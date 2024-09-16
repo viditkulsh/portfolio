@@ -21,7 +21,7 @@ const Projects = () => {
             <a href="https://github.com/viditkulsh/Aventura-De-Texto" target="_blank">Aventura De Texto</a>
         </li>
         <li>
-            <a href="https://github.com/viditkulsh/ImageCarousel" target="_blank">Image Carousel</a>
+            <a href="https://github.com/viditkulsh/ImageCarousel" target="_blank">Image Carousel</a>  
         </li>
       </ul>
     </section>
