@@ -1,30 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import Header from './components/Header';
 import About from './components/About';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
+import LandingCard from './components/LandingCard';
 
 const App = () => {
-  const [showCard, setShowCard] = useState(true);
+  const [showLandingCard, setShowLandingCard] = useState(true);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowCard(false);
-    }, 2000); // 2 seconds delay before zoom-in effect
-    return () => clearTimeout(timer);
-  }, []);
+  const handleLandingClick = () => {
+    setShowLandingCard(false); // Trigger transition on click
+  };
 
   return (
     <div className="app-container">
-      {showCard ? (
-        <div className="black-background">
-          <div className="intro-card">
-            <h1>Vidit Kulshrestha</h1>
-            <p>BCA(Hons), Blockchain Specialist</p>
-            <p>Bennett University, 3rd Year</p>
-          </div>
-        </div>
+      {showLandingCard ? (
+        <LandingCard onClick={handleLandingClick} />
       ) : (
         <div className="main-content">
           <Header />
