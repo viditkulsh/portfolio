@@ -1,38 +1,120 @@
-.App {
-  text-align: center;
+/* Global styles */
+body, html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+  background-color: #f0f4f8; /* Soothing background */
+  color: #2e3a59; /* Text color */
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Blank page with centered card */
+.black-background {
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.intro-card {
+  width: 600px;
+  height: 300px;
+  background-color: white;
+  color: #2e3a59;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  animation: zoomIn 2s ease forwards;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Header styling */
+header {
+  background-color: #ffffff;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 24px;
+  color: #2e3a59;
+}
+
+nav a {
+  margin: 0 15px;
+  color: #6cace4;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav a:hover {
+  color: #3d8edb;
+}
+
+/* Main content alignment */
+.main-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  padding: 20px;
 }
 
-.App-link {
-  color: #61dafb;
+.content-wrapper {
+  max-width: 900px;
+  width: 100%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Section styling */
+section {
+  margin: 40px 0;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+section h2 {
+  margin-bottom: 15px;
+  font-size: 28px;
+  color: #2e3a59;
+}
+
+section p {
+  font-size: 18px;
+  color: #4a4a4a;
+}
+
+/* Footer/contact links */
+footer {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+}
+
+footer a {
+  color: #6cace4;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+footer a:hover {
+  color: #3d8edb;
 }
