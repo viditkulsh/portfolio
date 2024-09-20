@@ -1,3 +1,4 @@
+// This is the index.js file present in the src folder.
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';

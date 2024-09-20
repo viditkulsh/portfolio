@@ -1,3 +1,5 @@
+// This is tailwind.config.js file present in the root directory of the project.
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
