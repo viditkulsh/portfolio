@@ -1,3 +1,5 @@
+// This is Contact.js file under components folder which is present in src folder.
+
 import React from 'react';
 
 const Contact = () => {

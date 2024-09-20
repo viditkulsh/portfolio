@@ -1,3 +1,4 @@
+// This is About.js file under components folder which is present in src folder.
 import React from 'react';
 
 const About = () => {

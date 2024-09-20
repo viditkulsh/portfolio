@@ -1,3 +1,5 @@
+// This is App.js file under components folder which is present in src folder.
+
 import React, { useState } from 'react';
 import './App.css';
 import Header from './components/Header';

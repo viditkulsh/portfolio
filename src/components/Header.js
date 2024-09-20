@@ -1,3 +1,4 @@
+// This is Header.js file under components folder which is present in src folder.
 import React from 'react';
 import './Header.css'; // Importing CSS file for header-specific styles
 
