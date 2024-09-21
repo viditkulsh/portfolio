@@ -1,13 +1,12 @@
 /* This is App.css file under components folder which is present in src folder. */
-
 /* Global styles */
 body, html {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: 'Inter', sans-serif;
-  background-color: #f0f4f8; /* Soothing background */
-  color: #2e3a59; /* Text color */
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
 /* Main content alignment */
@@ -27,7 +26,7 @@ body, html {
 section {
   margin: 40px 0;
   padding: 20px;
-  background-color: #ffffff;
+  background-color: var(--primary-color);
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -35,12 +34,12 @@ section {
 section h2 {
   margin-bottom: 15px;
   font-size: 28px;
-  color: #2e3a59;
+  color: var(--text-color); /* Ensure heading color is set */
 }
 
 section p {
   font-size: 18px;
-  color: #4a4a4a;
+  color: var(--secondary-color);
 }
 
 /* Footer/contact links */
@@ -48,18 +47,18 @@ footer {
   display: flex;
   justify-content: space-around;
   padding: 20px;
-  background-color: #ffffff;
+  background-color: var(--primary-color);
   border-radius: 10px;
 }
 
 footer a {
-  color: #6cace4;
+  color: var(--accent-color);
   text-decoration: none;
   font-size: 16px;
 }
 
 footer a:hover {
-  color: #3d8edb;
+  color: var(--highlight-color);
 }
 
 /* Transition styles */
@@ -79,4 +78,41 @@ footer a:hover {
 .fade-exit-active {
   opacity: 0;
   transition: opacity 300ms;
+}
+
+/* Light mode variables */
+:root {
+  --background-color: #f0f4f8;
+  --text-color: #2e3a59;
+  --primary-color: #C0C0C0;
+  --secondary-color: #708090;
+  --accent-color: #007BFF;
+  --highlight-color: #20B2AA;
+}
+
+/* Dark mode variables */
+body.dark-mode {
+  --background-color: #2E2E2E;
+  --text-color: #C0C0C0;
+  --primary-color: #2E2E2E;
+  --secondary-color: #708090;
+  --accent-color: #007BFF;
+  --highlight-color: #20B2AA;
+}
+
+.app-container {
+  position: relative;
+  z-index: 1; /* Ensure the main content is above the particle background */
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.content-wrapper {
+  max-width: 900px;
+  width: 100%;
 }

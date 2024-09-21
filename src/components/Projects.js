@@ -1,12 +1,13 @@
 // This is Projects.js file under components folder which is present in src folder.
 
 import React from 'react';
+import './Projects.css';
 
 const Projects = () => {
   return (
-    <section id="projects">
-      <h2>Projects</h2>
-      <ul>
+    <section id="projects" className="projects-section">
+      <h2 className="projects-title">Projects</h2>
+      <ul className="projects-list">
         <li>
           <a href="https://codolio.com/profile/viditkul08" target="_blank" rel="noopener noreferrer">My Codolio Profile</a>
         </li>

@@ -1,5 +1,4 @@
 /* This is index.css file present in src folder. */
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -9,6 +8,26 @@ body, html {
   padding: 0;
   box-sizing: border-box;
   font-family: 'Inter', sans-serif;
-  background-color: #f0f4f8; /* Soothing background */
-  color: #2e3a59; /* Text color */
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+/* Light mode variables */
+:root {
+  --background-color: #f0f4f8;
+  --text-color: #2e3a59;
+  --primary-color: #C0C0C0;
+  --secondary-color: #708090;
+  --accent-color: #007BFF;
+  --highlight-color: #20B2AA;
+}
+
+/* Dark mode variables */
+body.dark-mode {
+  --background-color: #2E2E2E;
+  --text-color: #C0C0C0;
+  --primary-color: #C0C0C0;
+  --secondary-color: #708090;
+  --accent-color: #007BFF;
+  --highlight-color: #20B2AA;
 }

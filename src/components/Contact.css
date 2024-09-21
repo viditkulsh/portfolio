@@ -1,0 +1,35 @@
+/* Contact.css */
+.contact-section {
+  background-color: var(--primary-color);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contact-title {
+  color: var(--text-color);
+  font-size: 2em;
+  margin-bottom: 10px;
+}
+
+.contact-description {
+  color: var(--secondary-color);
+  font-size: 1.2em;
+  line-height: 1.6;
+}
+
+.contact-footer {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.contact-icon {
+  height: 30px;
+  width: 40px;
+  transition: transform 0.3s;
+}
+
+.contact-icon:hover {
+  transform: scale(1.1);
+}

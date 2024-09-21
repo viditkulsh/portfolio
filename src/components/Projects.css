@@ -1,0 +1,31 @@
+.projects-section {
+  background-color: var(--primary-color);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.projects-title {
+  color: var(--text-color);
+  font-size: 2em;
+  margin-bottom: 10px;
+}
+
+.projects-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.projects-list li {
+  margin-bottom: 10px;
+}
+
+.projects-list a {
+  color: var(--accent-color);
+  text-decoration: none;
+  font-size: 1.2em;
+}
+
+.projects-list a:hover {
+  color: var(--highlight-color);
+}

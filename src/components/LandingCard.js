@@ -1,5 +1,3 @@
-// This is LandingCard.js file under components folder which is present in src folder.
-
 import React, { useEffect, useRef } from 'react';
 import './LandingCard.css';
 
