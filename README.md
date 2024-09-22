@@ -32,10 +32,10 @@ npm start
 This will start the app on http://localhost:3000.
 
 ## Components
-App.jsx: The main component that renders the entire application.
-Background: A component that handles the background visuals.
-LandingCard: The landing page component that is shown initially.
-Header: The header component that contains navigation links.
-About: A component that provides information about you.
-Projects: A component that showcases your projects.
-Contact: A component that provides contact information.
+App.jsx: The main component that renders the entire application.<br>
+Background: A component that handles the background visuals.<br>
+LandingCard: The landing page component that is shown initially.<br>
+Header: The header component that contains navigation links.<br>
+About: A component that provides information about you.<br>
+Projects: A component that showcases your projects.<br>
+Contact: A component that provides contact information.<br>
