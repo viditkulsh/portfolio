@@ -1,103 +1,116 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
+import 'particles.js';
 import './LandingCard.css';
 
 const LandingCard = ({ onClick }) => {
-  const canvasRef = useRef(null);
-
   useEffect(() => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
-    let particlesArray = [];
-    const colors = ['255,255,255', '128,208,199', '64,81,78', '255,99,71']; // Cosmic-like colors
-
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    // Resize canvas
-    const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-    window.addEventListener('resize', resizeCanvas);
-
-    // Mouse object to track mouse position
-    const mouse = {
-      x: null,
-      y: null,
-    };
-
-    // Update mouse position on mouse move
-    const handleMouseMove = (event) => {
-      mouse.x = event.x;
-      mouse.y = event.y;
-    };
-    window.addEventListener('mousemove', handleMouseMove);
-
-    class Particle {
-      constructor(x, y, size, color, speedX, speedY, originalX, originalY) {
-        this.x = x;
-        this.y = y;
-        this.size = size;
-        this.color = color;
-        this.speedX = speedX;
-        this.speedY = speedY;
-        this.originalX = originalX;
-        this.originalY = originalY;
-      }
-
-      update(mouse) {
-        const dx = mouse.x - this.x;
-        const dy = mouse.y - this.y;
-        // Additional logic for particle update
-      }
-
-      draw() {
-        ctx.fillStyle = `rgba(${this.color}, 1)`;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.closePath();
-        ctx.fill();
-      }
-    }
-
-    const createStars = () => {
-      for (let i = 0; i < 100; i++) {
-        const x = Math.random() * canvas.width;
-        const y = Math.random() * canvas.height;
-        const size = Math.random() * 2;
-        const color = colors[Math.floor(Math.random() * colors.length)];
-        const originalX = x;
-        const originalY = y;
-        particlesArray.push(new Particle(x, y, size, color, 0, 0, originalX, originalY));
-      }
-    };
-
-    const animateParticles = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particlesArray.forEach((particle, index) => {
-        particle.update(mouse);
-        particle.draw();
-        if (particle.size <= 0.5) {
-          particlesArray.splice(index, 1);
-        }
-      });
-      requestAnimationFrame(animateParticles);
-    };
-
-    createStars();
-    animateParticles();
-
-    // Cleanup
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('resize', resizeCanvas);
-    };
+    window.particlesJS('particles-js', {
+      particles: {
+        number: {
+          value: 80,
+          density: {
+            enable: true,
+            value_area: 800,
+          },
+        },
+        color: {
+          value: '#ffffff',
+        },
+        shape: {
+          type: 'circle',
+          stroke: {
+            width: 0,
+            color: '#000000',
+          },
+          polygon: {
+            nb_sides: 5,
+          },
+        },
+        opacity: {
+          value: 0.5,
+          random: false,
+          anim: {
+            enable: false,
+            speed: 1,
+            opacity_min: 0.1,
+            sync: false,
+          },
+        },
+        size: {
+          value: 3,
+          random: true,
+          anim: {
+            enable: false,
+            speed: 40,
+            size_min: 0.1,
+            sync: false,
+          },
+        },
+        line_linked: {
+          enable: false, // Disable the honeycomb effect
+        },
+        move: {
+          enable: true,
+          speed: 6,
+          direction: 'none',
+          random: false,
+          straight: false,
+          out_mode: 'out',
+          bounce: false,
+          attract: {
+            enable: false,
+            rotateX: 600,
+            rotateY: 1200,
+          },
+        },
+      },
+      interactivity: {
+        detect_on: 'canvas',
+        events: {
+          onhover: {
+            enable: true,
+            mode: 'repulse',
+          },
+          onclick: {
+            enable: true,
+            mode: 'push',
+          },
+          resize: true,
+        },
+        modes: {
+          grab: {
+            distance: 400,
+            line_linked: {
+              opacity: 1,
+            },
+          },
+          bubble: {
+            distance: 400,
+            size: 40,
+            duration: 2,
+            opacity: 8,
+            speed: 3,
+          },
+          repulse: {
+            distance: 200,
+            duration: 0.4,
+          },
+          push: {
+            particles_nb: 4,
+          },
+          remove: {
+            particles_nb: 2,
+          },
+        },
+      },
+      retina_detect: true,
+    });
   }, []);
 
   return (
     <div className="landing-container" onClick={onClick}>
-      <canvas ref={canvasRef} className="particle-canvas"></canvas>
-      <div className="card-container">
+      <div id="particles-js" style={{ position: 'absolute', width: '100%', height: '100%' }}></div>
+      <div className="card-container" style={{ position: 'relative', zIndex: 1 }}>
         <div className="landing-card">
           <h1 className="main-name">Vidit Kulshrestha</h1>
           <p>BCA(Hons), Blockchain Specialist</p>

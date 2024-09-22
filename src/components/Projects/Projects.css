@@ -1,3 +1,11 @@
+/* Define CSS variables for dark mode */
+:root {
+  --primary-color: #121212; /* Dark background color */
+  --text-color: #ffffff;    /* Light text color */
+  --accent-color: #bb86fc;  /* Accent color for links */
+  --highlight-color: #ff4081; /* Highlight color for hover effects */
+}
+
 .projects-section {
   background-color: var(--primary-color);
   padding: 20px;

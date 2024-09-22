@@ -1,22 +1,10 @@
-/* src/components/Background/Background.css */
-
-/* Import Google Fonts */
-@import url("https://fonts.googleapis.com/css?family=Montserrat:400,700");
-
-/* Reset and Base Styles */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 html, body {
   width: 100%;
   height: 100%;
 }
 
 body {
-  background-color: #131217;
+  background-color: #131217; /* Dark background color */
   font-family: Montserrat, sans-serif;
   overflow: hidden;
   position: relative;
@@ -32,7 +20,7 @@ body {
 }
 
 #gradient {
-  background: radial-gradient(#ff8811, transparent 50%);
+  background: radial-gradient(#ff8811, transparent 50%); /* Dark gradient */
   width: 400px;
   height: 400px;
   position: fixed;

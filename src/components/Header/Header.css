@@ -1,43 +1,49 @@
+:root {
+  --primary-color: #121212; /* Dark background color */
+  --text-color: #ffffff; /* Light text color */
+  --highlight-color: #bb86fc; /* Highlight color for hover effects */
+}
+
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
+  padding: 2rem 3rem; /* Increased padding for more space */
   background-color: var(--primary-color);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Enhanced box shadow */
+  border-radius: 10px; /* Rounded corners */
+  transition: all 0.3s ease-in-out; /* Smooth transition */
 }
 
 .header-title {
-  font-size: 2rem;
-  margin: 0 1rem;
+  font-size: 2.5rem; /* Increased font size */
+  margin: 0 1rem; /* Added margin for more space */
   color: var(--text-color);
-  transition: color 0.3s ease-in-out;
+  transition: color 0.3s ease-in-out; /* Smooth transition */
 }
 
 .header-nav {
   display: flex;
-  gap: 1rem;
+  gap: 2rem; /* Increased gap for more space */
 }
 
 .header-nav a {
   text-decoration: none;
   color: var(--text-color);
   font-weight: bold;
-  transition: color 0.3s ease-in-out;
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
+  transition: color 0.3s ease-in-out; /* Smooth transition */
+  padding: 0.5rem 1rem; /* Added padding for better click area */
+  border-radius: 5px; /* Rounded corners for links */
 }
 
 .header-nav a:hover {
   color: var(--highlight-color);
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.1); /* Added background color on hover */
 }
 
 .header-toggle {
-  margin-left: 1rem;
-  position: relative;
+  margin-left: 2rem; /* Added margin for more space between toggle button and other elements */
+  position: relative; /* Ensure the SVGs are positioned correctly */
 }
 
 .theme-toggle {
@@ -46,19 +52,19 @@
   justify-content: center;
   cursor: pointer;
   position: relative;
-  width: 40px;
-  height: 20px;
+  width: 50px; /* Adjust width as needed */
+  height: 24px; /* Adjust height as needed */
 }
 
 .theme-toggle input {
-  display: none;
+  display: none; /* Hide the checkbox */
 }
 
 .theme-toggle svg {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   fill: var(--text-color);
-  transition: fill 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  transition: fill 0.3s ease-in-out, opacity 0.3s ease-in-out; /* Smooth transition for fill and opacity */
 }
 
 .theme-toggle .sun-icon {
@@ -79,76 +85,4 @@
 
 .theme-toggle input:checked ~ .moon-icon {
   opacity: 1;
-}
-
-/* Media Queries for responsiveness */
-@media (max-width: 600px) {
-  .header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .header-title {
-    margin-bottom: 1rem;
-  }
-
-  .header-nav {
-    flex-direction: column;
-    gap: 0.5rem;
-    width: 100%;
-  }
-
-  .header-toggle {
-    margin-left: 0;
-    margin-top: 1rem;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
-}
-
-@media (min-width: 600px) {
-  .header {
-    padding: 1.5rem 2.5rem;
-  }
-
-  .header-title {
-    font-size: 2.5rem;
-  }
-
-  .header-nav {
-    gap: 1.5rem;
-  }
-
-  .header-toggle {
-    margin-left: 1.5rem;
-  }
-
-  .theme-toggle {
-    width: 50px;
-    height: 24px;
-  }
-
-  .theme-toggle svg {
-    width: 24px;
-    height: 24px;
-  }
-}
-
-@media (min-width: 900px) {
-  .header {
-    padding: 2rem 3rem;
-  }
-
-  .header-title {
-    font-size: 3rem;
-  }
-
-  .header-nav {
-    gap: 2rem;
-  }
-
-  .header-toggle {
-    margin-left: 2rem;
-  }
 }

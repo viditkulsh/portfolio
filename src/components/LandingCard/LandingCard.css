@@ -1,5 +1,13 @@
 /* This is LandingCard.css file under components folder which is present in src folder. */
 
+/* Define CSS variables for dark mode */
+:root {
+  --background-color: #121212; /* Dark cosmic background */
+  --text-color: #ffffff;       /* Light text color */
+  --highlight-color: #bb86fc;  /* Bright, cosmic name color */
+  --secondary-color: #bbbbbb;  /* Light secondary color */
+}
+
 /* Full-screen background with cosmic particle effects */
 .landing-container {
   position: relative;

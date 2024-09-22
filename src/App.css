@@ -1,33 +1,11 @@
-/* src/App.css */
-
-/* Global styles */
-body, html {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Inter', sans-serif;
-  background-color: var(--background-color);
-  color: var(--text-color);
-}
-
-/* Light mode variables */
+/* Define CSS variables for dark mode */
 :root {
-  --background-color: #f0f4f8;
-  --text-color: #2e3a59;
-  --primary-color: #C0C0C0;
-  --secondary-color: #708090;
-  --accent-color: #007BFF;
-  --highlight-color: #20B2AA;
-}
-
-/* Dark mode variables */
-body.dark-mode {
-  --background-color: #2E2E2E;
-  --text-color: #C0C0C0;
-  --primary-color: #2E2E2E;
-  --secondary-color: #708090;
-  --accent-color: #007BFF;
-  --highlight-color: #20B2AA;
+  --background-color: #2E2E2E; /* Dark background color */
+  --text-color: #C0C0C0;       /* Light text color */
+  --primary-color: #2E2E2E;    /* Dark primary color */
+  --secondary-color: #708090;  /* Dark secondary color */
+  --accent-color: #007BFF;     /* Accent color */
+  --highlight-color: #20B2AA;  /* Highlight color */
 }
 
 /* Main content alignment */
@@ -57,76 +35,5 @@ section {
   margin: 40px 0;
   padding: 20px;
   background-color: var(--primary-color);
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-section h2 {
-  margin-bottom: 15px;
-  font-size: 28px;
-  color: var(--text-color); /* Ensure heading color is set */
-}
-
-section p {
-  font-size: 18px;
-  color: var(--secondary-color);
-}
-
-/* Footer/contact links */
-footer {
-  display: flex;
-  justify-content: space-around;
-  padding: 20px;
-  background-color: var(--primary-color);
-  border-radius: 10px;
-}
-
-footer a {
-  color: var(--accent-color);
-  text-decoration: none;
-  font-size: 16px;
-}
-
-footer a:hover {
-  color: var(--highlight-color);
-}
-
-/* Transition styles */
-.fade-enter {
-  opacity: 0;
-}
-
-.fade-enter-active {
-  opacity: 1;
-  transition: opacity 300ms;
-}
-
-.fade-exit {
-  opacity: 1;
-}
-
-.fade-exit-active {
-  opacity: 0;
-  transition: opacity 300ms;
-}
-
-/* Responsive styles */
-@media (min-width: 600px) {
-  .section-title {
-    font-size: 2.5rem;
-  }
-
-  .section-description {
-    font-size: 1.125rem;
-  }
-}
-
-@media (min-width: 900px) {
-  .section-title {
-    font-size: 3rem;
-  }
-
-  .section-description {
-    font-size: 1.25rem;
-  }
+  color: var(--text-color);
 }
