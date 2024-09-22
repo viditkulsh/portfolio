@@ -1,5 +1,3 @@
-/* This is About.css file under components folder which is present in src folder. */
-
 /* Define CSS variables */
 :root {
   --primary-color: #121212; /* Dark background color */
@@ -24,5 +22,5 @@
   color: var(--secondary-color);
   font-size: 1.2em;
   line-height: 1.6;
-  margin-bottom: 1em; /* Add margin to create space between paragraphs */
+  margin-bottom: 1em; /* Space between paragraphs */
 }

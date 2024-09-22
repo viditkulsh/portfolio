@@ -1,24 +1,22 @@
-/* Define CSS variables for dark mode */
 :root {
-  --background-color: #2E2E2E; /* Dark background color */
-  --text-color: #C0C0C0;       /* Light text color */
-  --primary-color: #2E2E2E;    /* Dark primary color */
-  --secondary-color: #708090;  /* Dark secondary color */
-  --accent-color: #007BFF;     /* Accent color */
-  --highlight-color: #20B2AA;  /* Highlight color */
+  --background-color: #2E2E2E;
+  --text-color: #C0C0C0;
+  --primary-color: #2E2E2E;
+  --secondary-color: #708090;
+  --accent-color: #007BFF;
+  --highlight-color: #20B2AA;
 }
 
-/* Main content alignment */
 .app-container {
   position: relative;
   width: 100%;
   height: 100vh;
-  overflow-y: scroll; /* Ensures vertical scrollbar is always visible */
+  overflow-y: scroll;
 }
 
 .main-content {
   position: relative;
-  z-index: 1; /* Ensure it stays above the background */
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,7 +28,6 @@
   width: 100%;
 }
 
-/* Section styling */
 section {
   margin: 40px 0;
   padding: 20px;

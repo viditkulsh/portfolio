@@ -27,6 +27,6 @@ body {
   top: 0;
   left: 0;
   transform: translate(200px, 200px);
-  z-index: 0;
+  z-index: 1;
   pointer-events: none; /* Ensure the gradient does not interfere with mouse events */
 }

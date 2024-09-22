@@ -1,9 +1,8 @@
-/* Define CSS variables for dark mode */
 :root {
-  --primary-color: #121212; /* Dark background color */
-  --text-color: #ffffff;    /* Light text color */
-  --accent-color: #bb86fc;  /* Accent color for links */
-  --highlight-color: #ff4081; /* Highlight color for hover effects */
+  --primary-color: #121212;
+  --text-color: #ffffff;
+  --accent-color: #bb86fc;
+  --highlight-color: #ff4081;
 }
 
 .projects-section {
@@ -36,9 +35,4 @@
 
 .projects-list a:hover {
   color: var(--highlight-color);
-}
-
-/* Added :visited state for links */
-.projects-list a:visited {
-  color: var(--accent-color);
 }

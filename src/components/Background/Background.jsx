@@ -1,6 +1,5 @@
-// src/components/Background/Background.jsx
 import React, { useEffect, useRef } from 'react';
-import './Background.css'; // Import your CSS file
+import './Background.css';
 
 const Background = () => {
   const patternRef = useRef(null);
@@ -11,11 +10,10 @@ const Background = () => {
     const patternElement = patternRef.current;
     const gradientElement = gradientRef.current;
 
-    // Adjust these values to change the size of the hexagons
-    const hexagonWidth = 55; // New width of the hexagon
-    const hexagonHeight = 60; // New height of the hexagon
-    const verticalSpacing = 50; // Vertical spacing between hexagons
-    const horizontalSpacing = 55; // Horizontal spacing between hexagons
+    const hexagonWidth = 55;
+    const hexagonHeight = 60;
+    const verticalSpacing = 50;
+    const horizontalSpacing = 55;
 
     const countY = Math.ceil(patternElement.clientHeight / verticalSpacing) + 1;
     const countX = Math.ceil(patternElement.clientWidth / horizontalSpacing) + 1;
@@ -34,7 +32,6 @@ const Background = () => {
           top: ${i * verticalSpacing}px;
           left: ${j * horizontalSpacing + ((i * (horizontalSpacing / 2)) % horizontalSpacing)}px;
         `;
-
         patternElement.appendChild(hexagon);
         hexagons.push(hexagon);
       }

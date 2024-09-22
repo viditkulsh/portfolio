@@ -1,5 +1,3 @@
-/* src/index.css */
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -14,17 +12,15 @@ body, html {
   transition: background-color 0.3s, color 0.3s;
 }
 
-/* Dark mode variables */
 :root {
-  --background-color: #2E2E2E; /* Dark background color */
-  --text-color: #C0C0C0;       /* Light text color */
-  --primary-color: #2E2E2E;    /* Dark primary color */
-  --secondary-color: #708090;  /* Dark secondary color */
-  --accent-color: #007BFF;     /* Accent color */
-  --highlight-color: #20B2AA;  /* Highlight color */
+  --background-color: #2E2E2E;
+  --text-color: #C0C0C0;
+  --primary-color: #2E2E2E;
+  --secondary-color: #708090;
+  --accent-color: #007BFF;
+  --highlight-color: #20B2AA;
 }
 
-/* Additional styles for better UI */
 .container {
   max-width: 1200px;
   margin: 0 auto;

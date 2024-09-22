@@ -11,13 +11,12 @@ const App = () => {
   const [showLandingCard, setShowLandingCard] = useState(true);
 
   const handleLandingClick = () => {
-    console.log('Landing card clicked!');
-    setShowLandingCard(false); // Hide the landing card and show the main content
+    setShowLandingCard(false);
   };
 
   return (
-    <div className="app-container" onClick={handleLandingClick} >
-      <Background /> {/* Add Background component here */}
+    <div className="app-container" onClick={handleLandingClick}>
+      <Background />
       {showLandingCard ? (
         <LandingCard onClick={handleLandingClick} />
       ) : (
