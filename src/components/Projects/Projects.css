@@ -29,3 +29,8 @@
 .projects-list a:hover {
   color: var(--highlight-color);
 }
+
+/* Added :visited state for links */
+.projects-list a:visited {
+  color: var(--accent-color);
+}

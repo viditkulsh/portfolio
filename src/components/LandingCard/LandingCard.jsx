@@ -20,6 +20,19 @@ const LandingCard = ({ onClick }) => {
     };
     window.addEventListener('resize', resizeCanvas);
 
+    // Mouse object to track mouse position
+    const mouse = {
+      x: null,
+      y: null,
+    };
+
+    // Update mouse position on mouse move
+    const handleMouseMove = (event) => {
+      mouse.x = event.x;
+      mouse.y = event.y;
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+
     class Particle {
       constructor(x, y, size, color, speedX, speedY, originalX, originalY) {
         this.x = x;
@@ -35,54 +48,26 @@ const LandingCard = ({ onClick }) => {
       update(mouse) {
         const dx = mouse.x - this.x;
         const dy = mouse.y - this.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-        const forceDirectionX = dx / distance;
-        const forceDirectionY = dy / distance;
-        const maxDistance = 150; // Attraction radius
-        const force = (maxDistance - distance) / maxDistance;
-
-        if (distance < maxDistance) {
-          this.x -= forceDirectionX * force * 2; // Move toward mouse
-          this.y -= forceDirectionY * force * 2;
-        } else {
-          // Return to original position
-          this.x += (this.originalX - this.x) * 0.05;
-          this.y += (this.originalY - this.y) * 0.05;
-        }
+        // Additional logic for particle update
       }
 
       draw() {
+        ctx.fillStyle = `rgba(${this.color}, 1)`;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${this.color}, 0.8)`;
+        ctx.closePath();
         ctx.fill();
       }
     }
 
-    const mouse = { x: undefined, y: undefined };
-
-    const handleMouseMove = (e) => {
-      mouse.x = e.clientX;
-      mouse.y = e.clientY;
-      // Cosmic trail effect near the cursor
-      const numberOfParticles = 5;
-      for (let i = 0; i < numberOfParticles; i++) {
-        const size = Math.random() * 2 + 1;
-        const speedX = Math.random() * 1 - 0.5;
-        const speedY = Math.random() * 1 - 0.5;
-        const color = colors[Math.floor(Math.random() * colors.length)];
-        particlesArray.push(new Particle(e.clientX, e.clientY, size, color, speedX, speedY));
-      }
-    };
-
     const createStars = () => {
-      for (let i = 0; i < 150; i++) {
-        const size = Math.random() * 2 + 1;
+      for (let i = 0; i < 100; i++) {
         const x = Math.random() * canvas.width;
         const y = Math.random() * canvas.height;
+        const size = Math.random() * 2;
+        const color = colors[Math.floor(Math.random() * colors.length)];
         const originalX = x;
         const originalY = y;
-        const color = '255,255,255'; // Star-like color
         particlesArray.push(new Particle(x, y, size, color, 0, 0, originalX, originalY));
       }
     };
@@ -99,7 +84,6 @@ const LandingCard = ({ onClick }) => {
       requestAnimationFrame(animateParticles);
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
     createStars();
     animateParticles();
 
