@@ -12,7 +12,7 @@ const Header = () => {
       toggle.checked = savedTheme === 'dark-mode';
     }
 
-    toggle.addEventListener('change', () => {
+    const handleToggleChange = () => {
       if (toggle.checked) {
         document.body.classList.add('dark-mode');
         document.body.classList.remove('light-mode');
@@ -22,7 +22,14 @@ const Header = () => {
         document.body.classList.remove('dark-mode');
         localStorage.setItem('theme', 'light-mode');
       }
-    });
+    };
+
+    toggle.addEventListener('change', handleToggleChange);
+
+    // Cleanup event listener on component unmount
+    return () => {
+      toggle.removeEventListener('change', handleToggleChange);
+    };
   }, []);
 
   return (

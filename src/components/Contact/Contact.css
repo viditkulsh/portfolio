@@ -1,4 +1,12 @@
 /* Contact.css */
+
+/* Define CSS variables */
+:root {
+  --primary-color: #f0f0f0; /* Example color */
+  --text-color: #333333;    /* Example color */
+  --secondary-color: #666666; /* Example color */
+}
+
 .contact-section {
   background-color: var(--primary-color);
   padding: 20px;

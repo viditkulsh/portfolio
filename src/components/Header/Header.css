@@ -73,10 +73,10 @@
   opacity: 0;
 }
 
-.theme-toggle input:checked + label .sun-icon {
+.theme-toggle input:checked ~ .sun-icon {
   opacity: 0;
 }
 
-.theme-toggle input:checked + label .moon-icon {
+.theme-toggle input:checked ~ .moon-icon {
   opacity: 1;
 }

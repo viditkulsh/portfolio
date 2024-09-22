@@ -30,14 +30,20 @@ const App = () => {
         <LandingCard onClick={handleLandingClick} />
       ) : (
         <div className="main-content">
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<div>Loading Header...</div>}>
             <Header />
-            <div className="content-wrapper">
-              <About />
-              <Projects />
-              <Contact />
-            </div>
           </Suspense>
+          <div className="content-wrapper">
+            <Suspense fallback={<div>Loading About...</div>}>
+              <About />
+            </Suspense>
+            <Suspense fallback={<div>Loading Projects...</div>}>
+              <Projects />
+            </Suspense>
+            <Suspense fallback={<div>Loading Contact...</div>}>
+              <Contact />
+            </Suspense>
+          </div>
         </div>
       )}
     </div>

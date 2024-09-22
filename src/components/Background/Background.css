@@ -10,13 +10,16 @@
   box-sizing: border-box;
 }
 
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
 body {
   background-color: #131217;
-  width: 100%;
-  height: 100vh;
-  position: relative;
-  font-family: Montserrat;
+  font-family: Montserrat, sans-serif;
   overflow: hidden;
+  position: relative;
 }
 
 #pattern {

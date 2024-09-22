@@ -1,5 +1,12 @@
 /* This is About.css file under components folder which is present in src folder. */
 
+/* Define CSS variables */
+:root {
+  --primary-color: #f0f0f0; /* Example color */
+  --text-color: #333333;    /* Example color */
+  --secondary-color: #666666; /* Example color */
+}
+
 .about-section {
   background-color: var(--primary-color);
   padding: 20px;

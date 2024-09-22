@@ -9,8 +9,12 @@ const Background = () => {
 
   useEffect(() => {
     const patternElement = patternRef.current;
+    const gradientElement = gradientRef.current;
+
     const countY = Math.ceil(patternElement.clientHeight / 40) + 1;
     const countX = Math.ceil(patternElement.clientWidth / 48) + 1;
+
+    const hexagons = [];
 
     for (let i = 0; i < countY; i++) {
       for (let j = 0; j < countX; j++) {
@@ -26,6 +30,7 @@ const Background = () => {
         `;
 
         patternElement.appendChild(hexagon);
+        hexagons.push(hexagon);
       }
     }
 
@@ -34,7 +39,6 @@ const Background = () => {
     };
 
     const loop = () => {
-      const gradientElement = gradientRef.current;
       const { x, y } = mousePosition.current;
       gradientElement.style.transform = `translate(${x - 200}px, ${y - 200}px)`;
       requestAnimationFrame(loop);
@@ -45,6 +49,7 @@ const Background = () => {
 
     return () => {
       document.removeEventListener('mousemove', handleMouseMove);
+      hexagons.forEach(hexagon => patternElement.removeChild(hexagon));
     };
   }, []);
 
