@@ -24,4 +24,5 @@
   color: var(--secondary-color);
   font-size: 1.2em;
   line-height: 1.6;
+  margin-bottom: 1em; /* Add margin to create space between paragraphs */
 }
