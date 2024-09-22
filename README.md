@@ -81,5 +81,4 @@ Header: The header component that contains navigation links.
 About: A component that provides information about you.
 Projects: A component that showcases your projects.
 Contact: A component that provides contact information.
-=======
 
