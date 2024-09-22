@@ -1,0 +1,41 @@
+/* src/components/Background/Background.css */
+
+/* Import Google Fonts */
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,700");
+
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #131217;
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  font-family: Montserrat;
+  overflow: hidden;
+}
+
+#pattern {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+#gradient {
+  background: radial-gradient(#ff8811, transparent 50%);
+  width: 400px;
+  height: 400px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: translate(200px, 200px);
+  z-index: 0;
+  pointer-events: none; /* Ensure the gradient does not interfere with mouse events */
+}

@@ -1,4 +1,5 @@
-/* This is index.css file present in src folder. */
+/* src/index.css */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -10,6 +11,7 @@ body, html {
   font-family: 'Inter', sans-serif;
   background-color: var(--background-color);
   color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
 }
 
 /* Light mode variables */
@@ -26,8 +28,38 @@ body, html {
 body.dark-mode {
   --background-color: #2E2E2E;
   --text-color: #C0C0C0;
-  --primary-color: #C0C0C0;
+  --primary-color: #2E2E2E;
   --secondary-color: #708090;
   --accent-color: #007BFF;
   --highlight-color: #20B2AA;
+}
+
+/* Additional styles for better UI */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+header {
+  background-color: var(--primary-color);
+  padding: 10px 0;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2rem;
+  color: var(--accent-color);
+}
+
+main {
+  padding: 20px;
+}
+
+footer {
+  background-color: var(--primary-color);
+  padding: 10px 0;
+  text-align: center;
+  color: var(--text-color);
 }

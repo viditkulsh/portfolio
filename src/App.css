@@ -1,4 +1,5 @@
-/* This is App.css file under components folder which is present in src folder. */
+/* src/App.css */
+
 /* Global styles */
 body, html {
   margin: 0;
@@ -9,8 +10,37 @@ body, html {
   color: var(--text-color);
 }
 
+/* Light mode variables */
+:root {
+  --background-color: #f0f4f8;
+  --text-color: #2e3a59;
+  --primary-color: #C0C0C0;
+  --secondary-color: #708090;
+  --accent-color: #007BFF;
+  --highlight-color: #20B2AA;
+}
+
+/* Dark mode variables */
+body.dark-mode {
+  --background-color: #2E2E2E;
+  --text-color: #C0C0C0;
+  --primary-color: #2E2E2E;
+  --secondary-color: #708090;
+  --accent-color: #007BFF;
+  --highlight-color: #20B2AA;
+}
+
 /* Main content alignment */
+.app-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
 .main-content {
+  position: relative;
+  z-index: 1; /* Ensure it stays above the background */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -80,39 +110,23 @@ footer a:hover {
   transition: opacity 300ms;
 }
 
-/* Light mode variables */
-:root {
-  --background-color: #f0f4f8;
-  --text-color: #2e3a59;
-  --primary-color: #C0C0C0;
-  --secondary-color: #708090;
-  --accent-color: #007BFF;
-  --highlight-color: #20B2AA;
+/* Responsive styles */
+@media (min-width: 600px) {
+  .section-title {
+    font-size: 2.5rem;
+  }
+
+  .section-description {
+    font-size: 1.125rem;
+  }
 }
 
-/* Dark mode variables */
-body.dark-mode {
-  --background-color: #2E2E2E;
-  --text-color: #C0C0C0;
-  --primary-color: #2E2E2E;
-  --secondary-color: #708090;
-  --accent-color: #007BFF;
-  --highlight-color: #20B2AA;
-}
+@media (min-width: 900px) {
+  .section-title {
+    font-size: 3rem;
+  }
 
-.app-container {
-  position: relative;
-  z-index: 1; /* Ensure the main content is above the particle background */
-}
-
-.main-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-}
-
-.content-wrapper {
-  max-width: 900px;
-  width: 100%;
+  .section-description {
+    font-size: 1.25rem;
+  }
 }

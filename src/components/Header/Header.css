@@ -1,0 +1,82 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 3rem; /* Increased padding for more space */
+  background-color: var(--primary-color);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Enhanced box shadow */
+  border-radius: 10px; /* Rounded corners */
+  transition: all 0.3s ease-in-out; /* Smooth transition */
+}
+
+.header-title {
+  font-size: 2.5rem; /* Increased font size */
+  margin: 0 1rem; /* Added margin for more space */
+  color: var(--text-color);
+  transition: color 0.3s ease-in-out; /* Smooth transition */
+}
+
+.header-nav {
+  display: flex;
+  gap: 2rem; /* Increased gap for more space */
+}
+
+.header-nav a {
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: bold;
+  transition: color 0.3s ease-in-out; /* Smooth transition */
+  padding: 0.5rem 1rem; /* Added padding for better click area */
+  border-radius: 5px; /* Rounded corners for links */
+}
+
+.header-nav a:hover {
+  color: var(--highlight-color);
+  background-color: rgba(255, 255, 255, 0.1); /* Added background color on hover */
+}
+
+.header-toggle {
+  margin-left: 2rem; /* Added margin for more space between toggle button and other elements */
+  position: relative; /* Ensure the SVGs are positioned correctly */
+}
+
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  width: 50px; /* Adjust width as needed */
+  height: 24px; /* Adjust height as needed */
+}
+
+.theme-toggle input {
+  display: none; /* Hide the checkbox */
+}
+
+.theme-toggle svg {
+  width: 24px;
+  height: 24px;
+  fill: var(--text-color);
+  transition: fill 0.3s ease-in-out, opacity 0.3s ease-in-out; /* Smooth transition for fill and opacity */
+}
+
+.theme-toggle .sun-icon {
+  position: absolute;
+  left: 0;
+  opacity: 1;
+}
+
+.theme-toggle .moon-icon {
+  position: absolute;
+  right: 0;
+  opacity: 0;
+}
+
+.theme-toggle input:checked + label .sun-icon {
+  opacity: 0;
+}
+
+.theme-toggle input:checked + label .moon-icon {
+  opacity: 1;
+}

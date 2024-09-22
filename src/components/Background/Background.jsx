@@ -1,0 +1,59 @@
+// src/components/Background/Background.jsx
+import React, { useEffect, useRef } from 'react';
+import './Background.css'; // Import your CSS file
+
+const Background = () => {
+  const patternRef = useRef(null);
+  const gradientRef = useRef(null);
+  const mousePosition = useRef({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const patternElement = patternRef.current;
+    const countY = Math.ceil(patternElement.clientHeight / 40) + 1;
+    const countX = Math.ceil(patternElement.clientWidth / 48) + 1;
+
+    for (let i = 0; i < countY; i++) {
+      for (let j = 0; j < countX; j++) {
+        const hexagon = document.createElement('div');
+        hexagon.style = `
+          background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODciIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgODcgMTAwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cGF0aCBkPSJNMi4xOTg3MyAyNi4xNTQ3TDQzLjUgMi4zMDk0TDg0LjgwMTMgMjYuMTU0N1Y3My44NDUzTDQzLjUgOTcuNjkwNkwyLjE5ODczIDczLjg0NTNWMjYuMTU0N1oiIGZpbGw9IiMxMzEyMTciIHN0cm9rZT0iIzEzMTIxNyIgc3Ryb2tlLXdpZHRoPSI0Ii8+Cjwvc3ZnPgo=') no-repeat;
+          width: 44px;
+          height: 50px;
+          background-size: contain;
+          position: absolute;
+          top: ${i * 40}px;
+          left: ${j * 48 + ((i * 24) % 48)}px;
+        `;
+
+        patternElement.appendChild(hexagon);
+      }
+    }
+
+    const handleMouseMove = (event) => {
+      mousePosition.current = { x: event.clientX, y: event.clientY };
+    };
+
+    const loop = () => {
+      const gradientElement = gradientRef.current;
+      const { x, y } = mousePosition.current;
+      gradientElement.style.transform = `translate(${x - 200}px, ${y - 200}px)`;
+      requestAnimationFrame(loop);
+    };
+
+    document.addEventListener('mousemove', handleMouseMove);
+    requestAnimationFrame(loop);
+
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
+
+  return (
+    <>
+      <div id="gradient" ref={gradientRef}></div>
+      <div id="pattern" ref={patternRef}></div>
+    </>
+  );
+};
+
+export default Background;
