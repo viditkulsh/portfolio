@@ -11,8 +11,14 @@ const Background = () => {
     const patternElement = patternRef.current;
     const gradientElement = gradientRef.current;
 
-    const countY = Math.ceil(patternElement.clientHeight / 40) + 1;
-    const countX = Math.ceil(patternElement.clientWidth / 48) + 1;
+    // Adjust these values to change the size of the hexagons
+    const hexagonWidth = 55; // New width of the hexagon
+    const hexagonHeight = 60; // New height of the hexagon
+    const verticalSpacing = 50; // Vertical spacing between hexagons
+    const horizontalSpacing = 55; // Horizontal spacing between hexagons
+
+    const countY = Math.ceil(patternElement.clientHeight / verticalSpacing) + 1;
+    const countX = Math.ceil(patternElement.clientWidth / horizontalSpacing) + 1;
 
     const hexagons = [];
 
@@ -21,12 +27,12 @@ const Background = () => {
         const hexagon = document.createElement('div');
         hexagon.style = `
           background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODciIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgODcgMTAwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cGF0aCBkPSJNMi4xOTg3MyAyNi4xNTQ3TDQzLjUgMi4zMDk0TDg0LjgwMTMgMjYuMTU0N1Y3My44NDUzTDQzLjUgOTcuNjkwNkwyLjE5ODczIDczLjg0NTNWMjYuMTU0N1oiIGZpbGw9IiMxMzEyMTciIHN0cm9rZT0iIzEzMTIxNyIgc3Ryb2tlLXdpZHRoPSI0Ii8+Cjwvc3ZnPgo=') no-repeat;
-          width: 44px;
-          height: 50px;
+          width: ${hexagonWidth}px;
+          height: ${hexagonHeight}px;
           background-size: contain;
           position: absolute;
-          top: ${i * 40}px;
-          left: ${j * 48 + ((i * 24) % 48)}px;
+          top: ${i * verticalSpacing}px;
+          left: ${j * horizontalSpacing + ((i * (horizontalSpacing / 2)) % horizontalSpacing)}px;
         `;
 
         patternElement.appendChild(hexagon);

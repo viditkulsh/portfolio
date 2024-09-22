@@ -11,7 +11,8 @@ const App = () => {
   const [showLandingCard, setShowLandingCard] = useState(true);
 
   const handleLandingClick = () => {
-    setShowLandingCard(false);
+    console.log('Landing card clicked!');
+    setShowLandingCard(false); // Hide the landing card and show the main content
   };
 
   return (

@@ -108,7 +108,7 @@ const LandingCard = ({ onClick }) => {
   }, []);
 
   return (
-    <div className="landing-container" onClick={onClick}>
+    <div className="landing-container" onClick={onClick} style={{ position: 'relative', width: '100%', height: '100%' }}>
       <div id="particles-js" style={{ position: 'absolute', width: '100%', height: '100%' }}></div>
       <div className="card-container" style={{ position: 'relative', zIndex: 1 }}>
         <div className="landing-card">
@@ -122,4 +122,4 @@ const LandingCard = ({ onClick }) => {
   );
 };
 
-export default LandingCard;
+export default LandingCard; 
