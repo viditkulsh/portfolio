@@ -16,7 +16,7 @@ const App = () => {
   };
 
   return (
-    <div className="app-container">
+    <div className="app-container" onClick={handleLandingClick} >
       <Background /> {/* Add Background component here */}
       {showLandingCard ? (
         <LandingCard onClick={handleLandingClick} />
