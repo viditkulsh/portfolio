@@ -35,44 +35,6 @@ npm start
 
 This will start the app on http://localhost:3000.
 
-## Project Structure
-PORTFOLIO/
-├── node_modules/
-├── public/
-│   ├── favicon.ico
-│   ├── index.html
-│   └── manifest.json
-├── src/
-│   ├── components/
-│   │   ├── About/
-│   │   │   ├── About.js
-│   │   │   ├── About.css
-│   │   ├── Background/
-│   │   │   ├── Background.js
-│   │   │   ├── Background.css
-│   │   ├── Contact/
-│   │   │   ├── Contact.js
-│   │   │   ├── Contact.css
-│   │   ├── Header/
-│   │   │   ├── Header.js
-│   │   │   ├── Header.css
-│   │   ├── LandingCard/
-│   │   │   ├── Landing.js
-│   │   │   ├── Landing.css
-│   │   ├── Projects/
-│   │   │   ├── Projects.js
-│   │   │   └── Projects.css
-│   ├── App.jsx
-│   ├── App.css
-│   ├── index.js
-│   ├── index.css
-│   └── reportWebVitals.js
-├── .gitignore
-├── package-lock.json
-├── package.json
-├── README.md
-├── tailwind.config.json
-
 ## Components
 App.jsx: The main component that renders the entire application.
 Background: A component that handles the background visuals.
