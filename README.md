@@ -6,10 +6,7 @@ This is a personal portfolio project built using React. It showcases various sec
 
 - [Installation](#installation)
 - [Usage](#usage)
-- [Project Structure](#project-structure)
 - [Components](#components)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Installation
 
