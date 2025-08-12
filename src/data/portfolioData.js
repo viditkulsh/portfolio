@@ -218,21 +218,24 @@ export const portfolioData = {
   resumeVariants: {
     "full-stack-developer": {
       title: "Full Stack Developer Resume",
-      filename: "Vidit_Kulshrestha_FullStack.pdf",
+      filename: "Vidit Kulsh CV Full Stack.pdf",
+      path: "/resumes/Vidit Kulsh CV Full Stack.pdf",
       highlightedSkills: ["React.js", "Node.js", "MongoDB", "JavaScript"],
       relevantProjects: [2],
       relevantExperience: [1]
     },
     "blockchain-developer": {
       title: "Blockchain Developer Resume", 
-      filename: "Vidit_Kulshrestha_Blockchain.pdf",
+      filename: "Vidit Kulsh CV Blockchain.pdf",
+      path: "/resumes/Vidit Kulsh CV Blockchain.pdf",
       highlightedSkills: ["Blockchain Development", "Smart Contracts", "Cryptography", "Distributed Systems"],
       relevantProjects: [1],
       relevantExperience: [1]
     },
     "software-engineer": {
       title: "Software Engineer Resume",
-      filename: "Vidit_Kulshrestha_SWE.pdf",
+      filename: "Vidit Kulsh CV Software Eng.pdf",
+      path: "/resumes/Vidit Kulsh CV Software Eng.pdf",
       highlightedSkills: ["Java", "JavaScript", "Algorithm Design", "System Design"],
       relevantProjects: [1, 2],
       relevantExperience: [1]

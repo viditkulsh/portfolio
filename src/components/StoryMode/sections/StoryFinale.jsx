@@ -6,8 +6,17 @@ const StoryFinale = () => {
   const navigate = useNavigate();
 
   const handleResumeDownload = (variant) => {
-    // Resume download logic
-    console.log(`Downloading ${variant} resume`);
+    const resumeMap = {
+      'full-stack-developer': '/resumes/Vidit Kulsh CV Full Stack.pdf',
+      'blockchain-developer': '/resumes/Vidit Kulsh CV Blockchain.pdf',
+      'software-engineer': '/resumes/Vidit Kulsh CV Software Eng.pdf'
+    };
+    
+    const resumePath = resumeMap[variant] || resumeMap['full-stack-developer'];
+    const link = document.createElement('a');
+    link.href = resumePath;
+    link.download = `Vidit_Kulshrestha_${variant.replace('-', '_')}_Resume.pdf`;
+    link.click();
   };
 
   return (

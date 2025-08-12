@@ -16,6 +16,7 @@ const StoryMode = ({ isRecruiterMode }) => {
   const navigate = useNavigate();
   const [currentStory, setCurrentStory] = useState(0);
   const [aiSpeaking, setAiSpeaking] = useState(false);
+  const [countdown, setCountdown] = useState(25); // Live countdown state
 
   const storySteps = [
     { 
@@ -80,13 +81,28 @@ const StoryMode = ({ isRecruiterMode }) => {
   // Auto-advance (optional)
   useEffect(() => {
     if (!isRecruiterMode) {
+      setCountdown(25); // Reset countdown
+      
+      const countdownInterval = setInterval(() => {
+        setCountdown(prev => {
+          if (prev <= 1) {
+            clearInterval(countdownInterval);
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+
       const timer = setTimeout(() => {
         if (currentStory < storySteps.length - 1) {
           setCurrentStory(prev => prev + 1);
         }
-      }, storySteps[currentStory]?.duration || 30000);
+      }, storySteps[currentStory]?.duration || 25000);
 
-      return () => clearTimeout(timer);
+      return () => {
+        clearTimeout(timer);
+        clearInterval(countdownInterval);
+      };
     }
   }, [currentStory, isRecruiterMode, storySteps]);
 
@@ -290,7 +306,10 @@ const StoryMode = ({ isRecruiterMode }) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 2 }}
         >
-          Auto-advancing in {Math.ceil((storySteps[currentStory]?.duration || 25000) / 1000)}s
+          <div className="flex items-center gap-2">
+            <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
+            <span>Auto-advancing in {countdown}s</span>
+          </div>
         </motion.div>
       )}
     </motion.div>

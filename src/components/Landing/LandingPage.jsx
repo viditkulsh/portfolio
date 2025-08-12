@@ -33,10 +33,10 @@ const LandingPage = ({ isRecruiterMode, setIsRecruiterMode }) => {
   };
 
   const handleResumeDownload = () => {
-    // This would trigger resume download
+    // Default to full-stack developer resume
     const link = document.createElement('a');
-    link.href = '/resume/vidit_Kulshrestha_resume.pdf';
-    link.download = 'Vidit_Kulshrestha_Resume.pdf';
+    link.href = '/resumes/Vidit Kulsh CV Full Stack.pdf';
+    link.download = 'Vidit_Kulshrestha_FullStack_Resume.pdf';
     link.click();
   };
 
