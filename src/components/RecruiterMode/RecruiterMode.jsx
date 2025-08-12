@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { usePortfolio } from '../../context/PortfolioContext';
+import ResumeSelector from '../../pages/ResumeSelector';
 
 const RecruiterMode = () => {
   const navigate = useNavigate();
   const { portfolioData } = usePortfolio();
   const [activeSection, setActiveSection] = useState('overview');
   const [showMetrics, setShowMetrics] = useState(false);
+  const [showResumeSelector, setShowResumeSelector] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => setShowMetrics(true), 1000);
@@ -53,6 +55,28 @@ const RecruiterMode = () => {
   const handleBackToHome = () => {
     navigate('/');
   };
+
+  const handleDownloadResume = () => {
+    setShowResumeSelector(true);
+  };
+
+  const handleBackFromResume = () => {
+    setShowResumeSelector(false);
+  };
+
+  const handleViewPortfolio = () => {
+    navigate('/');
+  };
+
+  // Show Resume Selector if requested
+  if (showResumeSelector) {
+    return (
+      <ResumeSelector 
+        onBack={handleBackFromResume}
+        onViewPortfolio={handleViewPortfolio}
+      />
+    );
+  }
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -390,11 +414,12 @@ const RecruiterMode = () => {
                 Schedule Interview
               </motion.button>
               <motion.button 
+                onClick={handleDownloadResume}
                 className="px-8 py-3 border border-blue-400 text-blue-200 rounded-full font-medium hover:bg-blue-600/20"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                Download Full Resume
+                Download Resume
               </motion.button>
             </div>
           </div>

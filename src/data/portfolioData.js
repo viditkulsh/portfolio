@@ -13,11 +13,11 @@ export const portfolioData = {
     tagline: "Engineering scalable solutions at the crossroads of web and blockchain innovation",
     shortIntro: "Tech enthusiast and problem solver with a strong foundation in distributed systems, blockchain interoperability, and full-stack development. Passionate about turning ideas into secure, scalable, and elegant digital solutions.",
     quote: "Build with precision, scale with vision.",
-    email: "vidit.Kulshrestha@example.com",
-    phone: "+91 9876543210",
-    location: "Greater Noida, Uttar Pradesh, India",
-    profileImage: "/images/profile.jpg",
-    resume: "/resume/vidit_resume.pdf",
+    email: "vidit.kulsh@work.com",
+    phone: "+91-9205075815",
+    location: "Delhi NCR, India",
+    profileImage: "/images/profile.jpeg",
+    resume: "/resumes/Vidit Kulsh CV Full Stack.pdf",
     social: {
       github: socialMediaData.platforms.github.url,
       leetcode: socialMediaData.platforms.leetcode.url,
@@ -73,8 +73,8 @@ export const portfolioData = {
       institution: "Bennett University",
       degree: "Bachelor of Computer Applications (Honours)",
       field: "Computer Applications",
-      duration: "Sep 2022 – Jul 2025 (Expected)",
-      cgpa: "8.88/10",
+      duration: "Sep 2022 – Jul 2025",
+      cgpa: "8.78/10",
       location: { x: -2, y: 0, z: 0 },
       keyCourses: [
         "Algorithm Design Strategies",
@@ -251,9 +251,9 @@ export const portfolioData = {
       skills: "Vidit has expertise in {skillList}. His strongest areas are blockchain development and full-stack web technologies. Would you like to see projects where he's applied these skills?",
       projects: "Let me tell you about {projectName} - {projectDescription}. This project showcases Vidit's ability to work on cutting-edge technology.",
       experience: "Vidit is currently collaborating with {company} on {achievement}. His research in blockchain interoperability is quite impressive!",
-      education: "Vidit is pursuing BCA Honours at Bennett University with an outstanding 8.88/10 CGPA, including consecutive Outstanding Academic Achievement awards.",
+      education: "Vidit is pursuing BCA Honours at Bennett University with an outstanding 8.78/10 CGPA, including consecutive Outstanding Academic Achievement awards.",
       navigation: "I can guide you through any section of Vidit's portfolio. Would you like to see his projects, skills, education, or learn about his research work?",
-      recruiter: "Perfect! Let me highlight Vidit's key achievements: 8.88/10 CGPA, research collaboration with DRDO, blockchain expertise, and strong full-stack development skills. What specific role are you considering him for?"
+      recruiter: "Perfect! Let me highlight Vidit's key achievements: 8.78/10 CGPA, research collaboration with DRDO, blockchain expertise, and strong full-stack development skills. What specific role are you considering him for?"
     }
   },
 

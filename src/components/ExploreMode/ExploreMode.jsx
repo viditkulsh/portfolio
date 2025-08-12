@@ -32,7 +32,32 @@ const ExploreMode = ({ isRecruiterMode }) => {
                         <div className="grid md:grid-cols-2 gap-8">
                             <div className="bg-white/5 backdrop-blur-md rounded-xl p-6 border border-white/10">
                                 <h3 className="text-xl font-semibold text-blue-200 mb-4">Personal Overview</h3>
-                                <p className="text-white/90 leading-relaxed">{portfolioData.about.overview}</p>
+                                
+                                {/* Profile Photo */}
+                                <div className="flex items-center gap-4 mb-6">
+                                    <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-primary-cyan/30">
+                                        <img 
+                                            src={portfolioData.personal.profileImage}
+                                            alt={portfolioData.personal.name}
+                                            className="w-full h-full object-cover"
+                                            onError={(e) => {
+                                                e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iODAiIHZpZXdCb3g9IjAgMCA4MCA4MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iNDAiIGN5PSI0MCIgcj0iNDAiIGZpbGw9IiM0Qjc2ODgiLz4KPHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4PSIyMCIgeT0iMjAiPgo8cGF0aCBkPSJNMTIgMTJDMTQuNDg1MyAxMiAxNi41IDkuOTg1MjggMTYuNSA3LjVDMTYuNSA1LjAxNDcyIDE0LjQ4NTMgMyAxMiAzQzkuNTE0NzIgMyA3LjUgNS4wMTQ3MiA3LjUgNy41QzcuNSA5Ljk4NTI4IDkuNTE0NzIgMTIgMTIgMTJaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTIgMTQuNUM3LjAzMTI1IDE0LjUgMyAxOC41MzEyIDMgMjMuNVYyNEg5SDE1SDIxVjIzLjVDMjEgMTguNTMxMiAxNi45Njg4IDE0LjUgMTIgMTQuNVoiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPgo8L3N2Zz4K';
+                                            }}
+                                        />
+                                    </div>
+                                    <div>
+                                        <h4 className="text-white font-semibold">{portfolioData.personal.name}</h4>
+                                        <p className="text-blue-300 text-sm">{portfolioData.personal.title}</p>
+                                        <p className="text-blue-400 text-xs">{portfolioData.personal.location}</p>
+                                    </div>
+                                </div>
+                                
+                                <p className="text-white/90 leading-relaxed">{portfolioData.about.bio}</p>
+                                
+                                {/* Personal Quote */}
+                                <div className="mt-4 p-4 bg-gradient-to-r from-purple-500/10 to-blue-500/10 rounded-lg border-l-4 border-primary-cyan">
+                                    <p className="text-primary-cyan italic">"{portfolioData.personal.quote}"</p>
+                                </div>
                             </div>
                             <div className="bg-white/5 backdrop-blur-md rounded-xl p-6 border border-white/10">
                                 <h3 className="text-xl font-semibold text-blue-200 mb-4">Fun Facts</h3>

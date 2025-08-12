@@ -1,28 +1,99 @@
 import React from 'react';
+import { Mail, Instagram, Github, Twitter, Linkedin, Phone, MapPin } from 'lucide-react';
+import { portfolioData } from '../../data/portfolioData';
 import './Contact.css';
 
 const Contact = () => {
+  const socialPlatforms = [
+    {
+      name: 'Email',
+      url: `mailto:${portfolioData.personal.email}?subject=Regarding%20Opportunity&body=Hello%20${portfolioData.personal.name},%0A%0AI%20hope%20this%20email%20finds%20you%20well.%20I%20am%20reaching%20out%20regarding%20a%20potential%20opportunity...`,
+      icon: <Mail className="w-6 h-6" />,
+      color: 'text-red-400 hover:text-red-300'
+    },
+    {
+      name: 'LinkedIn',
+      url: portfolioData.personal.social.linkedin,
+      icon: <Linkedin className="w-6 h-6" />,
+      color: 'text-blue-400 hover:text-blue-300'
+    },
+    {
+      name: 'GitHub',
+      url: portfolioData.personal.social.github,
+      icon: <Github className="w-6 h-6" />,
+      color: 'text-gray-400 hover:text-gray-300'
+    },
+    {
+      name: 'Twitter',
+      url: portfolioData.personal.social.twitter,
+      icon: <Twitter className="w-6 h-6" />,
+      color: 'text-blue-400 hover:text-blue-300'
+    },
+    {
+      name: 'Instagram',
+      url: portfolioData.personal.social.instagram,
+      icon: <Instagram className="w-6 h-6" />,
+      color: 'text-pink-400 hover:text-pink-300'
+    }
+  ];
+
   return (
     <section id="contact" className="contact-section">
-      <h2 className="contact-title">Contact</h2>
-      <p className="contact-description">Feel free to connect with me through the following platforms:</p>
-      <footer className="contact-footer">
-        <a href="mailto:viditkul08@gmail.com?subject=Regarding%20Selection%20for%20an%20Internship&body=Dear%20[Recipient's%20Name],%0A%0AWe%20are%20pleased%20to%20inform%20you%20that%20you%20have%20been%20selected%20as%20an%20intern%20at%20our%20esteemed%20company.%20Your%20skills%20and%20qualifications%20impressed%20us%20greatly,%20and%20we%20are%20excited%20to%20have%20you%20join%20our%20team.%0A%0AWe%20look%20forward%20to%20your%20contributions%20and%20are%20confident%20that%20this%20internship%20will%20be%20a%20valuable%20experience%20for%20you.%0A%0ACongratulations%20once%20again,%20and%20welcome%20aboard!%0A%0ABest%20regards,%0A[Your%20Name]%0A[Your%20Position]%0A[Company%20Name]" target="_blank" rel="noopener noreferrer">
-          <img src="https://pngimg.com/uploads/email/email_PNG48.png" alt="Email Icon" className="contact-icon" />
-        </a>
-        <a href="https://www.instagram.com/vidit_kulshrestha/" target="_blank" rel="noopener noreferrer">
-          <img src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/instagram.svg" alt="Instagram Icon" className="contact-icon" />
-        </a>
-        <a href="https://github.com/viditkulsh" target="_blank" rel="noopener noreferrer">
-          <img src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/github.svg" alt="GitHub Icon" className="contact-icon" />
-        </a>
-        <a href="https://x.com/vidit_kulsh" target="_blank" rel="noopener noreferrer">
-          <img src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/twitter.svg" alt="Twitter Icon" className="contact-icon" />
-        </a>
-        <a href="https://www.linkedin.com/in/vidit-kulshrestha/" target="_blank" rel="noopener noreferrer">
-          <img src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="LinkedIn Icon" className="contact-icon" />
-        </a>
-      </footer>
+      <div className="max-w-4xl mx-auto">
+        <h2 className="contact-title text-center mb-8">Let's Connect</h2>
+        
+        {/* Profile Section */}
+        <div className="flex flex-col md:flex-row items-center gap-8 mb-12">
+          <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-purple-500/30">
+            <img 
+              src={portfolioData.personal.profileImage}
+              alt={portfolioData.personal.name}
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <div className="text-center md:text-left">
+            <h3 className="text-2xl font-bold text-white mb-2">{portfolioData.personal.name}</h3>
+            <p className="text-blue-200 text-lg mb-3">{portfolioData.personal.title}</p>
+            <div className="flex flex-col sm:flex-row gap-4 text-blue-300">
+              <div className="flex items-center gap-2">
+                <MapPin className="w-4 h-4" />
+                <span>{portfolioData.personal.location}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Phone className="w-4 h-4" />
+                <span>{portfolioData.personal.phone}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p className="contact-description text-center text-blue-200 mb-8">
+          Ready to collaborate on exciting projects or discuss opportunities? 
+          Feel free to reach out through any of these platforms!
+        </p>
+        
+        {/* Social Links */}
+        <div className="contact-footer flex justify-center gap-6 flex-wrap">
+          {socialPlatforms.map((platform, index) => (
+            <a
+              key={index}
+              href={platform.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`contact-icon flex items-center gap-2 px-4 py-3 bg-white/10 backdrop-blur-md rounded-lg border border-white/20 transition-all duration-300 hover:scale-105 hover:bg-white/20 ${platform.color}`}
+              title={`Connect on ${platform.name}`}
+            >
+              {platform.icon}
+              <span className="hidden sm:inline text-sm font-medium">{platform.name}</span>
+            </a>
+          ))}
+        </div>
+
+        {/* Professional Tagline */}
+        <div className="text-center mt-8 p-4 bg-gradient-to-r from-purple-500/10 to-blue-500/10 rounded-lg border border-purple-500/20">
+          <p className="text-purple-200 italic">"{portfolioData.personal.quote}"</p>
+        </div>
+      </div>
     </section>
   );
 };

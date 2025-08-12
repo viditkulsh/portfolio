@@ -2,96 +2,92 @@
 export const experienceData = [
   {
     id: 1,
-    company: "DRDO & Astraeus Next Gen",
-    position: "Research Collaborator - Blockchain Interoperability",
-    duration: "2023 - Present",
-    location: "Research Collaboration",
-    type: "Research",
-    companyLogo: "/images/companies/drdo.png",
-    description: "Working on blockchain interoperability protocols research in collaboration with defense and private sector organizations",
+    company: "Adbhut Global",
+    position: "Freelance Web Developer",
+    duration: "Apr 2025",
+    location: "Remote, India",
+    type: "Freelance",
+    companyLogo: "/images/companies/adbhutglobal.png",
+    description: "Developed and deployed a full-stack, mobile-optimized website focusing on responsive design and UX improvements.",
     responsibilities: [
-      "Developing novel consensus mechanisms for cross-chain communication",
-      "Implementing cryptographic protocols for secure data exchange",
-      "Publishing technical documentation and research findings",
-      "Collaborating with academic and industry researchers"
+      "Developed full-stack website using HTML, CSS, and JavaScript",
+      "Boosted user engagement by 40% and reduced bounce rates by 25%",
+      "Integrated scalable backend logic handling 500+ form submissions per day",
+      "Enhanced load speed by 35% with image compression, lazy loading, and CDN integration"
+    ],
+    technologies: [
+      { name: "HTML", icon: "📝" },
+      { name: "CSS", icon: "🎨" },
+      { name: "JavaScript", icon: "📜" },
+      { name: "Backend Integration", icon: "🔧" },
+      { name: "SEO", icon: "🔍" }
+    ],
+    achievements: [
+      "Significantly improved user engagement metrics",
+      "Delivered scalable and performance-optimized web solution"
+    ],
+    skills: ["Full Stack Development", "Responsive Design", "Performance Optimization", "Backend Logic"],
+    projectsWorked: [],
+    mentors: [],
+    impact: "Elevated web presence and usability for Adbhut Global with measurable engagement growth."
+  },
+  {
+    id: 2,
+    company: "DRDO (Defence Research and Development Organization)",
+    position: "Blockchain Research Intern",
+    duration: "Jan 2025 – May 2025",
+    location: "Delhi, India",
+    type: "Internship",
+    companyLogo: "/images/companies/drdo.png",
+    description: "Researched cross-chain communication and trustless blockchain interoperability protocols.",
+    responsibilities: [
+      "Conducted research on cross-chain asset transfer protocols",
+      "Drafted technical documentation and architectural diagrams for academic publications",
+      "Supported development of trustless blockchain interoperability systems"
     ],
     technologies: [
       { name: "Blockchain", icon: "⛓️" },
       { name: "Cryptography", icon: "🔐" },
-      { name: "Distributed Systems", icon: "🌐" },
-      { name: "Protocol Design", icon: "📐" }
+      { name: "Research", icon: "📚" }
     ],
     achievements: [
-      "Developed innovative interoperability solutions",
-      "Contributed to academic research publications",
-      "Recognized for technical excellence in research collaboration"
+      "Produced research documentation contributing to academic proposals",
+      "Advanced knowledge of cross-chain interoperability"
     ],
-    skills: ["Research", "Blockchain Development", "Technical Writing", "Collaboration"],
-    projectsWorked: [1], // Reference to projects data
-    mentors: ["Dr. Research Lead", "Senior Blockchain Architect"],
-    impact: "Contributing to next-generation blockchain infrastructure that could revolutionize cross-chain communication"
-  },
-  {
-    id: 2,
-    company: "Bennett University",
-    position: "Teaching Assistant - Computer Science",
-    duration: "Jan 2024 - Present",
-    location: "Greater Noida, India",
-    type: "Academic",
-    companyLogo: "/images/companies/bennett.png",
-    description: "Supporting faculty in teaching computer science courses and mentoring junior students",
-    responsibilities: [
-      "Assisting in algorithm design and data structures courses",
-      "Mentoring students in programming assignments",
-      "Conducting lab sessions for practical implementations",
-      "Grading assignments and providing constructive feedback"
-    ],
-    technologies: [
-      { name: "Java", icon: "☕" },
-      { name: "Data Structures", icon: "🏗️" },
-      { name: "Algorithms", icon: "🧮" },
-      { name: "Teaching", icon: "👨‍🏫" }
-    ],
-    achievements: [
-      "Improved student performance by 25% in programming courses",
-      "Developed interactive coding exercises",
-      "Received excellent feedback from students and faculty"
-    ],
-    skills: ["Teaching", "Mentoring", "Algorithm Design", "Programming"],
-    projectsWorked: [],
-    mentors: ["Prof. Computer Science", "Department Head"],
-    impact: "Helping shape the next generation of computer science professionals"
+    skills: ["Blockchain Research", "Technical Writing", "Cross-chain Communication"],
+    projectsWorked: [1], // Assuming project 1 relates to this research
+    mentors: ["Dr. Research Lead"],
+    impact: "Contributed to foundational research advancing blockchain interoperability in defense tech."
   },
   {
     id: 3,
-    company: "Tech Innovation Lab",
-    position: "Full Stack Development Intern",
-    duration: "Jun 2023 - Aug 2023",
-    location: "Remote",
+    company: "Astraeus Next Gen",
+    position: "Blockchain Developer Intern",
+    duration: "Dec 2024 – Apr 2025",
+    location: "Remote, India",
     type: "Internship",
-    companyLogo: "/images/companies/tech-lab.png",
-    description: "Developed web applications using modern technologies and contributed to multiple client projects",
+    companyLogo: "/images/companies/astraeus.png",
+    description: "Developed and maintained smart contracts and cross-chain bridges for Ethereum-compatible networks.",
     responsibilities: [
-      "Built responsive web applications using React.js and Node.js",
-      "Developed RESTful APIs for client-server communication",
-      "Implemented user authentication and authorization systems",
-      "Collaborated with design team on UI/UX improvements"
+      "Maintained 90%+ smart contract test coverage",
+      "Built proof-of-concept cross-chain bridges using Solidity, Hardhat, and Ethers.js",
+      "Conducted peer reviews and participated in weekly agile sprints",
+      "Documented architecture and deployment processes to aid onboarding"
     ],
     technologies: [
-      { name: "React.js", icon: "⚛️" },
-      { name: "Node.js", icon: "🟢" },
-      { name: "MongoDB", icon: "🍃" },
-      { name: "Express.js", icon: "🚂" }
+      { name: "Solidity", icon: "🛠️" },
+      { name: "Hardhat", icon: "⚙️" },
+      { name: "Ethers.js", icon: "📡" },
+      { name: "Smart Contracts", icon: "📜" }
     ],
     achievements: [
-      "Delivered 3 client projects on time and within budget",
-      "Optimized application performance by 40%",
-      "Received offer for full-time position"
+      "Ensured high-quality test coverage and code reliability",
+      "Delivered cross-chain bridge prototypes enabling interoperability"
     ],
-    skills: ["Full Stack Development", "API Design", "Database Management", "Project Management"],
-    projectsWorked: [2], // Reference to projects data
-    mentors: ["Senior Full Stack Developer", "Project Manager"],
-    impact: "Contributed to successful delivery of client projects and gained real-world development experience"
+    skills: ["Smart Contract Development", "Cross-chain Bridges", "Code Review", "Agile Development"],
+    projectsWorked: [1], // Assuming overlap with research project
+    mentors: ["Senior Blockchain Architect"],
+    impact: "Enabled interoperability solutions between Ethereum-compatible networks enhancing project scope."
   }
 ];
 

@@ -1,23 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import ResumeSelector from '../../../pages/ResumeSelector';
 
 const StoryFinale = () => {
   const navigate = useNavigate();
+  const [showResumeSelector, setShowResumeSelector] = useState(false);
 
-  const handleResumeDownload = (variant) => {
-    const resumeMap = {
-      'full-stack-developer': '/resumes/Vidit Kulsh CV Full Stack.pdf',
-      'blockchain-developer': '/resumes/Vidit Kulsh CV Blockchain.pdf',
-      'software-engineer': '/resumes/Vidit Kulsh CV Software Eng.pdf'
-    };
-    
-    const resumePath = resumeMap[variant] || resumeMap['full-stack-developer'];
-    const link = document.createElement('a');
-    link.href = resumePath;
-    link.download = `Vidit_Kulshrestha_${variant.replace('-', '_')}_Resume.pdf`;
-    link.click();
+  const handleResumeDownload = () => {
+    setShowResumeSelector(true);
   };
+
+  const handleBackFromResume = () => {
+    setShowResumeSelector(false);
+  };
+
+  const handleViewPortfolio = () => {
+    navigate('/');
+  };
+
+  // Show Resume Selector if requested
+  if (showResumeSelector) {
+    return (
+      <ResumeSelector 
+        onBack={handleBackFromResume}
+        onViewPortfolio={handleViewPortfolio}
+      />
+    );
+  }
 
   return (
     <div className="story-finale min-h-[calc(100vh-200px)] flex flex-col items-center justify-center text-center px-4">
@@ -79,31 +89,22 @@ const StoryFinale = () => {
         transition={{ delay: 1.2, duration: 0.8 }}
       >
         <h3 className="text-2xl font-playfair text-white mb-6">
-          Choose Your Resume Format
+          Ready to Download My Resume?
         </h3>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          {[
-            { key: 'full-stack-developer', label: 'Full Stack Developer', icon: '🌐', color: 'from-blue-500 to-cyan-500' },
-            { key: 'blockchain-developer', label: 'Blockchain Developer', icon: '⛓️', color: 'from-purple-500 to-pink-500' },
-            { key: 'frontend-developer', label: 'Frontend Developer', icon: '🎨', color: 'from-green-500 to-teal-500' },
-            { key: 'software-engineer', label: 'Software Engineer', icon: '💻', color: 'from-orange-500 to-red-500' }
-          ].map((resume, index) => (
-            <motion.button
-              key={resume.key}
-              onClick={() => handleResumeDownload(resume.key)}
-              className={`bg-gradient-to-r ${resume.color} p-6 rounded-xl text-white font-medium hover:scale-105 transition-all duration-300 shadow-lg`}
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ delay: 1.5 + (index * 0.1), duration: 0.5 }}
-              whileHover={{ scale: 1.05, y: -5 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <div className="text-3xl mb-3">{resume.icon}</div>
-              <div className="text-sm font-semibold">{resume.label}</div>
-            </motion.button>
-          ))}
-        </div>
+        <motion.button
+          onClick={handleResumeDownload}
+          className="bg-gradient-to-r from-blue-500 to-purple-600 px-8 py-4 rounded-xl text-white font-medium hover:scale-105 transition-all duration-300 shadow-lg mb-6"
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ delay: 1.5, duration: 0.5 }}
+          whileHover={{ scale: 1.05, y: -5 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <div className="text-2xl mb-2">📄</div>
+          <div className="text-lg font-semibold">Choose Resume Type</div>
+          <div className="text-sm opacity-90">Select from 3 specialized versions</div>
+        </motion.button>
 
         {/* Call to Action */}
         <motion.div
