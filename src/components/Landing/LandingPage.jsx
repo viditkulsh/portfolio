@@ -8,10 +8,10 @@ const LandingPage = ({ isRecruiterMode, setIsRecruiterMode }) => {
   const navigate = useNavigate();
   const { portfolioData, setCurrentSection, setMode } = usePortfolio();
   const [showControls, setShowControls] = useState(false);
-  const [mounted, setMounted] = useState(false);
+  // Removed unused 'mounted' state variable
 
   useEffect(() => {
-    setMounted(true);
+    // Removed setMounted(true) as it was unused
     const timer = setTimeout(() => setShowControls(true), 2000);
     return () => clearTimeout(timer);
   }, []);

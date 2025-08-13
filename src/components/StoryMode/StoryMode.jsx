@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 
-import { usePortfolio } from '../../context/PortfolioContext';
+// Removed unused usePortfolio import
 import StoryAbout from './sections/StoryAbout';
 import StoryEducation from './sections/StoryEducation';
 import StorySkills from './sections/StorySkills';
@@ -18,7 +18,8 @@ const StoryMode = ({ isRecruiterMode }) => {
   const [aiSpeaking, setAiSpeaking] = useState(false);
   const [countdown, setCountdown] = useState(25); // Live countdown state
 
-  const storySteps = [
+  // Memoize storySteps to prevent re-creation on every render
+  const storySteps = useMemo(() => [
     { 
       component: StoryAbout, 
       title: 'About Me', 
@@ -67,7 +68,7 @@ const StoryMode = ({ isRecruiterMode }) => {
       description: 'Now you know why I\'m the one you need',
       duration: 25000
     }
-  ];
+  ], []); // Empty dependency array since this doesn't depend on props or state
 
   const CurrentStoryComponent = storySteps[currentStory]?.component;
 

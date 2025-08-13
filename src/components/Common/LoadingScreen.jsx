@@ -1,17 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const LoadingScreen = () => {
   const [progress, setProgress] = useState(0);
   const [loadingText, setLoadingText] = useState('Initializing...');
 
-  const loadingStages = [
+  // Memoize loadingStages to prevent re-creation on every render
+  const loadingStages = useMemo(() => [
     { progress: 20, text: 'Loading 3D assets...' },
     { progress: 40, text: 'Preparing portfolio data...' },
     { progress: 60, text: 'Setting up AI assistant...' },
     { progress: 80, text: 'Optimizing experience...' },
     { progress: 100, text: 'Welcome to the future!' }
-  ];
+  ], []);
 
   useEffect(() => {
     let currentStage = 0;
@@ -26,7 +27,7 @@ const LoadingScreen = () => {
     }, 500);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [loadingStages]); // Added loadingStages dependency
 
   return (
     <motion.div

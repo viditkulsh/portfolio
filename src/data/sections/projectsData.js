@@ -1,47 +1,135 @@
 // Projects Data - All project information
+// Projects Data - All project information
 export const projectsData = [
   {
     id: 1,
-    title: "Blockchain Interoperability Protocol",
-    description: "Research and development project aimed at enabling seamless communication between distinct blockchain networks.",
-    longDescription: "Advanced research project in collaboration with DRDO and Astraeus Next Gen, focusing on developing novel protocols for cross-chain communication. The project involves designing consensus mechanisms, implementing cryptographic protocols, and creating secure bridge architectures.",
-    image: "/images/projects/blockchain-interop.jpg",
-    githubUrl: "#",
+    title: "Burger Hut",
+    description: "Full-stack food ordering website with PHP and MySQL backend, designed for a smooth ordering experience.",
+    longDescription: "Developed a creative landing page and login/signup system using PHP, MySQL, JavaScript, HTML, and CSS. Designed with a clean modular folder structure and hosted locally via XAMPP. Features include secure authentication, order management, and a white-orange themed responsive UI.",
+    image: "/images/projects/burgerhut.jpg",
+    githubUrl: "https://github.com/viditkulsh/BurgerHut",
     liveUrl: "#",
     technologies: [
-      { name: "Solidity", icon: "📜" },
-      { name: "Ethereum", icon: "💎" },
-      { name: "Interledger Protocol", icon: "🔗" },
-      { name: "Node.js", icon: "🟢" }
+      { name: "PHP", icon: "🐘" },
+      { name: "MySQL", icon: "🗄️" },
+      { name: "JavaScript", icon: "📜" },
+      { name: "HTML", icon: "📝" },
+      { name: "CSS", icon: "🎨" }
     ],
-    category: "Blockchain",
+    category: "Full Stack",
     featured: true,
-    status: "Active Research",
-    collaborators: ["DRDO", "Astraeus Next Gen"],
-    problem: "Existing blockchain networks operate in isolation, limiting their potential for widespread adoption",
-    solution: "Developed interoperability protocols enabling secure cross-chain transactions and data exchange",
-    impact: "Contributing to academic research and future blockchain infrastructure development",
-    highlights: [
-      "Enabling cross-chain communication",
-      "Collaboration with DRDO research team", 
-      "Advanced cryptographic implementations"
-    ],
-    year: "2023-2024",
-    duration: "12 months (ongoing)",
-    teamSize: "5 researchers",
+    status: "Completed",
+    problem: "Need for a user-friendly food ordering platform for a restaurant.",
+    solution: "Built a responsive, database-driven web application with secure login and dynamic menu display.",
+    impact: "Provided an intuitive platform to streamline online food ordering.",
+    highlights: ["Responsive design", "Secure authentication", "Customizable menu system"],
+    year: "2025",
+    duration: "1 month",
+    teamSize: "Solo project",
     achievements: [
-      "Successfully implemented prototype cross-chain bridge",
-      "Published preliminary research findings",
-      "Achieved 95% transaction success rate in testing"
+      "Clean modular code structure",
+      "Fast load times and smooth UI",
+      "Secure user login system"
     ]
   },
   {
     id: 2,
-    title: "Full Stack Web Application",
-    description: "A scalable MERN stack web application for managing distributed resources.",
-    longDescription: "Comprehensive web application built using the MERN stack, featuring real-time data synchronization, user authentication, and responsive design. The application demonstrates modern web development practices and scalable architecture patterns.",
-    image: "/images/projects/fullstack-app.jpg",
-    githubUrl: "#",
+    title: "Adbhut Global Website",
+    description: "Mobile-optimized corporate website with SEO and performance enhancements.",
+    longDescription: "Developed and deployed a full-stack, mobile-optimized corporate site using HTML, CSS, and JavaScript. Integrated scalable backend logic to handle 500+ form submissions/day, improved SEO, and enhanced load speed by 35% with image compression, lazy loading, and CDN integration.",
+    image: "/images/projects/adbhutglobal.jpg",
+    githubUrl: "https://github.com/viditkulsh/adbhutGlobal",
+    liveUrl: "https://adbhutglobal.com",
+    technologies: [
+      { name: "HTML", icon: "📝" },
+      { name: "CSS", icon: "🎨" },
+      { name: "JavaScript", icon: "📜" },
+      { name: "Backend Integration", icon: "🔧" },
+      { name: "SEO", icon: "🔍" }
+    ],
+    category: "Web Development",
+    featured: true,
+    status: "Completed",
+    problem: "Client needed a professional, fast, and mobile-optimized corporate website.",
+    solution: "Created a responsive, SEO-optimized platform with improved load speed and backend scalability.",
+    impact: "Increased user engagement by 40% and reduced bounce rates by 25%.",
+    highlights: ["SEO optimization", "High performance", "Responsive architecture"],
+    year: "2025",
+    duration: "1 month",
+    teamSize: "Solo project",
+    achievements: [
+      "Improved page speed scores significantly",
+      "Handled high daily form submissions",
+      "Delivered responsive UX"
+    ]
+  },
+  {
+    id: 3,
+    title: "Sathi Sahyogi",
+    description: "Volunteer coordination platform for disaster relief and community service.",
+    longDescription: "Built a web app to connect volunteers with NGOs and communities during crises. Features real-time task allocation, role-based access, and resource tracking, ensuring efficient collaboration.",
+    image: "/images/projects/sathisahyogi.jpg",
+    githubUrl: "https://github.com/viditkulsh/SathiSahyogi",
+    liveUrl: "#",
+    technologies: [
+      { name: "React.js", icon: "⚛️" },
+      { name: "Node.js", icon: "🟢" },
+      { name: "MongoDB", icon: "🍃" },
+      { name: "Express.js", icon: "🚂" }
+    ],
+    category: "Full Stack",
+    featured: true,
+    status: "Completed",
+    problem: "Need for efficient volunteer coordination during disasters.",
+    solution: "Developed a role-based volunteer and task management system.",
+    impact: "Improved disaster response efficiency for NGOs.",
+    highlights: ["Real-time coordination", "Role-based access", "Resource tracking"],
+    year: "2025",
+    duration: "2 months",
+    teamSize: "2 developers",
+    achievements: [
+      "Optimized response time in test scenarios",
+      "Streamlined volunteer onboarding",
+      "Secured data storage with MongoDB"
+    ]
+  },
+  {
+    id: 4,
+    title: "IditTrack",
+    description: "Micro SaaS Inventory & Order Management system for small businesses.",
+    longDescription: "Developed an inventory and order tracking platform with product management, order tracking, FTP file uploads, and POS API integration. Designed for small businesses to streamline operations.",
+    image: "/images/projects/idittrack.jpg",
+    githubUrl: "https://github.com/viditkulsh/idittrack",
+    liveUrl: "#",
+    technologies: [
+      { name: "React.js", icon: "⚛️" },
+      { name: "Node.js", icon: "🟢" },
+      { name: "MongoDB", icon: "🍃" },
+      { name: "Express.js", icon: "🚂" }
+    ],
+    category: "SaaS",
+    featured: false,
+    status: "Active Development",
+    problem: "Small businesses lack affordable, scalable inventory and order tracking tools.",
+    solution: "Created a modular, easy-to-use platform with advanced order and product management.",
+    impact: "Potential to cut manual tracking effort by 60%.",
+    highlights: ["POS API integration", "FTP file upload", "Product management"],
+    year: "2025",
+    duration: "Ongoing",
+    teamSize: "Solo project",
+    achievements: [
+      "Integrated POS APIs successfully",
+      "Implemented modular architecture",
+      "Dockerized for deployment"
+    ]
+  },
+  {
+    id: 5,
+    title: "Note-e-Movie",
+    description: "Movie note-taking app with integrated film database search.",
+    longDescription: "Built a platform for movie enthusiasts to take notes, save favorites, and track watchlists. Integrated external movie database APIs for accurate data.",
+    image: "/images/projects/noteemovie.jpg",
+    githubUrl: "https://github.com/viditkulsh/Note-e-Movie",
     liveUrl: "#",
     technologies: [
       { name: "React.js", icon: "⚛️" },
@@ -50,91 +138,190 @@ export const projectsData = [
       { name: "MongoDB", icon: "🍃" }
     ],
     category: "Full Stack",
-    featured: true,
+    featured: false,
     status: "Completed",
-    problem: "Need for efficient resource management across distributed systems",
-    solution: "Built scalable web application with real-time updates and intuitive user interface",
-    impact: "Demonstrated proficiency in full-stack development and modern web technologies",
-    highlights: [
-      "Scalable architecture design",
-      "Real-time data management", 
-      "Responsive user interface"
-    ],
-    year: "2023",
-    duration: "4 months",
+    problem: "Film fans lack tools to take structured notes linked to movie data.",
+    solution: "Created a personalized movie note-taking platform with integrated data.",
+    impact: "Improved how users organize and recall film experiences.",
+    highlights: ["API integration", "User authentication", "Responsive UI"],
+    year: "2024",
+    duration: "1 month",
     teamSize: "Solo project",
     achievements: [
-      "Achieved 99.9% uptime in production",
-      "Implemented real-time collaboration features",
-      "Optimized performance for 1000+ concurrent users"
+      "Seamless movie database integration",
+      "Mobile-friendly design",
+      "Fast search experience"
     ]
   },
   {
-    id: 3,
-    title: "Smart Contract Portfolio",
-    description: "Collection of secure and efficient smart contracts for various DeFi applications.",
-    longDescription: "Developed a comprehensive suite of smart contracts including token contracts, staking mechanisms, and governance protocols. Each contract is thoroughly tested and optimized for gas efficiency.",
-    image: "/images/projects/smart-contracts.jpg",
-    githubUrl: "#",
+    id: 6,
+    title: "HemoChain",
+    description: "Blockchain-based blood donation tracking system.",
+    longDescription: "Developed a decentralized application to track blood donations and manage donor-recipient records securely on the blockchain.",
+    image: "/images/projects/hemomain.jpg",
+    githubUrl: "https://github.com/viditkulsh/HemoChain",
     liveUrl: "#",
     technologies: [
       { name: "Solidity", icon: "📜" },
+      { name: "Ethereum", icon: "💎" },
       { name: "Hardhat", icon: "🔨" },
-      { name: "OpenZeppelin", icon: "🛡️" },
       { name: "Web3.js", icon: "🌐" }
+    ],
+    category: "Blockchain",
+    featured: true,
+    status: "Completed",
+    problem: "Blood donation tracking systems are prone to inefficiency and data tampering.",
+    solution: "Implemented secure blockchain tracking of blood donations.",
+    impact: "Improved transparency and trust in donation management.",
+    highlights: ["Decentralized storage", "Immutable records", "Smart contracts"],
+    year: "2024",
+    duration: "2 months",
+    teamSize: "2 developers",
+    achievements: [
+      "Successful PoC deployment",
+      "Secure donor data storage",
+      "User-friendly blockchain interface"
+    ]
+  },
+  {
+    id: 7,
+    title: "Spell Checker",
+    description: "Lightweight spell-checking utility for text correction.",
+    longDescription: "Built a Python-based spell checker that uses dictionary-based matching and NLP techniques for correction suggestions.",
+    image: "/images/projects/spellchecker.jpg",
+    githubUrl: "https://github.com/viditkulsh/SpellChecker",
+    liveUrl: "#",
+    technologies: [
+      { name: "Python", icon: "🐍" },
+      { name: "NLTK", icon: "📚" }
+    ],
+    category: "Utility",
+    featured: false,
+    status: "Completed",
+    problem: "Writers need quick offline spell-check tools.",
+    solution: "Created a lightweight, accurate, and fast spell-checking utility.",
+    impact: "Helps writers correct errors without heavy dependencies.",
+    highlights: ["Offline support", "Fast processing", "Custom dictionary"],
+    year: "2024",
+    duration: "2 weeks",
+    teamSize: "Solo project",
+    achievements: [
+      "High accuracy rate",
+      "Extensible dictionary feature",
+      "CLI interface for quick use"
+    ]
+  },
+  {
+    id: 8,
+    title: "Graph Crafters",
+    description: "Data visualization tool for graph plotting and customization.",
+    longDescription: "Built a Python-based tool to plot and customize various graph types for academic and professional use.",
+    image: "/images/projects/graphcrafters.jpg",
+    githubUrl: "https://github.com/viditkulsh/GraphCrafters",
+    liveUrl: "#",
+    technologies: [
+      { name: "Python", icon: "🐍" },
+      { name: "Matplotlib", icon: "📊" }
+    ],
+    category: "Data Visualization",
+    featured: false,
+    status: "Completed",
+    problem: "Users need an easy tool for quick, customizable graph plotting.",
+    solution: "Provided a Python-based interface for fast, flexible graph creation.",
+    impact: "Speeds up data visualization for students and researchers.",
+    highlights: ["Multiple graph types", "Custom styling", "Export to image"],
+    year: "2023",
+    duration: "1 month",
+    teamSize: "Solo project",
+    achievements: [
+      "Support for various chart types",
+      "User-defined styles",
+      "Fast rendering"
+    ]
+  },
+  {
+    id: 9,
+    title: "Image Carousel",
+    description: "Customizable image carousel component for websites.",
+    longDescription: "Developed a responsive, touch-friendly image carousel with smooth animations, auto-play, and configurable settings.",
+    image: "/images/projects/imagecarousel.jpg",
+    githubUrl: "https://github.com/viditkulsh/ImageCarousel",
+    liveUrl: "https://idit-image-carousel.vercel.app/",
+    technologies: [
+      { name: "HTML", icon: "📝" },
+      { name: "CSS", icon: "🎨" },
+      { name: "JavaScript", icon: "📜" }
+    ],
+    category: "Frontend",
+    featured: false,
+    status: "Completed",
+    problem: "Websites need lightweight, customizable carousel solutions.",
+    solution: "Created a modular image carousel component with responsive design.",
+    impact: "Improved visual engagement on websites.",
+    highlights: ["Smooth animations", "Customizable options", "Touch-friendly"],
+    year: "2023",
+    duration: "2 weeks",
+    teamSize: "Solo project",
+    achievements: [
+      "Responsive design for all devices",
+      "Configurable autoplay settings",
+      "Lightweight implementation"
+    ]
+  },
+  {
+    id: 10,
+    title: "Mood Dapp",
+    description: "Ethereum-based decentralized application for storing user mood.",
+    longDescription: "Created a blockchain application allowing users to set and retrieve their mood on the Ethereum network using smart contracts.",
+    image: "/images/projects/moodapp.jpg",
+    githubUrl: "https://github.com/viditkulsh/Mood_Dapp_myFirstDapp",
+    liveUrl: "#",
+    technologies: [
+      { name: "Solidity", icon: "📜" },
+      { name: "Ethereum", icon: "💎" },
+      { name: "Hardhat", icon: "🔨" }
     ],
     category: "Blockchain",
     featured: false,
     status: "Completed",
-    problem: "Need for secure and gas-efficient smart contracts for DeFi applications",
-    solution: "Developed optimized smart contract suite with comprehensive testing",
-    impact: "Contributed to DeFi ecosystem with secure and efficient protocols",
-    highlights: [
-      "Gas-optimized implementations",
-      "Comprehensive security testing",
-      "Modular contract architecture"
-    ],
+    problem: "Simple introduction to decentralized app development.",
+    solution: "Built a mood-storing DApp with basic blockchain interactions.",
+    impact: "Helped in learning smart contract deployment and interaction.",
+    highlights: ["Ethereum smart contracts", "Basic UI", "Blockchain data storage"],
     year: "2023",
-    duration: "3 months",
+    duration: "2 weeks",
     teamSize: "Solo project",
     achievements: [
-      "30% gas optimization compared to standard implementations",
-      "Zero security vulnerabilities in audit",
-      "Successfully deployed on multiple testnets"
+      "First deployed smart contract",
+      "Learned blockchain fundamentals",
+      "Basic UI integration"
     ]
   },
   {
-    id: 4,
-    title: "AI-Powered Code Analyzer",
-    description: "Machine learning tool for automated code quality assessment and optimization suggestions.",
-    longDescription: "Developed an intelligent code analysis system that uses machine learning to identify code quality issues, suggest optimizations, and provide best practice recommendations. The tool supports multiple programming languages and integrates with popular IDEs.",
-    image: "/images/projects/code-analyzer.jpg",
-    githubUrl: "#",
+    id: 11,
+    title: "Aventura De Texto",
+    description: "Text-based adventure game implemented in Python.",
+    longDescription: "Designed an interactive game where players navigate through a story using text commands, featuring multiple endings.",
+    image: "/images/projects/aventura.jpg",
+    githubUrl: "https://github.com/viditkulsh/Aventura-De-Texto",
     liveUrl: "#",
     technologies: [
-      { name: "Python", icon: "🐍" },
-      { name: "TensorFlow", icon: "🧠" },
-      { name: "Flask", icon: "🌶️" },
-      { name: "Docker", icon: "🐳" }
+      { name: "Python", icon: "🐍" }
     ],
-    category: "AI/ML",
+    category: "Game Development",
     featured: false,
     status: "Completed",
-    problem: "Developers need automated tools for code quality assessment and optimization",
-    solution: "Built ML-powered analyzer with real-time feedback and optimization suggestions",
-    impact: "Improved code quality and development efficiency for multiple teams",
-    highlights: [
-      "Multi-language support",
-      "Real-time analysis",
-      "IDE integration"
-    ],
-    year: "2022",
-    duration: "5 months",
-    teamSize: "3 developers",
+    problem: "Create an engaging text-based adventure for Python practice.",
+    solution: "Implemented an interactive storyline with branching paths.",
+    impact: "Enhanced player engagement through narrative design.",
+    highlights: ["Branching storyline", "Multiple endings", "Replayability"],
+    year: "2023",
+    duration: "3 weeks",
+    teamSize: "Solo project",
     achievements: [
-      "85% accuracy in code quality prediction",
-      "Integrated with 5+ popular IDEs",
-      "Reduced code review time by 40%"
+      "Interactive storyline",
+      "Customizable scenarios",
+      "Replay value"
     ]
   }
 ];

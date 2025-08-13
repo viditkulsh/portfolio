@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React from 'react'; // Removed unused useState import
+import { motion } from 'framer-motion'; // Removed unused AnimatePresence import
 import { Download, ArrowLeft, Eye, ExternalLink, User, Code, Blocks } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
 
 const ResumeSelector = ({ onBack, onViewPortfolio }) => {
-  const [selectedResume, setSelectedResume] = useState(null);
-  const [isViewing, setIsViewing] = useState(false);
+  // Removed unused state variables: selectedResume, setSelectedResume, isViewing, setIsViewing
 
   const resumeOptions = [
     {

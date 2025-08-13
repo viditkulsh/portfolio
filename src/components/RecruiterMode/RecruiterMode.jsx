@@ -8,13 +8,10 @@ const RecruiterMode = () => {
   const navigate = useNavigate();
   const { portfolioData } = usePortfolio();
   const [activeSection, setActiveSection] = useState('overview');
-  const [showMetrics, setShowMetrics] = useState(false);
+  // Removed unused showMetrics state variable
   const [showResumeSelector, setShowResumeSelector] = useState(false);
 
-  useEffect(() => {
-    const timer = setTimeout(() => setShowMetrics(true), 1000);
-    return () => clearTimeout(timer);
-  }, []);
+  // Removed unused useEffect for showMetrics
 
   const sections = {
     overview: 'Executive Summary',
