@@ -2,6 +2,7 @@ import React, { useState } from 'react'; // Removed unused useEffect import
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { usePortfolio } from '../../context/PortfolioContext';
+import { User, GraduationCap, Zap, Rocket, Briefcase, Trophy, Mail, Wrench, Smartphone, MapPin } from 'lucide-react';
 
 const ExploreMode = ({ isRecruiterMode }) => {
     const navigate = useNavigate();
@@ -10,13 +11,13 @@ const ExploreMode = ({ isRecruiterMode }) => {
     const [showSidebar, setShowSidebar] = useState(true);
 
     const sections = {
-        about: { title: 'About Me', icon: '👨‍💻', color: 'from-blue-500 to-cyan-500' },
-        education: { title: 'Education', icon: '🎓', color: 'from-purple-500 to-pink-500' },
-        skills: { title: 'Skills', icon: '⚡', color: 'from-green-500 to-teal-500' },
-        projects: { title: 'Projects', icon: '🚀', color: 'from-orange-500 to-red-500' },
-        experience: { title: 'Experience', icon: '💼', color: 'from-indigo-500 to-purple-500' },
-        certificates: { title: 'Certificates', icon: '🏆', color: 'from-yellow-500 to-orange-500' },
-        contact: { title: 'Contact', icon: '📧', color: 'from-pink-500 to-rose-500' }
+        about: { title: 'About Me', icon: User, color: 'from-blue-500 to-cyan-500' },
+        education: { title: 'Education', icon: GraduationCap, color: 'from-purple-500 to-pink-500' },
+        skills: { title: 'Skills', icon: Zap, color: 'from-green-500 to-teal-500' },
+        projects: { title: 'Projects', icon: Rocket, color: 'from-orange-500 to-red-500' },
+        experience: { title: 'Experience', icon: Briefcase, color: 'from-indigo-500 to-purple-500' },
+        certificates: { title: 'Certificates', icon: Trophy, color: 'from-yellow-500 to-orange-500' },
+        contact: { title: 'Contact', icon: Mail, color: 'from-pink-500 to-rose-500' }
     };
 
     const handleBackToHome = () => {
@@ -132,7 +133,7 @@ const ExploreMode = ({ isRecruiterMode }) => {
                                             >
                                                 <div className="flex justify-between items-center mb-2">
                                                     <div className="flex items-center gap-2">
-                                                        <span className="text-lg">{skill.icon || '⚡'}</span>
+                                                        <span className="text-lg">{skill.icon ? React.createElement(skill.icon, { size: 16 }) : <Zap size={16} />}</span>
                                                         <span className="text-white font-medium">{skill.name}</span>
                                                     </div>
                                                     <span className="text-blue-300 text-sm">{skill.level}%</span>
@@ -176,7 +177,7 @@ const ExploreMode = ({ isRecruiterMode }) => {
                                                 key={techIndex}
                                                 className="flex items-center gap-1 px-3 py-1 bg-blue-500/20 text-blue-200 rounded-full text-sm border border-blue-500/30"
                                             >
-                                                <span>{tech.icon || '🔧'}</span>
+                                                <span>{tech.icon ? React.createElement(tech.icon, { size: 14 }) : <Wrench size={14} />}</span>
                                                 <span>{tech.name || tech}</span>
                                             </span>
                                         ))}
@@ -277,15 +278,15 @@ const ExploreMode = ({ isRecruiterMode }) => {
                                 <h3 className="text-xl font-semibold text-blue-200 mb-4">Contact Information</h3>
                                 <div className="space-y-4">
                                     <div className="flex items-center gap-3">
-                                        <span className="text-blue-400">📧</span>
+                                        <span className="text-blue-400"><Mail size={16} /></span>
                                         <span className="text-white">{portfolioData.personal.email}</span>
                                     </div>
                                     <div className="flex items-center gap-3">
-                                        <span className="text-blue-400">📱</span>
+                                        <span className="text-blue-400"><Smartphone size={16} /></span>
                                         <span className="text-white">{portfolioData.personal.phone}</span>
                                     </div>
                                     <div className="flex items-center gap-3">
-                                        <span className="text-blue-400">📍</span>
+                                        <span className="text-blue-400"><MapPin size={16} /></span>
                                         <span className="text-white">{portfolioData.personal.location}</span>
                                     </div>
                                 </div>
@@ -382,7 +383,7 @@ const ExploreMode = ({ isRecruiterMode }) => {
                                           whileHover={{ scale: 1.02, x: 5 }}
                                           whileTap={{ scale: 0.98 }}
                                       >
-                                          <span className="text-xl">{section.icon}</span>
+                                          <span className="text-xl">{React.createElement(section.icon, { size: 20 })}</span>
                                           <span className="font-medium">{section.title}</span>
                                       </motion.button>
                                   ))}

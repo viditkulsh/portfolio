@@ -32,7 +32,12 @@ const StorySkills = () => {
               transition={{ delay: index * 0.1, duration: 0.5 }}
               whileHover={{ scale: 1.05, y: -5 }}
             >
-              <div className="text-3xl mb-3">{skill.icon}</div>
+              <div className="text-3xl mb-3">
+                {React.createElement(skill.icon, {
+                  size: 32,
+                  className: "mx-auto text-primary-cyan"
+                })}
+              </div>
               <h3 className="text-primary-cyan font-semibold mb-2">{skill.name}</h3>
               <div className="text-sm text-primary-text/70 mb-3">{skill.level}% proficiency</div>
               

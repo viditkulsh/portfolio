@@ -95,7 +95,12 @@ const StoryExperience = () => {
                           key={techIndex}
                           className="text-xs bg-primary-purple/20 text-primary-cyan px-2 py-1 rounded-md flex items-center gap-1"
                         >
-                          <span>{tech.icon}</span>
+                          <span>
+                            {React.createElement(tech.icon, {
+                              size: 14,
+                              className: "text-primary-cyan"
+                            })}
+                          </span>
                           <span>{tech.name}</span>
                         </span>
                       ))}
@@ -199,7 +204,12 @@ const StoryExperience = () => {
                         key={index}
                         className="bg-primary-purple/20 text-primary-cyan px-3 py-1 rounded-md flex items-center gap-2"
                       >
-                        <span>{tech.icon}</span>
+                        <span>
+                          {React.createElement(tech.icon, {
+                            size: 16,
+                            className: "text-primary-cyan"
+                          })}
+                        </span>
                         <span>{tech.name}</span>
                       </span>
                     ))}

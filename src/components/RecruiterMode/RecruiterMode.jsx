@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { usePortfolio } from '../../context/PortfolioContext';
 import ResumeSelector from '../../pages/ResumeSelector';
+import { GraduationCap, Microscope, Zap, Rocket, Target, Trophy, Lightbulb, Star } from 'lucide-react';
 
 const RecruiterMode = () => {
   const navigate = useNavigate();
@@ -22,10 +23,10 @@ const RecruiterMode = () => {
   };
 
   const metrics = [
-    { label: 'Academic CGPA', value: '8.88/10', icon: '🎓', description: 'Consistent Excellence' },
-    { label: 'Research Collaborations', value: '2+', icon: '🔬', description: 'DRDO & Industry' },
-    { label: 'Technical Skills', value: '15+', icon: '⚡', description: 'Full Stack + Blockchain' },
-    { label: 'Project Impact', value: 'High', icon: '🚀', description: 'Production Ready' }
+    { label: 'Academic CGPA', value: '8.88/10', icon: GraduationCap, description: 'Consistent Excellence' },
+    { label: 'Research Collaborations', value: '2+', icon: Microscope, description: 'DRDO & Industry' },
+    { label: 'Technical Skills', value: '15+', icon: Zap, description: 'Full Stack + Blockchain' },
+    { label: 'Project Impact', value: 'High', icon: Rocket, description: 'Production Ready' }
   ];
 
   const strengthsData = {
@@ -143,7 +144,7 @@ const RecruiterMode = () => {
               transition={{ delay: index * 0.1 + 0.5 }}
               whileHover={{ scale: 1.05, y: -5 }}
             >
-              <div className="text-3xl mb-2">{metric.icon}</div>
+              <div className="text-3xl mb-2">{React.createElement(metric.icon, { size: 24 })}</div>
               <div className="text-2xl font-bold text-white mb-1">{metric.value}</div>
               <div className="text-sm text-blue-200 font-medium mb-1">{metric.label}</div>
               <div className="text-xs text-blue-300">{metric.description}</div>
@@ -188,7 +189,7 @@ const RecruiterMode = () => {
                 <h2 className="text-3xl font-playfair text-white mb-6">Why Vidit is Your Ideal Candidate</h2>
                 <div className="grid md:grid-cols-2 gap-8">
                   <div>
-                    <h3 className="text-xl font-semibold text-blue-200 mb-4">🎯 Perfect Fit Profile</h3>
+                    <h3 className="text-xl font-semibold text-blue-200 mb-4 flex items-center gap-2"><Target size={20} /> Perfect Fit Profile</h3>
                     <ul className="space-y-3 text-white/90">
                       <li className="flex items-start gap-3">
                         <span className="text-green-400 mt-1">✓</span>
@@ -209,22 +210,22 @@ const RecruiterMode = () => {
                     </ul>
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold text-blue-200 mb-4">🚀 Immediate Value Add</h3>
+                    <h3 className="text-xl font-semibold text-blue-200 mb-4 flex items-center gap-2"><Rocket size={20} /> Immediate Value Add</h3>
                     <ul className="space-y-3 text-white/90">
                       <li className="flex items-start gap-3">
-                        <span className="text-yellow-400 mt-1">⭐</span>
+                        <span className="text-yellow-400 mt-1"><Star size={16} /></span>
                         <span>Ready to contribute from day one</span>
                       </li>
                       <li className="flex items-start gap-3">
-                        <span className="text-yellow-400 mt-1">⭐</span>
+                        <span className="text-yellow-400 mt-1"><Star size={16} /></span>
                         <span>Strong foundation in modern tech stack</span>
                       </li>
                       <li className="flex items-start gap-3">
-                        <span className="text-yellow-400 mt-1">⭐</span>
+                        <span className="text-yellow-400 mt-1"><Star size={16} /></span>
                         <span>Research mindset brings innovation</span>
                       </li>
                       <li className="flex items-start gap-3">
-                        <span className="text-yellow-400 mt-1">⭐</span>
+                        <span className="text-yellow-400 mt-1"><Star size={16} /></span>
                         <span>Collaborative approach with proven results</span>
                       </li>
                     </ul>
@@ -288,7 +289,7 @@ const RecruiterMode = () => {
                     <ul className="space-y-2">
                       {strengthsData.research.map((item, index) => (
                         <li key={index} className="flex items-start gap-3 text-white/90">
-                          <span className="text-purple-400 mt-1">🎯</span>
+                          <span className="text-purple-400 mt-1"><Target size={16} /></span>
                           <span>{item}</span>
                         </li>
                       ))}
@@ -319,7 +320,7 @@ const RecruiterMode = () => {
                 <h2 className="text-3xl font-playfair text-white mb-6">Impact & Results</h2>
                 <div className="grid md:grid-cols-3 gap-6">
                   <div className="bg-gradient-to-b from-yellow-500/20 to-orange-500/20 p-6 rounded-xl border border-yellow-500/30">
-                    <h3 className="text-lg font-semibold text-white mb-3">🏆 Academic Excellence</h3>
+                    <h3 className="text-lg font-semibold text-white mb-3 flex items-center gap-2"><Trophy size={18} /> Academic Excellence</h3>
                     <ul className="space-y-2 text-yellow-100">
                       <li>• 8.88/10 CGPA</li>
                       <li>• Consecutive Outstanding Achievement Awards</li>
@@ -327,7 +328,7 @@ const RecruiterMode = () => {
                     </ul>
                   </div>
                   <div className="bg-gradient-to-b from-blue-500/20 to-cyan-500/20 p-6 rounded-xl border border-blue-500/30">
-                    <h3 className="text-lg font-semibold text-white mb-3">🚀 Professional Growth</h3>
+                    <h3 className="text-lg font-semibold text-white mb-3 flex items-center gap-2"><Rocket size={18} /> Professional Growth</h3>
                     <ul className="space-y-2 text-blue-100">
                       <li>• DRDO research collaboration</li>
                       <li>• Industry-academic bridge building</li>
@@ -335,7 +336,7 @@ const RecruiterMode = () => {
                     </ul>
                   </div>
                   <div className="bg-gradient-to-b from-purple-500/20 to-pink-500/20 p-6 rounded-xl border border-purple-500/30">
-                    <h3 className="text-lg font-semibold text-white mb-3">💡 Innovation Impact</h3>
+                    <h3 className="text-lg font-semibold text-white mb-3 flex items-center gap-2"><Lightbulb size={18} /> Innovation Impact</h3>
                     <ul className="space-y-2 text-purple-100">
                       <li>• Blockchain protocol development</li>
                       <li>• Technical documentation</li>
@@ -368,7 +369,7 @@ const RecruiterMode = () => {
                     </div>
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold text-blue-200 mb-4">🎯 Fun Facts</h3>
+                    <h3 className="text-xl font-semibold text-blue-200 mb-4 flex items-center gap-2"><Target size={20} /> Fun Facts</h3>
                     <div className="space-y-3">
                       {portfolioData.about.funFacts.map((fact, index) => (
                         <motion.div

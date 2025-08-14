@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { usePortfolio } from '../../../context/PortfolioContext';
+import { MapPin, Trophy } from 'lucide-react';
 
 const StoryEducation = ({ isRecruiterMode }) => {
   const { portfolioData } = usePortfolio();
@@ -43,7 +44,7 @@ const StoryEducation = ({ isRecruiterMode }) => {
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2 text-primary-text/70">
-                  <span>📍</span>
+                  <span><MapPin size={16} /></span>
                   <span>{edu.institution}</span>
                 </div>
                 <span className="text-primary-cyan font-semibold">
@@ -52,7 +53,7 @@ const StoryEducation = ({ isRecruiterMode }) => {
               </div>
 
               <div className="flex items-center gap-2">
-                <span className="text-primary-purple">🏆</span>
+                <span className="text-primary-purple"><Trophy size={16} /></span>
                 <span className="text-primary-text">
                   CGPA: <strong className="text-primary-cyan">{edu.cgpa}</strong>
                 </span>

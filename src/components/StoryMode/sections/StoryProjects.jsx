@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePortfolio } from '../../../context/PortfolioContext';
-import { ExternalLink, Github, Eye } from 'lucide-react';
+import { ExternalLink, Github, Eye, Rocket } from 'lucide-react';
 
 const StoryProjects = () => {
   const { portfolioData } = usePortfolio();
@@ -53,7 +53,7 @@ const StoryProjects = () => {
                     className="w-full h-full object-cover"
                   />
                 ) : (
-                  <div className="text-6xl opacity-50">{project.icon || '🚀'}</div>
+                    <div className="text-6xl opacity-50">{project.icon ? React.createElement(project.icon, { size: 48 }) : <Rocket size={48} />}</div>
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <div className="absolute bottom-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -73,7 +73,12 @@ const StoryProjects = () => {
                       key={techIndex}
                       className="text-xs bg-primary-purple/20 text-primary-cyan px-2 py-1 rounded-md flex items-center gap-1"
                     >
-                      <span>{tech.icon}</span>
+                      <span>
+                        {React.createElement(tech.icon, {
+                          size: 14,
+                          className: "text-primary-cyan"
+                        })}
+                      </span>
                       <span>{tech.name}</span>
                     </span>
                   ))}
@@ -124,7 +129,7 @@ const StoryProjects = () => {
                           className="w-full h-full object-cover rounded-lg"
                         />
                       ) : (
-                        <div className="text-8xl opacity-50">{selectedProject.icon || '🚀'}</div>
+                          <div className="text-8xl opacity-50">{selectedProject.icon ? React.createElement(selectedProject.icon, { size: 64 }) : <Rocket size={64} />}</div>
                       )}
                     </div>
                   </div>
@@ -143,7 +148,12 @@ const StoryProjects = () => {
                             key={index}
                             className="bg-primary-purple/20 text-primary-cyan px-3 py-1 rounded-md flex items-center gap-2"
                           >
-                            <span>{tech.icon}</span>
+                            <span>
+                              {React.createElement(tech.icon, {
+                                size: 16,
+                                className: "text-primary-cyan"
+                              })}
+                            </span>
                             <span>{tech.name}</span>
                           </span>
                         ))}

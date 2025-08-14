@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePortfolio } from '../../../context/PortfolioContext';
+import { User, Target, Lightbulb, Sparkles, Rocket } from 'lucide-react';
 
 const StoryAbout = ({ isRecruiterMode, onNext, onPrevious }) => {
   const { portfolioData } = usePortfolio();
@@ -39,7 +40,7 @@ const StoryAbout = ({ isRecruiterMode, onNext, onPrevious }) => {
             transition={{ delay: 0.3 }}
           >
             <div className="w-16 h-16 rounded-full bg-gradient-to-r from-primary-cyan to-primary-purple flex items-center justify-center">
-              <span className="text-2xl">👨‍💻</span>
+              <span className="text-2xl"><User size={24} /></span>
             </div>
             <div>
               <h1 className="heading-lg text-gradient">{portfolioData.personal.name}</h1>
@@ -82,7 +83,7 @@ const StoryAbout = ({ isRecruiterMode, onNext, onPrevious }) => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            Discover Fun Facts 🎯
+            Discover Fun Facts <Target size={16} className="inline" />
           </motion.button>
         </div>
       </motion.div>
@@ -178,7 +179,7 @@ const StoryAbout = ({ isRecruiterMode, onNext, onPrevious }) => {
               {selectedTimelineItem.isHumorous && (
                 <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-lg p-4">
                   <p className="text-yellow-300 text-sm">
-                    💡 <strong>Lesson learned:</strong> Every bug is just an undocumented feature waiting to be discovered!
+                    <Lightbulb size={16} className="inline" /> <strong>Lesson learned:</strong> Every bug is just an undocumented feature waiting to be discovered!
                   </p>
                 </div>
               )}
@@ -187,7 +188,7 @@ const StoryAbout = ({ isRecruiterMode, onNext, onPrevious }) => {
                 onClick={() => setSelectedTimelineItem(null)}
                 className="btn btn-primary mt-6"
               >
-                Got it! ✨
+                Got it! <Sparkles size={16} className="inline" />
               </button>
             </motion.div>
           </motion.div>
@@ -235,7 +236,7 @@ const StoryAbout = ({ isRecruiterMode, onNext, onPrevious }) => {
                   onClick={() => setShowFunFacts(false)}
                   className="btn btn-primary"
                 >
-                  Awesome! 🚀
+                  Awesome! <Rocket size={16} className="inline" />
                 </button>
               </div>
             </motion.div>

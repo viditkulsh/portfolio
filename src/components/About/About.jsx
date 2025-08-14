@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Trophy } from 'lucide-react';
 import { usePortfolio } from '../../context/PortfolioContext';
 
 const About = () => {
@@ -118,7 +119,7 @@ const About = () => {
                       whileHover={{ x: 5 }}
                       transition={{ duration: 0.2 }}
                     >
-                      <span className="text-gradient-indigo">🏆</span>
+                      <span className="text-gradient-indigo"><Trophy size={20} /></span>
                       <p className="text-primary-silver/90 font-inter text-sm">
                         {achievement}
                       </p>

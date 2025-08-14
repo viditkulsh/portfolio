@@ -1,4 +1,5 @@
 // Experience Data - All work experience and professional background
+import { FileText, Palette, FileCode, Wrench, Search, Link, Shield, BookOpen, Settings, Radio, FileText as Contract } from 'lucide-react';
 export const experienceData = [
   {
     id: 1,
@@ -16,11 +17,11 @@ export const experienceData = [
       "Enhanced load speed by 35% with image compression, lazy loading, and CDN integration"
     ],
     technologies: [
-      { name: "HTML", icon: "📝" },
-      { name: "CSS", icon: "🎨" },
-      { name: "JavaScript", icon: "📜" },
-      { name: "Backend Integration", icon: "🔧" },
-      { name: "SEO", icon: "🔍" }
+      { name: "HTML", icon: FileText },
+      { name: "CSS", icon: Palette },
+      { name: "JavaScript", icon: FileCode },
+      { name: "Backend Integration", icon: Wrench },
+      { name: "SEO", icon: Search }
     ],
     achievements: [
       "Significantly improved user engagement metrics",
@@ -46,9 +47,9 @@ export const experienceData = [
       "Supported development of trustless blockchain interoperability systems"
     ],
     technologies: [
-      { name: "Blockchain", icon: "⛓️" },
-      { name: "Cryptography", icon: "🔐" },
-      { name: "Research", icon: "📚" }
+      { name: "Blockchain", icon: Link },
+      { name: "Cryptography", icon: Shield },
+      { name: "Research", icon: BookOpen }
     ],
     achievements: [
       "Produced research documentation contributing to academic proposals",
@@ -75,10 +76,10 @@ export const experienceData = [
       "Documented architecture and deployment processes to aid onboarding"
     ],
     technologies: [
-      { name: "Solidity", icon: "🛠️" },
-      { name: "Hardhat", icon: "⚙️" },
-      { name: "Ethers.js", icon: "📡" },
-      { name: "Smart Contracts", icon: "📜" }
+      { name: "Solidity", icon: Wrench },
+      { name: "Hardhat", icon: Settings },
+      { name: "Ethers.js", icon: Radio },
+      { name: "Smart Contracts", icon: Contract }
     ],
     achievements: [
       "Ensured high-quality test coverage and code reliability",

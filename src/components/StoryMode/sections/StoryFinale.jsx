@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import ResumeSelector from '../../../pages/ResumeSelector';
+import { Microscope, Zap } from 'lucide-react';
 
 const StoryFinale = () => {
   const navigate = useNavigate();
@@ -70,12 +71,12 @@ const StoryFinale = () => {
           <p className="text-blue-200 text-sm">8.88/10 CGPA with consecutive outstanding achievements</p>
         </div>
         <div className="bg-white/5 backdrop-blur-md rounded-xl p-6 border border-white/10">
-          <div className="text-3xl mb-3">🔬</div>
+          <div className="text-3xl mb-3"><Microscope size={32} /></div>
           <h3 className="text-lg font-semibold text-white mb-2">Research Experience</h3>
           <p className="text-blue-200 text-sm">DRDO collaboration in blockchain interoperability</p>
         </div>
         <div className="bg-white/5 backdrop-blur-md rounded-xl p-6 border border-white/10">
-          <div className="text-3xl mb-3">⚡</div>
+          <div className="text-3xl mb-3"><Zap size={32} /></div>
           <h3 className="text-lg font-semibold text-white mb-2">Technical Mastery</h3>
           <p className="text-blue-200 text-sm">Full-stack + Blockchain development expertise</p>
         </div>

@@ -1,4 +1,29 @@
 // Skills Data - All skills and technologies information
+import {
+  Code,
+  Database,
+  Globe,
+  Zap,
+  Shield,
+  Layers,
+  Coffee,
+  Terminal,
+  Server,
+  GitBranch,
+  Key,
+  Lock,
+  Brain,
+  Users,
+  Target,
+  Repeat,
+  Palette,
+  Cpu,
+  Cloud,
+  Container,
+  FileCode,
+  Puzzle
+} from 'lucide-react';
+
 export const skillsData = {
   categories: [
     {
@@ -7,67 +32,144 @@ export const skillsData = {
       position: { x: 0, y: 2, z: 0 },
       skills: [
         { 
-          name: "Java", 
-          level: 90, 
-          icon: "☕", 
-          projects: ["Blockchain Protocols", "Enterprise Apps"],
+          name: "JavaScript (ES6+)",
+          level: 90,
+          icon: Code,
+          projects: ["BurgerHut", "AdbhutGlobal", "Note-e-Movie", "ImageCarousel"],
           category: "Programming Languages"
         },
-        { 
-          name: "JavaScript", 
-          level: 88, 
-          icon: "🟨", 
-          projects: ["Web Applications", "Interactive UIs"],
+        {
+          name: "TypeScript",
+          level: 88,
+          icon: FileCode,
+          projects: ["HemoChain", "idittrack", "Mood_Dapp_myFirstDapp"],
+          category: "Programming Languages"
+        },
+        {
+          name: "Java",
+          level: 90,
+          icon: Coffee,
+          projects: ["GraphCrafters", "Aventura-De-Texto"],
+          category: "Programming Languages"
+        },
+        {
+          name: "C++",
+          level: 80,
+          icon: Terminal,
+          projects: ["GraphCrafters"],
+          category: "Programming Languages"
+        },
+        {
+          name: "Python",
+          level: 82,
+          icon: Code,
+          projects: ["SpellChecker", "GraphCrafters"],
+          category: "Programming Languages"
+        },
+        {
+          name: "Solidity",
+          level: 85,
+          icon: Shield,
+          projects: ["HemoChain", "Mood_Dapp_myFirstDapp"],
           category: "Programming Languages"
         },
         { 
           name: "React.js", 
-          level: 85, 
-          icon: "⚛️", 
-          projects: ["Modern Web Apps", "Component Libraries"],
+          level: 88,
+          icon: Zap,
+          projects: ["BurgerHut", "AdbhutGlobal", "Note-e-Movie"],
+          category: "Frontend Frameworks"
+        },
+        {
+          name: "Tailwind CSS",
+          level: 85,
+          icon: Palette,
+          projects: ["BurgerHut", "AdbhutGlobal", "Note-e-Movie"],
           category: "Frontend Frameworks"
         },
         { 
           name: "Node.js", 
-          level: 82, 
-          icon: "🟢", 
-          projects: ["Backend Services", "API Development"],
+          level: 85,
+          icon: Server,
+          projects: ["BurgerHut", "AdbhutGlobal", "idittrack"],
+          category: "Backend Technologies"
+        },
+        {
+          name: "NestJS",
+          level: 78,
+          icon: Shield,
+          projects: ["idittrack"],
           category: "Backend Technologies"
         },
         { 
           name: "Express.js", 
-          level: 80, 
-          icon: "🚂", 
-          projects: ["REST APIs", "Web Services"],
+          level: 82,
+          icon: Layers,
+          projects: ["BurgerHut", "AdbhutGlobal", "idittrack"],
           category: "Backend Frameworks"
+        },
+        {
+          name: "PostgreSQL",
+          level: 80,
+          icon: Database,
+          projects: ["idittrack"],
+          category: "Databases"
+        },
+        {
+          name: "MySQL",
+          level: 82,
+          icon: Database,
+          projects: ["GraphCrafters"],
+          category: "Databases"
         },
         { 
           name: "MongoDB", 
-          level: 78, 
-          icon: "🍃", 
-          projects: ["Database Design", "Data Management"],
+          level: 80,
+          icon: Database,
+          projects: ["BurgerHut", "AdbhutGlobal", "idittrack"],
+          category: "Databases"
+        },
+        {
+          name: "Firebase",
+          level: 78,
+          icon: Zap,
+          projects: ["ImageCarousel", "idittrack"],
+          category: "Databases"
+        },
+        {
+          name: "Supabase",
+          level: 75,
+          icon: Cloud,
+          projects: ["idittrack"],
           category: "Databases"
         },
         { 
-          name: "SQL", 
-          level: 85, 
-          icon: "🗄️", 
-          projects: ["Database Optimization", "Complex Queries"],
-          category: "Databases"
+          name: "Docker",
+          level: 78,
+          icon: Container,
+          projects: ["HemoChain", "idittrack"],
+          category: "DevOps & Cloud"
         },
         { 
           name: "Git/GitHub", 
-          level: 90, 
-          icon: "🐙", 
-          projects: ["Version Control", "Collaboration"],
+          level: 92,
+          icon: GitBranch,
+          projects: ["All Projects"],
           category: "Development Tools"
         },
         { 
           name: "REST APIs", 
-          level: 85, 
-          icon: "🔌", 
-          projects: ["Service Integration", "API Design"],
+          level: 88,
+          icon: Globe,
+          projects: ["BurgerHut", "AdbhutGlobal", "idittrack"],
           category: "API Development"
+        },
+        {
+          name: "JWT Auth",
+          level: 80,
+          icon: Key,
+          projects: ["idittrack", "HemoChain"],
+          category: "Security"
         }
       ]
     },
@@ -79,30 +181,37 @@ export const skillsData = {
         { 
           name: "Blockchain Development", 
           level: 88, 
-          icon: "⛓️", 
-          projects: ["Interoperability Protocols", "DeFi Solutions"],
+          icon: Layers,
+          projects: ["HemoChain", "Mood_Dapp_myFirstDapp"],
           category: "Blockchain"
         },
         { 
           name: "Smart Contracts", 
           level: 85, 
-          icon: "📜", 
-          projects: ["Ethereum DApps", "Protocol Development"],
+          icon: FileCode,
+          projects: ["HemoChain", "Mood_Dapp_myFirstDapp"],
           category: "Blockchain"
         },
         { 
           name: "Cryptography", 
           level: 80, 
-          icon: "🔐", 
-          projects: ["Security Implementations", "Protocol Design"],
+          icon: Lock,
+          projects: ["HemoChain"],
           category: "Security"
         },
         { 
           name: "Distributed Systems", 
           level: 82, 
-          icon: "🌐", 
-          projects: ["Scalable Architecture", "System Design"],
+          icon: Globe,
+          projects: ["idittrack"],
           category: "System Architecture"
+        },
+        {
+          name: "Machine Learning",
+          level: 78,
+          icon: Cpu,
+          projects: ["GraphCrafters", "SpellChecker"],
+          category: "AI/ML"
         }
       ]
     },
@@ -114,37 +223,44 @@ export const skillsData = {
         { 
           name: "Problem-solving", 
           level: 92, 
-          icon: "🧩", 
-          projects: ["Complex Debugging", "Algorithm Design"],
+          icon: Puzzle,
+          projects: ["All Projects"],
           category: "Analytical Skills"
         },
         { 
           name: "Collaboration", 
           level: 88, 
-          icon: "🤝", 
-          projects: ["Team Projects", "Research Partnerships"],
+          icon: Users,
+          projects: ["Team Projects", "Research Collaborations"],
           category: "Interpersonal Skills"
         },
         { 
-          name: "Research-oriented mindset", 
+          name: "Leadership", 
           level: 85, 
-          icon: "🔬", 
-          projects: ["Academic Research", "Technology Innovation"],
-          category: "Research Skills"
+          icon: Target,
+          projects: ["Hackathons", "Capstone Research"],
+          category: "Interpersonal Skills"
+        },
+        {
+          name: "Technical Communication",
+          level: 85,
+          icon: FileCode,
+          projects: ["Documentation", "Research Papers"],
+          category: "Communication Skills"
         },
         { 
           name: "Adaptability", 
           level: 87, 
-          icon: "🔄", 
-          projects: ["New Technology Adoption", "Rapid Learning"],
+          icon: Repeat,
+          projects: ["Learning New Tech", "Multi-Stack Projects"],
           category: "Personal Skills"
         },
         { 
-          name: "Technical Writing", 
-          level: 80, 
-          icon: "✍️", 
-          projects: ["Documentation", "Research Papers"],
-          category: "Communication Skills"
+          name: "Critical Thinking",
+          level: 88,
+          icon: Brain,
+          projects: ["Blockchain Interoperability Research"],
+          category: "Analytical Skills"
         }
       ]
     }

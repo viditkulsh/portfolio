@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Download, User, Settings, Moon, Sun } from 'lucide-react';
+import { Download, User, Settings, Moon, Sun, Target } from 'lucide-react';
 import { useTheme } from '../../context/ThemeContext';
 import ResumeSelector from '../Resume/ResumeSelector';
 import SocialProfiles from '../Social/SocialProfiles';
@@ -141,8 +141,8 @@ const Navigation = () => {
             transition={{ duration: 0.3 }}
           >
             <div className="bg-gradient-to-r from-primary-cyan/20 to-primary-purple/20 border border-primary-cyan/30 rounded-full px-4 py-2">
-              <span className="text-sm text-primary-cyan font-medium">
-                🎯 Professional Mode Active - Streamlined for Recruiters
+              <span className="text-sm text-primary-cyan font-medium flex items-center gap-2">
+                <Target size={16} /> Professional Mode Active - Streamlined for Recruiters
               </span>
             </div>
           </motion.div>

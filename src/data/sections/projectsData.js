@@ -1,8 +1,53 @@
 // Projects Data - All project information
-// Projects Data - All project information
+import {
+  Lock,
+  Globe,
+  Database,
+  Code,
+  FileText,
+  Search,
+  Zap,
+  Coffee,
+  Terminal,
+  Server,
+  Palette,
+  Shield,
+  Layers
+} from 'lucide-react';
+
 export const projectsData = [
   {
-    id: 1,
+    id: 11,
+    title: "IditTrack",
+    description: "Micro SaaS Inventory & Order Management system for small businesses.",
+    longDescription: "Developed an inventory and order tracking platform with product management, order tracking, FTP file uploads, and POS API integration. Designed for small businesses to streamline operations.",
+    image: "/images/projects/idittrack.jpg",
+    githubUrl: "https://github.com/viditkulsh/idittrack",
+    liveUrl: "#",
+    technologies: [
+      { name: "React.js", icon: Zap },
+      { name: "Node.js", icon: Server },
+      { name: "MongoDB", icon: Database },
+      { name: "Express.js", icon: Layers }
+    ],
+    category: "SaaS",
+    featured: true,
+    status: "Completed",
+    problem: "Small businesses lack affordable, scalable inventory and order tracking tools.",
+    solution: "Created a modular, easy-to-use platform with advanced order and product management.",
+    impact: "Potential to cut manual tracking effort by 60%.",
+    highlights: ["POS API integration", "FTP file upload", "Product management"],
+    year: "2025",
+    duration: "1 month",
+    teamSize: "Solo project",
+    achievements: [
+      "Integrated POS APIs successfully",
+      "Implemented modular architecture",
+      "Dockerized for deployment"
+    ]
+  },
+  {
+    id: 10,
     title: "Burger Hut",
     description: "Full-stack food ordering website with PHP and MySQL backend, designed for a smooth ordering experience.",
     longDescription: "Developed a creative landing page and login/signup system using PHP, MySQL, JavaScript, HTML, and CSS. Designed with a clean modular folder structure and hosted locally via XAMPP. Features include secure authentication, order management, and a white-orange themed responsive UI.",
@@ -10,14 +55,14 @@ export const projectsData = [
     githubUrl: "https://github.com/viditkulsh/BurgerHut",
     liveUrl: "#",
     technologies: [
-      { name: "PHP", icon: "🐘" },
-      { name: "MySQL", icon: "🗄️" },
-      { name: "JavaScript", icon: "📜" },
-      { name: "HTML", icon: "📝" },
-      { name: "CSS", icon: "🎨" }
+      { name: "PHP", icon: Server },
+      { name: "MySQL", icon: Database },
+      { name: "JavaScript", icon: Code },
+      { name: "HTML", icon: FileText },
+      { name: "CSS", icon: Palette }
     ],
     category: "Full Stack",
-    featured: true,
+    featured: false,
     status: "Completed",
     problem: "Need for a user-friendly food ordering platform for a restaurant.",
     solution: "Built a responsive, database-driven web application with secure login and dynamic menu display.",
@@ -33,7 +78,7 @@ export const projectsData = [
     ]
   },
   {
-    id: 2,
+    id: 9,
     title: "Adbhut Global Website",
     description: "Mobile-optimized corporate website with SEO and performance enhancements.",
     longDescription: "Developed and deployed a full-stack, mobile-optimized corporate site using HTML, CSS, and JavaScript. Integrated scalable backend logic to handle 500+ form submissions/day, improved SEO, and enhanced load speed by 35% with image compression, lazy loading, and CDN integration.",
@@ -41,11 +86,11 @@ export const projectsData = [
     githubUrl: "https://github.com/viditkulsh/adbhutGlobal",
     liveUrl: "https://adbhutglobal.com",
     technologies: [
-      { name: "HTML", icon: "📝" },
-      { name: "CSS", icon: "🎨" },
-      { name: "JavaScript", icon: "📜" },
-      { name: "Backend Integration", icon: "🔧" },
-      { name: "SEO", icon: "🔍" }
+      { name: "HTML", icon: FileText },
+      { name: "CSS", icon: Palette },
+      { name: "JavaScript", icon: Code },
+      { name: "Backend Integration", icon: Server },
+      { name: "SEO", icon: Search }
     ],
     category: "Web Development",
     featured: true,
@@ -64,7 +109,7 @@ export const projectsData = [
     ]
   },
   {
-    id: 3,
+    id: 8,
     title: "Sathi Sahyogi",
     description: "Volunteer coordination platform for disaster relief and community service.",
     longDescription: "Built a web app to connect volunteers with NGOs and communities during crises. Features real-time task allocation, role-based access, and resource tracking, ensuring efficient collaboration.",
@@ -72,10 +117,10 @@ export const projectsData = [
     githubUrl: "https://github.com/viditkulsh/SathiSahyogi",
     liveUrl: "#",
     technologies: [
-      { name: "React.js", icon: "⚛️" },
-      { name: "Node.js", icon: "🟢" },
-      { name: "MongoDB", icon: "🍃" },
-      { name: "Express.js", icon: "🚂" }
+      { name: "React.js", icon: Zap },
+      { name: "Node.js", icon: Server },
+      { name: "MongoDB", icon: Database },
+      { name: "Express.js", icon: Layers }
     ],
     category: "Full Stack",
     featured: true,
@@ -94,37 +139,7 @@ export const projectsData = [
     ]
   },
   {
-    id: 4,
-    title: "IditTrack",
-    description: "Micro SaaS Inventory & Order Management system for small businesses.",
-    longDescription: "Developed an inventory and order tracking platform with product management, order tracking, FTP file uploads, and POS API integration. Designed for small businesses to streamline operations.",
-    image: "/images/projects/idittrack.jpg",
-    githubUrl: "https://github.com/viditkulsh/idittrack",
-    liveUrl: "#",
-    technologies: [
-      { name: "React.js", icon: "⚛️" },
-      { name: "Node.js", icon: "🟢" },
-      { name: "MongoDB", icon: "🍃" },
-      { name: "Express.js", icon: "🚂" }
-    ],
-    category: "SaaS",
-    featured: false,
-    status: "Active Development",
-    problem: "Small businesses lack affordable, scalable inventory and order tracking tools.",
-    solution: "Created a modular, easy-to-use platform with advanced order and product management.",
-    impact: "Potential to cut manual tracking effort by 60%.",
-    highlights: ["POS API integration", "FTP file upload", "Product management"],
-    year: "2025",
-    duration: "Ongoing",
-    teamSize: "Solo project",
-    achievements: [
-      "Integrated POS APIs successfully",
-      "Implemented modular architecture",
-      "Dockerized for deployment"
-    ]
-  },
-  {
-    id: 5,
+    id: 7,
     title: "Note-e-Movie",
     description: "Movie note-taking app with integrated film database search.",
     longDescription: "Built a platform for movie enthusiasts to take notes, save favorites, and track watchlists. Integrated external movie database APIs for accurate data.",
@@ -132,10 +147,10 @@ export const projectsData = [
     githubUrl: "https://github.com/viditkulsh/Note-e-Movie",
     liveUrl: "#",
     technologies: [
-      { name: "React.js", icon: "⚛️" },
-      { name: "Node.js", icon: "🟢" },
-      { name: "Express.js", icon: "🚂" },
-      { name: "MongoDB", icon: "🍃" }
+      { name: "React.js", icon: Zap },
+      { name: "Node.js", icon: Server },
+      { name: "Express.js", icon: Layers },
+      { name: "MongoDB", icon: Database }
     ],
     category: "Full Stack",
     featured: false,
@@ -160,12 +175,12 @@ export const projectsData = [
     longDescription: "Developed a decentralized application to track blood donations and manage donor-recipient records securely on the blockchain.",
     image: "/images/projects/hemomain.jpg",
     githubUrl: "https://github.com/viditkulsh/HemoChain",
-    liveUrl: "#",
+    liveUrl: "https://hemochain.com",
     technologies: [
-      { name: "Solidity", icon: "📜" },
-      { name: "Ethereum", icon: "💎" },
-      { name: "Hardhat", icon: "🔨" },
-      { name: "Web3.js", icon: "🌐" }
+      { name: "Solidity", icon: Shield },
+      { name: "Ethereum", icon: Lock },
+      { name: "Hardhat", icon: Terminal },
+      { name: "Web3.js", icon: Globe }
     ],
     category: "Blockchain",
     featured: true,
@@ -184,7 +199,7 @@ export const projectsData = [
     ]
   },
   {
-    id: 7,
+    id: 5,
     title: "Spell Checker",
     description: "Lightweight spell-checking utility for text correction.",
     longDescription: "Built a Python-based spell checker that uses dictionary-based matching and NLP techniques for correction suggestions.",
@@ -192,8 +207,8 @@ export const projectsData = [
     githubUrl: "https://github.com/viditkulsh/SpellChecker",
     liveUrl: "#",
     technologies: [
-      { name: "Python", icon: "🐍" },
-      { name: "NLTK", icon: "📚" }
+      { name: "Python", icon: Code },
+      { name: "NLTK", icon: FileText }
     ],
     category: "Utility",
     featured: false,
@@ -204,7 +219,7 @@ export const projectsData = [
     highlights: ["Offline support", "Fast processing", "Custom dictionary"],
     year: "2024",
     duration: "2 weeks",
-    teamSize: "Solo project",
+    teamSize: "Team project",
     achievements: [
       "High accuracy rate",
       "Extensible dictionary feature",
@@ -212,7 +227,7 @@ export const projectsData = [
     ]
   },
   {
-    id: 8,
+    id: 4,
     title: "Graph Crafters",
     description: "Data visualization tool for graph plotting and customization.",
     longDescription: "Built a Python-based tool to plot and customize various graph types for academic and professional use.",
@@ -220,11 +235,10 @@ export const projectsData = [
     githubUrl: "https://github.com/viditkulsh/GraphCrafters",
     liveUrl: "#",
     technologies: [
-      { name: "Python", icon: "🐍" },
-      { name: "Matplotlib", icon: "📊" }
+      { name: "Java", icon: Coffee }
     ],
     category: "Data Visualization",
-    featured: false,
+    featured: true,
     status: "Completed",
     problem: "Users need an easy tool for quick, customizable graph plotting.",
     solution: "Provided a Python-based interface for fast, flexible graph creation.",
@@ -232,7 +246,7 @@ export const projectsData = [
     highlights: ["Multiple graph types", "Custom styling", "Export to image"],
     year: "2023",
     duration: "1 month",
-    teamSize: "Solo project",
+    teamSize: "Team project",
     achievements: [
       "Support for various chart types",
       "User-defined styles",
@@ -240,7 +254,7 @@ export const projectsData = [
     ]
   },
   {
-    id: 9,
+    id: 3,
     title: "Image Carousel",
     description: "Customizable image carousel component for websites.",
     longDescription: "Developed a responsive, touch-friendly image carousel with smooth animations, auto-play, and configurable settings.",
@@ -248,9 +262,9 @@ export const projectsData = [
     githubUrl: "https://github.com/viditkulsh/ImageCarousel",
     liveUrl: "https://idit-image-carousel.vercel.app/",
     technologies: [
-      { name: "HTML", icon: "📝" },
-      { name: "CSS", icon: "🎨" },
-      { name: "JavaScript", icon: "📜" }
+      { name: "HTML", icon: FileText },
+      { name: "CSS", icon: Palette },
+      { name: "JavaScript", icon: Code }
     ],
     category: "Frontend",
     featured: false,
@@ -269,7 +283,7 @@ export const projectsData = [
     ]
   },
   {
-    id: 10,
+    id: 2,
     title: "Mood Dapp",
     description: "Ethereum-based decentralized application for storing user mood.",
     longDescription: "Created a blockchain application allowing users to set and retrieve their mood on the Ethereum network using smart contracts.",
@@ -277,9 +291,9 @@ export const projectsData = [
     githubUrl: "https://github.com/viditkulsh/Mood_Dapp_myFirstDapp",
     liveUrl: "#",
     technologies: [
-      { name: "Solidity", icon: "📜" },
-      { name: "Ethereum", icon: "💎" },
-      { name: "Hardhat", icon: "🔨" }
+      { name: "Solidity", icon: Shield },
+      { name: "Ethereum", icon: Lock },
+      { name: "Hardhat", icon: Terminal }
     ],
     category: "Blockchain",
     featured: false,
@@ -298,7 +312,7 @@ export const projectsData = [
     ]
   },
   {
-    id: 11,
+    id: 1,
     title: "Aventura De Texto",
     description: "Text-based adventure game implemented in Python.",
     longDescription: "Designed an interactive game where players navigate through a story using text commands, featuring multiple endings.",
@@ -306,7 +320,7 @@ export const projectsData = [
     githubUrl: "https://github.com/viditkulsh/Aventura-De-Texto",
     liveUrl: "#",
     technologies: [
-      { name: "Python", icon: "🐍" }
+      { name: "Python", icon: Code }
     ],
     category: "Game Development",
     featured: false,
@@ -317,7 +331,7 @@ export const projectsData = [
     highlights: ["Branching storyline", "Multiple endings", "Replayability"],
     year: "2023",
     duration: "3 weeks",
-    teamSize: "Solo project",
+    teamSize: "Team project",
     achievements: [
       "Interactive storyline",
       "Customizable scenarios",
