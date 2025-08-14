@@ -68,7 +68,7 @@ const StoryFinale = () => {
         <div className="bg-white/5 backdrop-blur-md rounded-xl p-6 border border-white/10">
           <div className="text-3xl mb-3">🎓</div>
           <h3 className="text-lg font-semibold text-white mb-2">Academic Excellence</h3>
-          <p className="text-blue-200 text-sm">8.88/10 CGPA with consecutive outstanding achievements</p>
+          <p className="text-blue-200 text-sm">8.78/10 CGPA with consecutive outstanding achievements</p>
         </div>
         <div className="bg-white/5 backdrop-blur-md rounded-xl p-6 border border-white/10">
           <div className="text-3xl mb-3"><Microscope size={32} /></div>

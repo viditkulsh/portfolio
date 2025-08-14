@@ -46,13 +46,15 @@ export const portfolioData = {
         year: "2020",
         title: "The Economics Breakup 💔📚",
         description: "Chose Commerce with Maths and Computer Science for my senior secondary studies. Broke up with Economics to pursue Computer Science full-time.",
-        isHumorous: true
+        isHumorous: true,
+        lessonLearned: "Sometimes the best decisions come from following your passion, even if it means changing direction completely."
       },
       {
         year: "2021",
         title: "Python & Chill 🐍☕",
         description: "Learned Python during lockdown with nothing else to do. Accidentally fell in love with programming.",
-        isHumorous: true
+        isHumorous: true,
+        lessonLearned: "The best learning happens when you're genuinely curious, not just checking boxes."
       },
       {
         year: "2022",
@@ -64,19 +66,22 @@ export const portfolioData = {
         year: "2023",
         title: "Projects & Friendships 🤝📂",
         description: "Made great friends in college and worked on multiple projects. Balanced deadlines with fun nights out.",
-        isHumorous: true
+        isHumorous: true,
+        lessonLearned: "Balance is everything - great work comes from great relationships, and both require intentional effort."
       },
       {
         year: "2024",
         title: "Leveling Up 🚀🗂️",
         description: "Started searching for internships and improving my profile. Also perfected the art of taking spontaneous trips with friends.",
-        isHumorous: true
+        isHumorous: true,
+        lessonLearned: "Professional growth and personal adventures aren't mutually exclusive - both fuel each other."
       },
       {
         year: "2025",
         title: "Blockchain & Graduation ⛓️🎓",
         description: "Completed two internships in the blockchain domain and wrapped up my BCA (Hons) degree.",
-        isHumorous: false
+        isHumorous: false,
+        lessonLearned: "Real-world experience is the best teacher - theory builds foundation, but practice builds confidence."
       }
     ]
   },
@@ -102,8 +107,8 @@ export const portfolioData = {
       ],
       capstone: "Blockchain interoperability protocols — in collaboration with DRDO and Astraeus Next Gen",
       achievements: [
-        "Outstanding Academic Achievement - Semester 1 (SGPA: 9.48)",
-        "Outstanding Academic Achievement - Semester 2 (SGPA: 9.2)",
+        "Outstanding Academic Achievement consecutively for two semesters",
+        "Specialization in Blockchain Technology and Distributed Systems",
         "Active member of ICB Student Chapter"
       ]
     }

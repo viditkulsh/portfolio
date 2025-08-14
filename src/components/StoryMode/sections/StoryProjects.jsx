@@ -173,7 +173,7 @@ const StoryProjects = () => {
                           View Code
                         </a>
                       )}
-                      {selectedProject.liveUrl && (
+                      {selectedProject.showLiveDemo && selectedProject.liveUrl && selectedProject.liveUrl !== "#" && (
                         <a
                           href={selectedProject.liveUrl}
                           target="_blank"

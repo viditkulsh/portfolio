@@ -2,13 +2,16 @@ import React, { useState } from 'react'; // Removed unused useEffect import
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { usePortfolio } from '../../context/PortfolioContext';
-import { User, GraduationCap, Zap, Rocket, Briefcase, Trophy, Mail, Wrench, Smartphone, MapPin } from 'lucide-react';
+import { socialMediaData } from '../../data/sections/socialMediaData';
+import { User, GraduationCap, Zap, Rocket, Briefcase, Trophy, Mail, Wrench, Smartphone, MapPin, ExternalLink, Github, Eye, Calendar, Award, TrendingUp } from 'lucide-react';
 
 const ExploreMode = ({ isRecruiterMode }) => {
     const navigate = useNavigate();
     const { portfolioData } = usePortfolio();
     const [activeSection, setActiveSection] = useState('about');
     const [showSidebar, setShowSidebar] = useState(true);
+    const [selectedProject, setSelectedProject] = useState(null);
+    const [selectedExperience, setSelectedExperience] = useState(null);
 
     const sections = {
         about: { title: 'About Me', icon: User, color: 'from-blue-500 to-cyan-500' },
@@ -22,6 +25,12 @@ const ExploreMode = ({ isRecruiterMode }) => {
 
     const handleBackToHome = () => {
         navigate('/');
+    };
+
+    const modalVariants = {
+        hidden: { opacity: 0, scale: 0.8 },
+        visible: { opacity: 1, scale: 1 },
+        exit: { opacity: 0, scale: 0.8 }
     };
 
     const renderSectionContent = () => {
@@ -158,51 +167,76 @@ const ExploreMode = ({ isRecruiterMode }) => {
             case 'projects':
                 return (
                     <div className="space-y-8">
-                        <h2 className="text-4xl font-playfair text-white mb-6">Featured Projects</h2>
-                        <div className="grid md:grid-cols-2 gap-8">
+                        <div className="text-center mb-12">
+                            <h2 className="text-4xl font-playfair bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent mb-4">Projects</h2>
+                            <p className="text-xl text-white/80">
+                                Bringing ideas to life through code and innovation...
+                            </p>
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                             {portfolioData.projects.map((project, index) => (
                                 <motion.div
-                                    key={index}
-                                    className="bg-white/5 backdrop-blur-md rounded-xl p-6 border border-white/10"
-                                    whileHover={{ y: -5 }}
+                                    key={project.id || index}
+                                    className="card hover:card-neon cursor-pointer group relative"
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: 0.3 + index * 0.1 }}
+                                    onClick={() => setSelectedProject(project)}
+                                    whileHover={{ scale: 1.02, y: -5 }}
                                 >
-                                    <div className="flex justify-between items-start mb-4">
-                                        <h3 className="text-xl font-semibold text-white">{project.title}</h3>
-                                        <span className="text-blue-300 text-sm">{project.year}</span>
+                                    {/* Project Image/Icon */}
+                                    <div className="w-full h-48 bg-gradient-to-br from-purple-500/20 to-cyan-500/20 rounded-lg mb-4 flex items-center justify-center relative overflow-hidden">
+                                        {project.image ? (
+                                            <img
+                                                src={project.image}
+                                                alt={project.title}
+                                                className="w-full h-full object-cover"
+                                            />
+                                        ) : (
+                                            <div className="text-6xl opacity-50">{project.icon ? React.createElement(project.icon, { size: 48 }) : <Rocket size={48} />}</div>
+                                        )}
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                                        <div className="absolute bottom-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                            <Eye className="w-5 h-5 text-white" />
+                                        </div>
                                     </div>
-                                    <p className="text-white/80 mb-4">{project.description}</p>
-                                    <div className="flex flex-wrap gap-2 mb-4">
-                                        {project.technologies.map((tech, techIndex) => (
-                                            <span
-                                                key={techIndex}
-                                                className="flex items-center gap-1 px-3 py-1 bg-blue-500/20 text-blue-200 rounded-full text-sm border border-blue-500/30"
-                                            >
-                                                <span>{tech.icon ? React.createElement(tech.icon, { size: 14 }) : <Wrench size={14} />}</span>
-                                                <span>{tech.name || tech}</span>
+
+                                    {/* Project Info */}
+                                    <div className="text-left">
+                                        <h3 className="text-xl font-semibold text-white mb-2">{project.title}</h3>
+                                        <p className="text-white/70 text-sm mb-4 line-clamp-2">{project.description}</p>
+
+                                        {/* Technologies */}
+                                        <div className="flex flex-wrap gap-2 mb-4">
+                                            {project.technologies.slice(0, 3).map((tech, techIndex) => (
+                                                <span
+                                                    key={techIndex}
+                                                    className="text-xs bg-purple-500/20 text-cyan-400 px-2 py-1 rounded-md flex items-center gap-1"
+                                                >
+                                                    <span>
+                                                        {React.createElement(tech.icon, {
+                                                            size: 14,
+                                                            className: "text-cyan-400"
+                                                        })}
+                                                    </span>
+                                                    <span>{tech.name || tech}</span>
+                                                </span>
+                                            ))}
+                                            {project.technologies.length > 3 && (
+                                                <span className="text-xs text-white/60">+{project.technologies.length - 3} more</span>
+                                            )}
+                                        </div>
+
+                                        {/* Status */}
+                                        <div className="flex items-center justify-between">
+                                            <span className={`text-xs px-2 py-1 rounded-full ${project.status === 'Completed' ? 'bg-green-500/20 text-green-300' :
+                                                project.status === 'In Progress' ? 'bg-yellow-500/20 text-yellow-300' :
+                                                    'bg-blue-500/20 text-blue-300'
+                                                }`}>
+                                                {project.status || 'Completed'}
                                             </span>
-                                        ))}
-                                    </div>
-                                    <div className="flex gap-4">
-                                        {project.github && (
-                                            <a
-                                                href={project.github}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="text-blue-400 hover:text-blue-300 transition-colors"
-                                            >
-                                                GitHub
-                                            </a>
-                                        )}
-                                        {project.demo && (
-                                            <a
-                                                href={project.demo}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="text-green-400 hover:text-green-300 transition-colors"
-                                            >
-                                                Live Demo
-                                            </a>
-                                        )}
+                                            <span className="text-xs text-white/60">{project.year}</span>
+                                        </div>
                                     </div>
                                 </motion.div>
                             ))}
@@ -218,27 +252,43 @@ const ExploreMode = ({ isRecruiterMode }) => {
                     {portfolioData.experience.map((exp, index) => (
                   <motion.div
                       key={index}
-                      className="bg-white/5 backdrop-blur-md rounded-xl p-6 border border-white/10"
+                            className="bg-white/5 backdrop-blur-md rounded-xl p-6 border border-white/10 cursor-pointer group"
                       whileHover={{ scale: 1.02 }}
+                            onClick={() => setSelectedExperience(exp)}
                   >
                       <div className="flex justify-between items-start mb-4">
-                          <div>
-                              <h3 className="text-xl font-semibold text-white">{exp.position}</h3>
-                              <p className="text-blue-200">{exp.company}</p>
-                          </div>
-                          <p className="text-blue-300 text-sm">{exp.duration}</p>
-                      </div>
-                      <p className="text-white/80 mb-4">{exp.description}</p>
+                                <div className="flex items-start gap-4">
+                                    <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                                        <span className="text-white font-bold text-lg">
+                                            {exp.company.charAt(0)}
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <h3 className="text-xl font-semibold text-white">{exp.position}</h3>
+                                        <p className="text-blue-200">{exp.company}</p>
+                                        <p className="text-blue-300 text-sm">{exp.duration}</p>
+                                    </div>
+                                </div>
+                                <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <Eye className="w-5 h-5 text-blue-300" />
+                                </div>
+                            </div>
+                            <p className="text-white/80 mb-4 line-clamp-3">{exp.description}</p>
                       {exp.responsibilities && (
                           <div className="space-y-2">
                               <h4 className="text-blue-200 font-medium">Key Responsibilities:</h4>
                               <ul className="space-y-1">
-                                  {exp.responsibilities.map((resp, i) => (
+                                        {exp.responsibilities.slice(0, 2).map((resp, i) => (
                                       <li key={i} className="text-white/80 text-sm flex items-start gap-2">
                                           <span className="text-green-400 mt-1">•</span>
                                           <span>{resp}</span>
                                       </li>
                                   ))}
+                                        {exp.responsibilities.length > 2 && (
+                                            <li className="text-blue-300 text-sm">
+                                                +{exp.responsibilities.length - 2} more responsibilities...
+                                            </li>
+                                        )}
                               </ul>
                           </div>
                       )}
@@ -295,7 +345,8 @@ const ExploreMode = ({ isRecruiterMode }) => {
                                 <h3 className="text-xl font-semibold text-blue-200 mb-4">Social Links</h3>
                                 <div className="space-y-3">
                                     {Object.entries(portfolioData.personal.social).map(([platform, url]) => {
-                                        const platformData = portfolioData.socialMedia?.platforms?.[platform];
+                                        const platformData = socialMediaData.platforms[platform];
+                                        const IconComponent = platformData?.icon;
                                         return (
                                             <a
                                                 key={platform}
@@ -304,7 +355,9 @@ const ExploreMode = ({ isRecruiterMode }) => {
                                                 rel="noopener noreferrer"
                                                 className="flex items-center gap-3 text-white hover:text-blue-300 transition-colors p-2 rounded-lg hover:bg-white/5"
                                             >
-                                                <span className="text-xl">{platformData?.icon || '🔗'}</span>
+                                                <span className="text-xl">
+                                                    {IconComponent ? <IconComponent size={20} /> : '🔗'}
+                                                </span>
                                                 <div>
                                                     <span className="capitalize font-medium">{platformData?.name || platform}</span>
                                                     {platformData?.description && (
@@ -408,6 +461,236 @@ const ExploreMode = ({ isRecruiterMode }) => {
                   </AnimatePresence>
               </div>
       </div>
+
+            {/* Project Detail Modal */}
+            <AnimatePresence>
+                {selectedProject && (
+                    <motion.div
+                        className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[60] p-4"
+                        variants={modalVariants}
+                        initial="hidden"
+                        animate="visible"
+                        exit="exit"
+                        onClick={() => setSelectedProject(null)}
+                    >
+                        <motion.div
+                            className="bg-gray-900/95 backdrop-blur-md rounded-xl p-8 border border-white/20 max-w-4xl max-h-[90vh] overflow-y-auto w-full"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <div className="flex flex-col lg:flex-row gap-8">
+                                {/* Project Image */}
+                                <div className="lg:w-1/2">
+                                    <div className="w-full h-64 bg-gradient-to-br from-purple-500/20 to-blue-500/20 rounded-lg flex items-center justify-center">
+                                        {selectedProject.image ? (
+                                            <img
+                                                src={selectedProject.image}
+                                                alt={selectedProject.title}
+                                                className="w-full h-full object-cover rounded-lg"
+                                            />
+                                        ) : (
+                                            <div className="text-8xl opacity-50">{selectedProject.icon ? React.createElement(selectedProject.icon, { size: 64 }) : <Rocket size={64} />}</div>
+                                        )}
+                                    </div>
+                                </div>
+
+                                {/* Project Details */}
+                                <div className="lg:w-1/2">
+                                    <h2 className="text-3xl font-playfair text-white mb-4">{selectedProject.title}</h2>
+                                    <p className="text-white/90 leading-relaxed mb-6">{selectedProject.description}</p>
+
+                                    {/* Technologies */}
+                                    <div className="mb-6">
+                                        <h3 className="text-lg font-semibold text-blue-200 mb-3">Technologies Used</h3>
+                                        <div className="flex flex-wrap gap-2">
+                                            {selectedProject.technologies.map((tech, index) => (
+                                                <span
+                                                    key={index}
+                                                    className="bg-blue-500/20 text-blue-200 px-3 py-1 rounded-md flex items-center gap-2 border border-blue-500/30"
+                                                >
+                                                    <span>
+                                                        {tech.icon ? React.createElement(tech.icon, { size: 16 }) : <Wrench size={16} />}
+                                                    </span>
+                                                    <span>{tech.name || tech}</span>
+                                                </span>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    {/* Project Links */}
+                                    <div className="flex gap-4 mb-6">
+                                        {selectedProject.githubUrl && (
+                                            <a
+                                                href={selectedProject.githubUrl}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="flex items-center gap-2 px-4 py-2 bg-gray-700/50 text-white rounded-lg border border-gray-600 hover:bg-gray-600/50 transition-colors"
+                                            >
+                                                <Github className="w-4 h-4" />
+                                                View Code
+                                            </a>
+                                        )}
+                                        {selectedProject.showLiveDemo && selectedProject.liveUrl && selectedProject.liveUrl !== "#" && (
+                                            <a
+                                                href={selectedProject.liveUrl}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                                            >
+                                                <ExternalLink className="w-4 h-4" />
+                                                Live Demo
+                                            </a>
+                                        )}
+                                    </div>
+
+                                    {/* Project Status and Year */}
+                                    <div className="flex items-center gap-4 text-sm">
+                                        {selectedProject.status && (
+                                            <span className={`px-3 py-1 rounded-full ${selectedProject.status === 'Completed' ? 'bg-green-500/20 text-green-300' :
+                                                selectedProject.status === 'In Progress' ? 'bg-yellow-500/20 text-yellow-300' :
+                                                    'bg-blue-500/20 text-blue-300'
+                                                }`}>
+                                                {selectedProject.status}
+                                            </span>
+                                        )}
+                                        <span className="text-white/60">Year: {selectedProject.year}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button
+                                onClick={() => setSelectedProject(null)}
+                                className="mt-8 mx-auto block px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                            >
+                                Close
+                            </button>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+            {/* Experience Detail Modal */}
+            <AnimatePresence>
+                {selectedExperience && (
+                    <motion.div
+                        className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[60] p-4"
+                        variants={modalVariants}
+                        initial="hidden"
+                        animate="visible"
+                        exit="exit"
+                        onClick={() => setSelectedExperience(null)}
+                    >
+                        <motion.div
+                            className="bg-gray-900/95 backdrop-blur-md rounded-xl p-8 border border-white/20 max-w-4xl max-h-[90vh] overflow-y-auto w-full"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <div className="flex items-start gap-4 mb-6">
+                                <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <span className="text-white font-bold text-xl">
+                                        {selectedExperience.company.charAt(0)}
+                                    </span>
+                                </div>
+                                <div className="flex-1">
+                                    <h2 className="text-3xl font-playfair text-white mb-2">{selectedExperience.position}</h2>
+                                    <p className="text-blue-200 font-medium text-lg">{selectedExperience.company}</p>
+                                    <div className="flex items-center gap-4 text-white/70 mt-2">
+                                        <span className="flex items-center gap-1">
+                                            <Calendar className="w-4 h-4" />
+                                            {selectedExperience.duration}
+                                        </span>
+                                        {selectedExperience.location && (
+                                            <span className="flex items-center gap-1">
+                                                <MapPin className="w-4 h-4" />
+                                                {selectedExperience.location}
+                                            </span>
+                                        )}
+                                        {selectedExperience.type && (
+                                            <span className={`px-3 py-1 rounded-full text-sm ${selectedExperience.type === 'Full-time' ? 'bg-green-500/20 text-green-300' :
+                                                selectedExperience.type === 'Internship' ? 'bg-blue-500/20 text-blue-300' :
+                                                    'bg-purple-500/20 text-purple-300'
+                                                }`}>
+                                                {selectedExperience.type}
+                                            </span>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p className="text-white/90 leading-relaxed mb-6">{selectedExperience.description}</p>
+
+                            {/* Responsibilities */}
+                            {selectedExperience.responsibilities && (
+                                <div className="mb-6">
+                                    <h3 className="text-lg font-semibold text-blue-200 mb-3">Key Responsibilities</h3>
+                                    <ul className="space-y-2">
+                                        {selectedExperience.responsibilities.map((responsibility, index) => (
+                                            <li key={index} className="flex items-start gap-3 text-white/80">
+                                                <span className="text-blue-300 mt-1 flex-shrink-0">•</span>
+                                                <span>{responsibility}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            )}
+
+                            {/* Technologies */}
+                            {selectedExperience.technologies && (
+                                <div className="mb-6">
+                                    <h3 className="text-lg font-semibold text-blue-200 mb-3">Technologies Used</h3>
+                                    <div className="flex flex-wrap gap-2">
+                                        {selectedExperience.technologies.map((tech, index) => (
+                                            <span
+                                                key={index}
+                                                className="bg-blue-500/20 text-blue-200 px-3 py-1 rounded-md flex items-center gap-2 border border-blue-500/30"
+                                            >
+                                                <span>
+                                                    {tech.icon ? React.createElement(tech.icon, { size: 16 }) : <Wrench size={16} />}
+                                                </span>
+                                                <span>{tech.name || tech}</span>
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* Achievements */}
+                            {selectedExperience.achievements && selectedExperience.achievements.length > 0 && (
+                                <div className="mb-6">
+                                    <h3 className="text-lg font-semibold text-blue-200 mb-3 flex items-center gap-2">
+                                        <Award className="w-5 h-5 text-yellow-400" />
+                                        Key Achievements
+                                    </h3>
+                                    <ul className="space-y-2">
+                                        {selectedExperience.achievements.map((achievement, index) => (
+                                            <li key={index} className="flex items-start gap-3 text-white/80">
+                                                <span className="text-yellow-400 mt-1 flex-shrink-0">★</span>
+                                                <span>{achievement}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            )}
+
+                            {/* Impact */}
+                            {selectedExperience.impact && (
+                                <div className="bg-gradient-to-r from-green-500/10 to-blue-500/10 border border-green-500/20 rounded-lg p-4 mb-6">
+                                    <div className="flex items-center gap-2 mb-2">
+                                        <TrendingUp className="w-5 h-5 text-green-400" />
+                                        <span className="font-medium text-green-300">Impact & Results</span>
+                                    </div>
+                                    <p className="text-white/80">{selectedExperience.impact}</p>
+                                </div>
+                            )}
+
+                            <button
+                                onClick={() => setSelectedExperience(null)}
+                                className="mt-8 mx-auto block px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                            >
+                                Close
+                            </button>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
     </motion.div>
   );
 };

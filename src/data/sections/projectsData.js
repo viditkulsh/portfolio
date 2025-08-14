@@ -24,6 +24,7 @@ export const projectsData = [
     image: "/images/projects/idittrack.jpg",
     githubUrl: "https://github.com/viditkulsh/idittrack",
     liveUrl: "#",
+    showLiveDemo: false, // Control whether to show live demo link
     technologies: [
       { name: "React.js", icon: Zap },
       { name: "Node.js", icon: Server },
@@ -54,6 +55,7 @@ export const projectsData = [
     image: "/images/projects/burgerhut.jpg",
     githubUrl: "https://github.com/viditkulsh/BurgerHut",
     liveUrl: "#",
+    showLiveDemo: false, // Control whether to show live demo link
     technologies: [
       { name: "PHP", icon: Server },
       { name: "MySQL", icon: Database },
@@ -85,6 +87,7 @@ export const projectsData = [
     image: "/images/projects/adbhutglobal.jpg",
     githubUrl: "https://github.com/viditkulsh/adbhutGlobal",
     liveUrl: "https://adbhutglobal.com",
+    showLiveDemo: true, // Control whether to show live demo link
     technologies: [
       { name: "HTML", icon: FileText },
       { name: "CSS", icon: Palette },
@@ -116,6 +119,7 @@ export const projectsData = [
     image: "/images/projects/sathisahyogi.jpg",
     githubUrl: "https://github.com/viditkulsh/SathiSahyogi",
     liveUrl: "#",
+    showLiveDemo: false, // Control whether to show live demo link
     technologies: [
       { name: "React.js", icon: Zap },
       { name: "Node.js", icon: Server },
@@ -146,6 +150,7 @@ export const projectsData = [
     image: "/images/projects/noteemovie.jpg",
     githubUrl: "https://github.com/viditkulsh/Note-e-Movie",
     liveUrl: "#",
+    showLiveDemo: false, // Control whether to show live demo link
     technologies: [
       { name: "React.js", icon: Zap },
       { name: "Node.js", icon: Server },
@@ -176,6 +181,7 @@ export const projectsData = [
     image: "/images/projects/hemomain.jpg",
     githubUrl: "https://github.com/viditkulsh/HemoChain",
     liveUrl: "https://hemochain.com",
+    showLiveDemo: true, // Control whether to show live demo link
     technologies: [
       { name: "Solidity", icon: Shield },
       { name: "Ethereum", icon: Lock },
@@ -206,6 +212,7 @@ export const projectsData = [
     image: "/images/projects/spellchecker.jpg",
     githubUrl: "https://github.com/viditkulsh/SpellChecker",
     liveUrl: "#",
+    showLiveDemo: false, // Control whether to show live demo link
     technologies: [
       { name: "Python", icon: Code },
       { name: "NLTK", icon: FileText }
@@ -234,6 +241,7 @@ export const projectsData = [
     image: "/images/projects/graphcrafters.jpg",
     githubUrl: "https://github.com/viditkulsh/GraphCrafters",
     liveUrl: "#",
+    showLiveDemo: false, // Control whether to show live demo link
     technologies: [
       { name: "Java", icon: Coffee }
     ],
@@ -261,6 +269,7 @@ export const projectsData = [
     image: "/images/projects/imagecarousel.jpg",
     githubUrl: "https://github.com/viditkulsh/ImageCarousel",
     liveUrl: "https://idit-image-carousel.vercel.app/",
+    showLiveDemo: true, // Control whether to show live demo link
     technologies: [
       { name: "HTML", icon: FileText },
       { name: "CSS", icon: Palette },
@@ -290,6 +299,7 @@ export const projectsData = [
     image: "/images/projects/moodapp.jpg",
     githubUrl: "https://github.com/viditkulsh/Mood_Dapp_myFirstDapp",
     liveUrl: "#",
+    showLiveDemo: false, // Control whether to show live demo link
     technologies: [
       { name: "Solidity", icon: Shield },
       { name: "Ethereum", icon: Lock },

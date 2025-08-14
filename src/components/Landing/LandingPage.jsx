@@ -3,11 +3,13 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 
 import { usePortfolio } from '../../context/PortfolioContext';
+import ResumeSelector from '../../pages/ResumeSelector';
 
 const LandingPage = ({ isRecruiterMode, setIsRecruiterMode }) => {
   const navigate = useNavigate();
   const { portfolioData, setCurrentSection, setMode } = usePortfolio();
   const [showControls, setShowControls] = useState(false);
+  const [showResumeSelector, setShowResumeSelector] = useState(false);
   // Removed unused 'mounted' state variable
 
   useEffect(() => {
@@ -33,12 +35,26 @@ const LandingPage = ({ isRecruiterMode, setIsRecruiterMode }) => {
   };
 
   const handleResumeDownload = () => {
-    // Default to full-stack developer resume
-    const link = document.createElement('a');
-    link.href = '/resumes/Vidit Kulsh CV Full Stack.pdf';
-    link.download = 'Vidit_Kulshrestha_FullStack_Resume.pdf';
-    link.click();
+    setShowResumeSelector(true);
   };
+
+  const handleBackFromResume = () => {
+    setShowResumeSelector(false);
+  };
+
+  const handleViewPortfolio = () => {
+    setShowResumeSelector(false);
+  };
+
+  // Show Resume Selector if requested
+  if (showResumeSelector) {
+    return (
+      <ResumeSelector
+        onBack={handleBackFromResume}
+        onViewPortfolio={handleViewPortfolio}
+      />
+    );
+  }
 
   return (
     <motion.div
@@ -241,40 +257,25 @@ const LandingPage = ({ isRecruiterMode, setIsRecruiterMode }) => {
                 <div className="absolute inset-0 bg-gradient-to-r from-gradient-teal to-gradient-indigo opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </motion.button>
 
-              {/* Download Resume Button */}
-              <motion.button
-                onClick={handleResumeDownload}
-                className="px-8 py-4 border-2 border-primary-silver/30 rounded-full text-primary-silver font-medium text-lg min-w-[200px] backdrop-blur-md bg-glassmorphism-bg hover:bg-gradient-secondary hover:text-white transition-all duration-300"
-                whileHover={{ 
-                  scale: 1.05,
-                  borderColor: "rgba(192, 192, 192, 0.8)"
-                }}
-                whileTap={{ scale: 0.95 }}
-                initial={{ x: 50, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ delay: 1.8, duration: 0.5 }}
-              >
-                Download Resume
-              </motion.button>
             </motion.div>
           )}
         </AnimatePresence>
 
-        {/* Elegant Scroll Indicator */}
+        {/* Choose your experience indicator - moved under CTA buttons */}
         <AnimatePresence>
           {showControls && (
             <motion.div
-              className="absolute bottom-12 left-1/2 transform -translate-x-1/2"
+              className="mt-12 flex justify-center"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 2.5 }}
+              transition={{ delay: 2.0 }}
             >
               <motion.div
                 className="flex flex-col items-center"
-                animate={{ y: [0, 10, 0] }}
+                animate={{ y: [0, 5, 0] }}
                 transition={{ duration: 2, repeat: Infinity }}
               >
-                <div className="w-px h-12 bg-gradient-to-b from-transparent via-primary-silver to-transparent opacity-60" />
+                <div className="w-px h-8 bg-gradient-to-b from-transparent via-primary-silver to-transparent opacity-60" />
                 <motion.div
                   className="w-2 h-2 rounded-full bg-primary-silver mt-2"
                   animate={{ 
@@ -284,12 +285,13 @@ const LandingPage = ({ isRecruiterMode, setIsRecruiterMode }) => {
                   transition={{ duration: 2, repeat: Infinity }}
                 />
                 <p className="text-xs text-primary-silver/60 mt-3 font-inter tracking-wide">
-                                  Choose your experience
+                  Choose your experience
                 </p>
               </motion.div>
             </motion.div>
           )}
         </AnimatePresence>
+
       </div>
 
       {/* Subtle Overlay for Depth */}

@@ -23,10 +23,10 @@ const RecruiterMode = () => {
   };
 
   const metrics = [
-    { label: 'Academic CGPA', value: '8.88/10', icon: GraduationCap, description: 'Consistent Excellence' },
-    { label: 'Research Collaborations', value: '2+', icon: Microscope, description: 'DRDO & Industry' },
-    { label: 'Technical Skills', value: '15+', icon: Zap, description: 'Full Stack + Blockchain' },
-    { label: 'Project Impact', value: 'High', icon: Rocket, description: 'Production Ready' }
+    { label: 'Academic CGPA', value: '8.78/10', icon: GraduationCap, description: 'Consistent Excellence' },
+    { label: 'Research Collaborations', value: '2+', icon: Microscope, description: 'Work Experience' },
+    { label: 'Technical Skills', value: `${portfolioData.skills?.technical?.skills?.length || 20}+`, icon: Zap, description: 'Full Stack + Blockchain' },
+    { label: 'Projects', value: `${portfolioData.projects?.length || 11}+`, icon: Rocket, description: 'Production Ready' }
   ];
 
   const strengthsData = {
@@ -37,10 +37,10 @@ const RecruiterMode = () => {
       { skill: 'Problem Solving', level: 92, rarity: 'Core Strength' }
     ],
     research: [
-      'Leading blockchain interoperability research with DRDO',
-      'Publishing academic papers in cutting-edge technology',
-      'Developing novel consensus mechanisms',
-      'Contributing to next-gen distributed systems'
+      'Researched on blockchain interoperability under the mentorship of great mentors at DRDO',
+      'Contributed in developing a novel consensus mechanism',
+      'Contributing to next-gen distributed systems',
+      'Exploring cutting-edge blockchain technologies'
     ],
     impact: [
       'Outstanding Academic Achievement (2 consecutive semesters)',
@@ -125,6 +125,11 @@ const RecruiterMode = () => {
           <h1 className="text-5xl md:text-6xl font-dm-serif text-white mb-4">
             {portfolioData.personal.name}
           </h1>
+          <div className="mb-6">
+            <p className="text-lg text-blue-300 font-playfair italic">
+              "{portfolioData.personal.quote}"
+            </p>
+          </div>
           <p className="text-xl text-blue-200 font-playfair">
             Your Next Top-Tier Developer
           </p>
@@ -142,7 +147,11 @@ const RecruiterMode = () => {
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ delay: index * 0.1 + 0.5 }}
-              whileHover={{ scale: 1.05, y: -5 }}
+              whileHover={{
+                scale: 1.05,
+                y: -5,
+                transition: { duration: 0.2, ease: "easeOut" }
+              }}
             >
               <div className="text-3xl mb-2">{React.createElement(metric.icon, { size: 24 })}</div>
               <div className="text-2xl font-bold text-white mb-1">{metric.value}</div>
@@ -284,7 +293,7 @@ const RecruiterMode = () => {
                   <div className="bg-gradient-to-r from-purple-600/20 to-blue-600/20 p-6 rounded-xl border border-purple-500/30">
                     <h3 className="text-xl font-semibold text-white mb-4">🔬 Current Research</h3>
                     <p className="text-blue-200 mb-4">
-                      Leading blockchain interoperability research in collaboration with DRDO and Astraeus Next Gen
+                      Researched on blockchain interoperability under the mentorship of great mentors at DRDO and Astraeus Next Gen
                     </p>
                     <ul className="space-y-2">
                       {strengthsData.research.map((item, index) => (
@@ -299,15 +308,13 @@ const RecruiterMode = () => {
                     <div className="bg-blue-600/20 p-6 rounded-xl border border-blue-500/30">
                       <h4 className="text-lg font-semibold text-white mb-3">Innovation Focus</h4>
                       <p className="text-blue-200">
-                        Developing novel consensus mechanisms for cross-chain communication, 
-                        pushing the boundaries of blockchain interoperability.
+                        I'm trying to push my boundaries into making something that will change the world and become a helpful tool to provide for humanity.
                       </p>
                     </div>
                     <div className="bg-green-600/20 p-6 rounded-xl border border-green-500/30">
                       <h4 className="text-lg font-semibold text-white mb-3">Real-World Impact</h4>
                       <p className="text-green-200">
-                        Contributing to academic research while building practical solutions 
-                        for next-generation distributed systems.
+                        Building innovative solutions focused on creating meaningful change and developing tools that serve humanity's greatest challenges.
                       </p>
                     </div>
                   </div>

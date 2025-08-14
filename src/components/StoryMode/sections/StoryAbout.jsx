@@ -24,10 +24,10 @@ const StoryAbout = ({ isRecruiterMode, onNext, onPrevious }) => {
   };
 
   return (
-    <div className="story-about grid grid-cols-1 lg:grid-cols-2 gap-12 min-h-screen items-center">
-      {/* Left Side - Introduction */}
+    <div className="story-about flex flex-col lg:flex-row gap-12 min-h-screen">
+      {/* Center-Left Side - Introduction */}
       <motion.div
-        className="space-y-8"
+        className="lg:w-2/5 xl:w-1/3 flex flex-col justify-center space-y-8 lg:pl-8"
         initial={{ opacity: 0, x: -100 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8 }}
@@ -39,9 +39,6 @@ const StoryAbout = ({ isRecruiterMode, onNext, onPrevious }) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
           >
-            <div className="w-16 h-16 rounded-full bg-gradient-to-r from-primary-cyan to-primary-purple flex items-center justify-center">
-              <span className="text-2xl"><User size={24} /></span>
-            </div>
             <div>
               <h1 className="heading-lg text-gradient">{portfolioData.personal.name}</h1>
               <p className="text-xl text-primary-text/80">{portfolioData.personal.title}</p>
@@ -90,7 +87,7 @@ const StoryAbout = ({ isRecruiterMode, onNext, onPrevious }) => {
 
       {/* Right Side - Interactive Timeline */}
       <motion.div
-        className="space-y-6"
+        className="lg:w-3/5 xl:w-2/3 space-y-6"
         initial={{ opacity: 0, x: 100 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8, delay: 0.4 }}
@@ -118,7 +115,9 @@ const StoryAbout = ({ isRecruiterMode, onNext, onPrevious }) => {
                 <div className={`relative z-10 w-16 h-16 rounded-full flex items-center justify-center text-white font-bold text-lg
                   ${item.isHumorous 
                     ? 'bg-gradient-to-r from-yellow-400 to-orange-500' 
-                    : 'bg-gradient-to-r from-primary-cyan to-primary-purple'
+                  : index % 2 === 0
+                    ? 'bg-gradient-to-r from-primary-cyan to-primary-purple'
+                    : 'bg-gradient-to-r from-green-400 to-blue-500'
                   }`}>
                   {item.year}
                 </div>
