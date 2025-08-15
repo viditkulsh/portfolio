@@ -21,7 +21,7 @@ export const projectsData = [
     title: "IditTrack",
     description: "Micro SaaS Inventory & Order Management system for small businesses.",
     longDescription: "Developed an inventory and order tracking platform with product management, order tracking, FTP file uploads, and POS API integration. Designed for small businesses to streamline operations.",
-    image: "/images/projects/idittrack.jpg",
+    image: "/images/projects/idittrack_landing.png",
     githubUrl: "https://github.com/viditkulsh/idittrack",
     liveUrl: "#",
     showLiveDemo: false, // Control whether to show live demo link
@@ -52,7 +52,7 @@ export const projectsData = [
     title: "Burger Hut",
     description: "Full-stack food ordering website with PHP and MySQL backend, designed for a smooth ordering experience.",
     longDescription: "Developed a creative landing page and login/signup system using PHP, MySQL, JavaScript, HTML, and CSS. Designed with a clean modular folder structure and hosted locally via XAMPP. Features include secure authentication, order management, and a white-orange themed responsive UI.",
-    image: "/images/projects/burgerhut.jpg",
+    image: "/images/projects/burger_house_landing.png",
     githubUrl: "https://github.com/viditkulsh/BurgerHut",
     liveUrl: "#",
     showLiveDemo: false, // Control whether to show live demo link
@@ -84,7 +84,7 @@ export const projectsData = [
     title: "Adbhut Global Website",
     description: "Mobile-optimized corporate website with SEO and performance enhancements.",
     longDescription: "Developed and deployed a full-stack, mobile-optimized corporate site using HTML, CSS, and JavaScript. Integrated scalable backend logic to handle 500+ form submissions/day, improved SEO, and enhanced load speed by 35% with image compression, lazy loading, and CDN integration.",
-    image: "/images/projects/adbhutglobal.jpg",
+    image: "/images/projects/adbhutglobal_landing.jpeg",
     githubUrl: "https://github.com/viditkulsh/adbhutGlobal",
     liveUrl: "https://adbhutglobal.com",
     showLiveDemo: true, // Control whether to show live demo link
@@ -116,7 +116,7 @@ export const projectsData = [
     title: "Sathi Sahyogi",
     description: "Volunteer coordination platform for disaster relief and community service.",
     longDescription: "Built a web app to connect volunteers with NGOs and communities during crises. Features real-time task allocation, role-based access, and resource tracking, ensuring efficient collaboration.",
-    image: "/images/projects/sathisahyogi.jpg",
+    image: "/images/projects/SathiSahyogi_landing.jpg",
     githubUrl: "https://github.com/viditkulsh/SathiSahyogi",
     liveUrl: "#",
     showLiveDemo: false, // Control whether to show live demo link
