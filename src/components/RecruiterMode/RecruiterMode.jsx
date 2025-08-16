@@ -329,7 +329,7 @@ const RecruiterMode = () => {
                   <div className="bg-gradient-to-b from-yellow-500/20 to-orange-500/20 p-6 rounded-xl border border-yellow-500/30">
                     <h3 className="text-lg font-semibold text-white mb-3 flex items-center gap-2"><Trophy size={18} /> Academic Excellence</h3>
                     <ul className="space-y-2 text-yellow-100">
-                      <li>• 8.88/10 CGPA</li>
+                      <li>• 8.78/10 CGPA</li>
                       <li>• Consecutive Outstanding Achievement Awards</li>
                       <li>• Top performer in advanced subjects</li>
                     </ul>

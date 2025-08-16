@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePortfolio } from '../../../context/PortfolioContext';
-import { User, Target, Lightbulb, Sparkles, Rocket } from 'lucide-react';
+import { Target, Lightbulb, Sparkles, Rocket } from 'lucide-react';
 
 const StoryAbout = ({ isRecruiterMode, onNext, onPrevious }) => {
   const { portfolioData } = usePortfolio();

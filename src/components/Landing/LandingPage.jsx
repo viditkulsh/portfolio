@@ -71,9 +71,9 @@ const LandingPage = ({ isRecruiterMode, setIsRecruiterMode }) => {
         <div className="absolute inset-0 bg-gradient-secondary opacity-20" />
       </div>
       
-      {/* Subtle Particle Animation */}
+      {/* Subtle Particle Animation - Reduced for mobile */}
       <div className="absolute inset-0 overflow-hidden">
-        {[...Array(30)].map((_, i) => (
+        {[...Array(window.innerWidth < 768 ? 15 : 30)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute w-1 h-1 bg-primary-silver rounded-full"
@@ -95,44 +95,46 @@ const LandingPage = ({ isRecruiterMode, setIsRecruiterMode }) => {
         ))}
       </div>
 
-      {/* Top Navigation */}
+      {/* Mobile/Desktop Top Navigation */}
       <motion.div
-        className="absolute top-8 right-8 flex items-center gap-4 z-20"
+        className="absolute top-4 sm:top-6 lg:top-8 right-4 sm:right-6 lg:right-8 flex flex-col sm:flex-row items-end sm:items-center gap-2 sm:gap-4 z-20"
         initial={{ y: -50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 1, duration: 0.8 }}
       >
         <motion.button
           onClick={handleRecruiterMode}
-          className="px-6 py-2 rounded-full backdrop-blur-md border bg-glassmorphism-bg text-primary-silver border-glassmorphism-border font-medium transition-all duration-300 hover:scale-105 hover:bg-gradient-accent hover:text-white"
+          className="px-3 sm:px-4 lg:px-6 py-2 text-sm sm:text-base rounded-full backdrop-blur-md border bg-glassmorphism-bg text-primary-silver border-glassmorphism-border font-medium transition-all duration-300 hover:scale-105 hover:bg-gradient-accent hover:text-white"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          Recruiter Mode
+          <span className="hidden sm:inline">Recruiter Mode</span>
+          <span className="sm:hidden">Recruiter</span>
         </motion.button>
 
         <motion.button
           onClick={handleResumeDownload}
-          className="px-6 py-2 rounded-full bg-glassmorphism-bg backdrop-blur-md border border-glassmorphism-border text-primary-silver font-medium transition-all duration-300 hover:scale-105 hover:bg-gradient-accent"
+          className="px-3 sm:px-4 lg:px-6 py-2 text-sm sm:text-base rounded-full bg-glassmorphism-bg backdrop-blur-md border border-glassmorphism-border text-primary-silver font-medium transition-all duration-300 hover:scale-105 hover:bg-gradient-accent"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          Download Resume
+          <span className="hidden sm:inline">Download Resume</span>
+          <span className="sm:hidden">Resume</span>
         </motion.button>
       </motion.div>
 
-      {/* Main Content */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center z-10 px-4">
+      {/* Main Content - Mobile First */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center z-10 px-4 sm:px-6 lg:px-8">
         {/* Hero Section */}
         <motion.div
-          className="text-center mb-12"
+          className="text-center mb-8 sm:mb-10 lg:mb-12"
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 1.5, delay: 0.5 }}
         >
-          {/* Name with Elegant Typography */}
+          {/* Name with Responsive Typography */}
           <motion.h1
-            className="text-6xl md:text-8xl font-dm-serif mb-6 text-white tracking-wide"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-dm-serif mb-4 sm:mb-6 text-white tracking-wide leading-tight"
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.8, duration: 1 }}
@@ -153,22 +155,22 @@ const LandingPage = ({ isRecruiterMode, setIsRecruiterMode }) => {
             </motion.span>
           </motion.h1>
           
-          {/* Role with Professional Styling */}
+          {/* Role with Professional Styling - Responsive */}
           <motion.div
-            className="relative mb-8"
+            className="relative mb-6 sm:mb-8"
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 1, duration: 0.8 }}
           >
-            <h2 className="text-2xl md:text-4xl font-playfair text-primary-silver font-light tracking-wide">
+            <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-playfair text-primary-silver font-light tracking-wide">
               {portfolioData.personal.title}
             </h2>
             <div className="absolute inset-0 bg-gradient-accent opacity-10 blur-xl" />
           </motion.div>
 
-          {/* Tagline */}
+          {/* Tagline - Responsive */}
           <motion.p
-            className="text-lg md:text-xl text-primary-silver/90 max-w-3xl mx-auto font-inter leading-relaxed"
+            className="text-base sm:text-lg lg:text-xl text-primary-silver/90 max-w-sm sm:max-w-2xl lg:max-w-3xl mx-auto font-inter leading-relaxed px-2"
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 1.2, duration: 0.8 }}
@@ -177,17 +179,17 @@ const LandingPage = ({ isRecruiterMode, setIsRecruiterMode }) => {
           </motion.p>
         </motion.div>
 
-        {/* Short Introduction */}
+        {/* Short Introduction - Mobile First */}
         <AnimatePresence>
           {showControls && (
             <motion.div
-              className="text-center mb-16 max-w-4xl mx-auto"
+              className="text-center mb-10 sm:mb-12 lg:mb-16 max-w-xs sm:max-w-2xl lg:max-w-4xl mx-auto px-4"
               initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.8 }}
             >
               <motion.p
-                className="text-base md:text-lg text-primary-silver/80 font-inter leading-relaxed"
+                className="text-sm sm:text-base lg:text-lg text-primary-silver/80 font-inter leading-relaxed"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.3 }}
@@ -198,64 +200,79 @@ const LandingPage = ({ isRecruiterMode, setIsRecruiterMode }) => {
           )}
         </AnimatePresence>
 
-        {/* CTA Buttons */}
+        {/* CTA Buttons - Mobile First Responsive */}
         <AnimatePresence>
           {showControls && (
             <motion.div
-              className="flex flex-col md:flex-row gap-6 items-center"
+              className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-center w-full max-w-md sm:max-w-none"
               initial={{ y: 50, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.8, delay: 1.5 }}
             >
-                          {/* Story Mode Button */}
-                          <motion.button
-                              onClick={handleStoryMode}
-                              className="group relative px-8 py-4 bg-gradient-secondary rounded-full text-white font-medium text-lg min-w-[200px] overflow-hidden"
-                              whileHover={{
-                                  scale: 1.05,
-                                  boxShadow: "0 20px 40px rgba(92, 44, 111, 0.3)"
-                              }}
-                              whileTap={{ scale: 0.95 }}
-                              initial={{ y: 50, opacity: 0 }}
-                              animate={{ y: 0, opacity: 1 }}
-                              transition={{ delay: 1.6, duration: 0.5 }}
-                          >
-                              <span className="relative z-10 flex items-center justify-center gap-2">
-                                  Story Mode
-                                  <motion.span
-                                      animate={{ rotate: [0, 15, 0] }}
-                                      transition={{ duration: 1.5, repeat: Infinity }}
-                                  >
-                                      📖
-                                  </motion.span>
-                              </span>
-                              <div className="absolute inset-0 bg-gradient-to-r from-gradient-charcoal to-gradient-silver opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                          </motion.button>
-
-              {/* Explore Portfolio Button */}
-              <motion.button
-                onClick={handleExploreMode}
-                className="group relative px-8 py-4 bg-gradient-accent rounded-full text-white font-medium text-lg min-w-[200px] overflow-hidden"
-                whileHover={{ 
-                  scale: 1.05,
-                  boxShadow: "0 20px 40px rgba(15, 118, 110, 0.3)"
-                }}
-                whileTap={{ scale: 0.95 }}
-                initial={{ x: -50, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ delay: 1.7, duration: 0.5 }}
+              {/* CTA Buttons - Responsive Container */}
+              <motion.div
+                className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-center justify-center w-full"
+                initial={{ y: 50, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.8, delay: 1.5 }}
               >
-                <span className="relative z-10 flex items-center justify-center gap-2">
-                  Explore Portfolio
-                  <motion.span
-                    animate={{ x: [0, 5, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
-                  >
-                    →
-                  </motion.span>
-                </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-gradient-teal to-gradient-indigo opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </motion.button>
+                {/* Story Mode Button - Responsive */}
+                <motion.button
+                  onClick={handleStoryMode}
+                  className="group relative px-6 sm:px-8 py-3 sm:py-4 
+               bg-gradient-secondary rounded-full text-white 
+               font-medium text-base sm:text-lg 
+               w-auto sm:min-w-[250px] overflow-hidden"
+                  whileHover={{
+                    scale: 1.02,
+                    boxShadow: "0 10px 30px rgba(92, 44, 111, 0.3)"
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                  initial={{ y: 50, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 1.6, duration: 0.5 }}
+                >
+                  <span className="relative z-10 flex items-center justify-center gap-2">
+                    Story Mode
+                    <motion.span
+                      animate={{ rotate: [0, 15, 0] }}
+                      transition={{ duration: 1.5, repeat: Infinity }}
+                    >
+                      📖
+                    </motion.span>
+                  </span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-gradient-charcoal to-gradient-silver opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </motion.button>
+
+                {/* Explore Portfolio Button - Responsive */}
+                <motion.button
+                  onClick={handleExploreMode}
+                  className="group relative px-6 sm:px-8 py-3 sm:py-4 
+               bg-gradient-accent rounded-full text-white 
+               font-medium text-base sm:text-lg 
+               w-auto sm:min-w-[250px] overflow-hidden"
+                  whileHover={{ 
+                    scale: 1.02,
+                    boxShadow: "0 10px 30px rgba(15, 118, 110, 0.3)"
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                  initial={{ x: -50, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ delay: 1.7, duration: 0.5 }}
+                >
+                  <span className="relative z-10 flex items-center justify-center gap-2">
+                    <span className="hidden sm:inline">Explore Portfolio</span>
+                    <span className="sm:hidden">Explore</span>
+                    <motion.span
+                      animate={{ x: [0, 5, 0] }}
+                      transition={{ duration: 1.5, repeat: Infinity }}
+                    >
+                      →
+                    </motion.span>
+                  </span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-gradient-teal to-gradient-indigo opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </motion.button>
+              </motion.div>
 
             </motion.div>
           )}

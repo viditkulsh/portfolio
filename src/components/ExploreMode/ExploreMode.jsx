@@ -1,4 +1,4 @@
-import React, { useState } from 'react'; // Removed unused useEffect import
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { usePortfolio } from '../../context/PortfolioContext';
@@ -12,6 +12,28 @@ const ExploreMode = ({ isRecruiterMode }) => {
     const [showSidebar, setShowSidebar] = useState(true);
     const [selectedProject, setSelectedProject] = useState(null);
     const [selectedExperience, setSelectedExperience] = useState(null);
+    const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1024);
+
+    // Handle window resize
+    useEffect(() => {
+        const handleResize = () => {
+            setWindowWidth(window.innerWidth);
+        };
+
+        if (typeof window !== 'undefined') {
+            window.addEventListener('resize', handleResize);
+            return () => window.removeEventListener('resize', handleResize);
+        }
+    }, []);
+
+    // Auto-hide sidebar on mobile after selection
+    useEffect(() => {
+        if (windowWidth < 768) {
+            setShowSidebar(false);
+        } else {
+            setShowSidebar(true);
+        }
+    }, [windowWidth, activeSection]);
 
     const sections = {
         about: { title: 'About Me', icon: User, color: 'from-blue-500 to-cyan-500' },
@@ -166,14 +188,14 @@ const ExploreMode = ({ isRecruiterMode }) => {
 
             case 'projects':
                 return (
-                    <div className="space-y-8">
-                        <div className="text-center mb-12">
-                            <h2 className="text-4xl font-playfair bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent mb-4">Projects</h2>
-                            <p className="text-xl text-white/80">
+                    <div className="space-y-6 sm:space-y-8">
+                        <div className="text-center mb-8 sm:mb-12">
+                            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-playfair bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent mb-4">Projects</h2>
+                            <p className="text-base sm:text-lg lg:text-xl text-white/80">
                                 Bringing ideas to life through code and innovation...
                             </p>
                         </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div className="grid-responsive">
                             {portfolioData.projects.map((project, index) => (
                                 <motion.div
                                     key={project.id || index}
@@ -184,8 +206,8 @@ const ExploreMode = ({ isRecruiterMode }) => {
                                     onClick={() => setSelectedProject(project)}
                                     whileHover={{ scale: 1.02, y: -5 }}
                                 >
-                                    {/* Project Image/Icon */}
-                                    <div className="w-full h-48 bg-gradient-to-br from-purple-500/20 to-cyan-500/20 rounded-lg mb-4 flex items-center justify-center relative overflow-hidden">
+                                    {/* Project Image/Icon - Responsive */}
+                                    <div className="w-full h-32 sm:h-40 lg:h-48 bg-gradient-to-br from-purple-500/20 to-cyan-500/20 rounded-lg mb-3 sm:mb-4 flex items-center justify-center relative overflow-hidden">
                                         {project.image ? (
                                             <img
                                                 src={project.image}
@@ -193,21 +215,21 @@ const ExploreMode = ({ isRecruiterMode }) => {
                                                 className="w-full h-full object-cover"
                                             />
                                         ) : (
-                                            <div className="text-6xl opacity-50">{project.icon ? React.createElement(project.icon, { size: 48 }) : <Rocket size={48} />}</div>
+                                                <div className="text-4xl sm:text-5xl lg:text-6xl opacity-50">{project.icon ? React.createElement(project.icon, { size: windowWidth < 640 ? 32 : windowWidth < 1024 ? 40 : 48 }) : <Rocket size={windowWidth < 640 ? 32 : windowWidth < 1024 ? 40 : 48} />}</div>
                                         )}
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                                        <div className="absolute bottom-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                            <Eye className="w-5 h-5 text-white" />
+                                        <div className="absolute bottom-2 sm:bottom-4 right-2 sm:right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                            <Eye className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                                         </div>
                                     </div>
 
-                                    {/* Project Info */}
+                                    {/* Project Info - Responsive */}
                                     <div className="text-left">
-                                        <h3 className="text-xl font-semibold text-white mb-2">{project.title}</h3>
-                                        <p className="text-white/70 text-sm mb-4 line-clamp-2">{project.description}</p>
+                                        <h3 className="text-lg sm:text-xl font-semibold text-white mb-2">{project.title}</h3>
+                                        <p className="text-white/70 text-sm sm:text-base mb-3 sm:mb-4 line-clamp-2">{project.description}</p>
 
-                                        {/* Technologies */}
-                                        <div className="flex flex-wrap gap-2 mb-4">
+                                        {/* Technologies - Responsive */}
+                                        <div className="flex flex-wrap gap-1 sm:gap-2 mb-3 sm:mb-4">
                                             {project.technologies.slice(0, 3).map((tech, techIndex) => (
                                                 <span
                                                     key={techIndex}
@@ -215,7 +237,7 @@ const ExploreMode = ({ isRecruiterMode }) => {
                                                 >
                                                     <span>
                                                         {React.createElement(tech.icon, {
-                                                            size: 14,
+                                                            size: 12,
                                                             className: "text-cyan-400"
                                                         })}
                                                     </span>
@@ -227,7 +249,7 @@ const ExploreMode = ({ isRecruiterMode }) => {
                                             )}
                                         </div>
 
-                                        {/* Status */}
+                                        {/* Status - Responsive */}
                                         <div className="flex items-center justify-between">
                                             <span className={`text-xs px-2 py-1 rounded-full ${project.status === 'Completed' ? 'bg-green-500/20 text-green-300' :
                                                 project.status === 'In Progress' ? 'bg-yellow-500/20 text-yellow-300' :
@@ -246,46 +268,46 @@ const ExploreMode = ({ isRecruiterMode }) => {
 
             case 'experience':
             return (
-            <div className="space-y-8">
-                <h2 className="text-4xl font-playfair text-white mb-6">Professional Experience</h2>
-                <div className="space-y-6">
+                <div className="space-y-6 sm:space-y-8">
+                    <h2 className="text-2xl sm:text-3xl lg:text-4xl font-playfair text-white mb-4 sm:mb-6">Professional Experience</h2>
+                    <div className="space-y-4 sm:space-y-6">
                     {portfolioData.experience.map((exp, index) => (
                   <motion.div
                       key={index}
-                            className="bg-white/5 backdrop-blur-md rounded-xl p-6 border border-white/10 cursor-pointer group"
+                            className="card cursor-pointer group"
                       whileHover={{ scale: 1.02 }}
                             onClick={() => setSelectedExperience(exp)}
                   >
-                      <div className="flex justify-between items-start mb-4">
-                                <div className="flex items-start gap-4">
-                                    <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex items-center justify-center flex-shrink-0">
-                                        <span className="text-white font-bold text-lg">
+                            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4 mb-3 sm:mb-4">
+                                <div className="flex items-start gap-3 sm:gap-4">
+                                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                                        <span className="text-white font-bold text-sm sm:text-lg">
                                             {exp.company.charAt(0)}
                                         </span>
                                     </div>
-                                    <div>
-                                        <h3 className="text-xl font-semibold text-white">{exp.position}</h3>
-                                        <p className="text-blue-200">{exp.company}</p>
-                                        <p className="text-blue-300 text-sm">{exp.duration}</p>
+                                    <div className="flex-1 min-w-0">
+                                        <h3 className="text-lg sm:text-xl font-semibold text-white">{exp.position}</h3>
+                                        <p className="text-blue-200 text-sm sm:text-base">{exp.company}</p>
+                                        <p className="text-blue-300 text-xs sm:text-sm">{exp.duration}</p>
                                     </div>
                                 </div>
-                                <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                    <Eye className="w-5 h-5 text-blue-300" />
+                                <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 self-start">
+                                    <Eye className="w-4 h-4 sm:w-5 sm:h-5 text-blue-300" />
                                 </div>
                             </div>
-                            <p className="text-white/80 mb-4 line-clamp-3">{exp.description}</p>
+                            <p className="text-white/80 text-sm sm:text-base mb-3 sm:mb-4 line-clamp-3">{exp.description}</p>
                       {exp.responsibilities && (
                           <div className="space-y-2">
-                              <h4 className="text-blue-200 font-medium">Key Responsibilities:</h4>
+                                    <h4 className="text-blue-200 font-medium text-sm sm:text-base">Key Responsibilities:</h4>
                               <ul className="space-y-1">
                                         {exp.responsibilities.slice(0, 2).map((resp, i) => (
-                                      <li key={i} className="text-white/80 text-sm flex items-start gap-2">
+                                            <li key={i} className="text-white/80 text-xs sm:text-sm flex items-start gap-2">
                                           <span className="text-green-400 mt-1">•</span>
                                           <span>{resp}</span>
                                       </li>
                                   ))}
                                         {exp.responsibilities.length > 2 && (
-                                            <li className="text-blue-300 text-sm">
+                                            <li className="text-blue-300 text-xs sm:text-sm">
                                                 +{exp.responsibilities.length - 2} more responsibilities...
                                             </li>
                                         )}
@@ -300,19 +322,19 @@ const ExploreMode = ({ isRecruiterMode }) => {
 
             case 'certificates':
                 return (
-                    <div className="space-y-8">
-                        <h2 className="text-4xl font-playfair text-white mb-6">Certificates & Achievements</h2>
-                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className="space-y-6 sm:space-y-8">
+                        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-playfair text-white mb-4 sm:mb-6">Certificates & Achievements</h2>
+                        <div className="grid-responsive">
                             {portfolioData.certificates.map((cert, index) => (
                                 <motion.div
                                     key={index}
-                                    className="bg-white/5 backdrop-blur-md rounded-xl p-6 border border-white/10"
+                                    className="card"
                                     whileHover={{ y: -5 }}
                                 >
-                                    <h3 className="text-lg font-semibold text-white mb-2">{cert.title}</h3>
-                                    <p className="text-blue-200 mb-2">{cert.issuer}</p>
-                                    <p className="text-blue-300 text-sm mb-4">{cert.year}</p>
-                                    <p className="text-white/80 text-sm">{cert.description}</p>
+                                    <h3 className="text-lg sm:text-xl font-semibold text-white mb-2">{cert.title}</h3>
+                                    <p className="text-blue-200 text-sm sm:text-base mb-2">{cert.issuer}</p>
+                                    <p className="text-blue-300 text-xs sm:text-sm mb-3 sm:mb-4">{cert.year}</p>
+                                    <p className="text-white/80 text-sm sm:text-base">{cert.description}</p>
                                 </motion.div>
                             ))}
                         </div>
@@ -321,29 +343,29 @@ const ExploreMode = ({ isRecruiterMode }) => {
 
             case 'contact':
                 return (
-                    <div className="space-y-8">
-                        <h2 className="text-4xl font-playfair text-white mb-6">Get In Touch</h2>
-                        <div className="grid md:grid-cols-2 gap-8">
-                            <div className="bg-white/5 backdrop-blur-md rounded-xl p-6 border border-white/10">
-                                <h3 className="text-xl font-semibold text-blue-200 mb-4">Contact Information</h3>
-                                <div className="space-y-4">
+                    <div className="space-y-6 sm:space-y-8">
+                        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-playfair text-white mb-4 sm:mb-6">Get In Touch</h2>
+                        <div className="grid gap-6 sm:gap-8 lg:grid-cols-2">
+                            <div className="card">
+                                <h3 className="text-lg sm:text-xl font-semibold text-blue-200 mb-3 sm:mb-4">Contact Information</h3>
+                                <div className="space-y-3 sm:space-y-4">
                                     <div className="flex items-center gap-3">
                                         <span className="text-blue-400"><Mail size={16} /></span>
-                                        <span className="text-white">{portfolioData.personal.email}</span>
+                                        <span className="text-white text-sm sm:text-base break-all">{portfolioData.personal.email}</span>
                                     </div>
                                     <div className="flex items-center gap-3">
                                         <span className="text-blue-400"><Smartphone size={16} /></span>
-                                        <span className="text-white">{portfolioData.personal.phone}</span>
+                                        <span className="text-white text-sm sm:text-base">{portfolioData.personal.phone}</span>
                                     </div>
                                     <div className="flex items-center gap-3">
                                         <span className="text-blue-400"><MapPin size={16} /></span>
-                                        <span className="text-white">{portfolioData.personal.location}</span>
+                                        <span className="text-white text-sm sm:text-base">{portfolioData.personal.location}</span>
                                     </div>
                                 </div>
                             </div>
-                            <div className="bg-white/5 backdrop-blur-md rounded-xl p-6 border border-white/10">
-                                <h3 className="text-xl font-semibold text-blue-200 mb-4">Social Links</h3>
-                                <div className="space-y-3">
+                            <div className="card">
+                                <h3 className="text-lg sm:text-xl font-semibold text-blue-200 mb-3 sm:mb-4">Social Links</h3>
+                                <div className="space-y-2 sm:space-y-3">
                                     {Object.entries(portfolioData.personal.social).map(([platform, url]) => {
                                         const platformData = socialMediaData.platforms[platform];
                                         const IconComponent = platformData?.icon;
@@ -353,13 +375,13 @@ const ExploreMode = ({ isRecruiterMode }) => {
                                                 href={url}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="flex items-center gap-3 text-white hover:text-blue-300 transition-colors p-2 rounded-lg hover:bg-white/5"
+                                                className="flex items-center gap-3 text-white hover:text-blue-300 transition-colors p-2 rounded-lg hover:bg-white/5 min-h-[44px] touch-target"
                                             >
-                                                <span className="text-xl">
-                                                    {IconComponent ? <IconComponent size={20} /> : '🔗'}
+                                                <span className="text-lg sm:text-xl">
+                                                    {IconComponent ? <IconComponent size={windowWidth < 640 ? 18 : 20} /> : '🔗'}
                                                 </span>
-                                                <div>
-                                                    <span className="capitalize font-medium">{platformData?.name || platform}</span>
+                                                <div className="flex-1 min-w-0">
+                                                    <span className="capitalize font-medium text-sm sm:text-base">{platformData?.name || platform}</span>
                                                     {platformData?.description && (
                                                         <p className="text-xs text-blue-300">{platformData.description}</p>
                                                     )}
@@ -385,59 +407,67 @@ const ExploreMode = ({ isRecruiterMode }) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-          {/* Top Navigation */}
+            {/* Responsive Top Navigation */}
           <div className="fixed top-0 left-0 right-0 bg-black/20 backdrop-blur-md border-b border-white/10 z-50">
-              <div className="flex justify-between items-center px-6 py-4">
+                <div className="flex justify-between items-center px-4 sm:px-6 py-3 sm:py-4">
                   <motion.button
                       onClick={handleBackToHome}
-                      className="flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-md rounded-full border border-white/20 text-blue-200 hover:text-white hover:bg-white/20 transition-all duration-300"
+                        className="flex items-center gap-2 px-3 sm:px-4 py-2 bg-white/10 backdrop-blur-md rounded-full border border-white/20 text-blue-200 hover:text-white hover:bg-white/20 transition-all duration-300"
                       whileHover={{ scale: 1.05, x: -5 }}
                       whileTap={{ scale: 0.95 }}
                   >
                       <span className="text-lg">←</span>
-                      <span className="font-medium">Back to Home</span>
+                        <span className="font-medium hidden sm:inline">Back to Home</span>
+                        <span className="font-medium sm:hidden">Back</span>
                   </motion.button>
 
-                  <h1 className="text-2xl font-playfair text-white">Portfolio Explorer</h1>
+                    <h1 className="text-lg sm:text-xl lg:text-2xl font-playfair text-white">Portfolio Explorer</h1>
 
                   <motion.button
                       onClick={() => setShowSidebar(!showSidebar)}
-                      className="px-4 py-2 bg-white/10 backdrop-blur-md rounded-full border border-white/20 text-blue-200 hover:text-white hover:bg-white/20 transition-all duration-300"
+                        className="px-3 sm:px-4 py-2 bg-white/10 backdrop-blur-md rounded-full border border-white/20 text-blue-200 hover:text-white hover:bg-white/20 transition-all duration-300"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                   >
-                      {showSidebar ? 'Hide Menu' : 'Show Menu'}
+                        <span className="hidden sm:inline">{showSidebar ? 'Hide Menu' : 'Show Menu'}</span>
+                        <span className="sm:hidden">☰</span>
                   </motion.button>
               </div>
           </div>
 
-          <div className="flex pt-20">
-              {/* Sidebar Navigation */}
+            <div className="flex pt-16 sm:pt-20">
+                {/* Responsive Sidebar Navigation */}
               <AnimatePresence>
                   {showSidebar && (
                       <motion.div
-                          className="fixed left-0 top-20 bottom-0 w-80 bg-black/30 backdrop-blur-md border-r border-white/10 z-40 overflow-y-auto"
+                            className="fixed left-0 top-16 sm:top-20 bottom-0 w-full sm:w-80 bg-black/30 backdrop-blur-md border-r border-white/10 z-40 overflow-y-auto"
                           initial={{ x: -320 }}
                           animate={{ x: 0 }}
                           exit={{ x: -320 }}
                           transition={{ duration: 0.3 }}
                       >
-                          <div className="p-6">
-                              <h3 className="text-lg font-semibold text-white mb-6">Navigation</h3>
-                              <div className="space-y-3">
+                            <div className="p-4 sm:p-6">
+                                <h3 className="text-base sm:text-lg font-semibold text-white mb-4 sm:mb-6">Navigation</h3>
+                                <div className="space-y-2 sm:space-y-3">
                                   {Object.entries(sections).map(([key, section]) => (
                                       <motion.button
                                           key={key}
-                                          onClick={() => setActiveSection(key)}
-                                          className={`w-full flex items-center gap-4 px-4 py-3 rounded-lg transition-all duration-300 ${activeSection === key
+                                          onClick={() => {
+                                              setActiveSection(key);
+                                              // Auto-hide sidebar on mobile after selection
+                                              if (window.innerWidth < 640) {
+                                                  setShowSidebar(false);
+                                              }
+                                          }}
+                                          className={`w-full flex items-center gap-3 sm:gap-4 px-3 sm:px-4 py-2 sm:py-3 rounded-lg transition-all duration-300 ${activeSection === key
                                                   ? `bg-gradient-to-r ${section.color} text-white shadow-lg`
                                                   : 'bg-white/5 text-blue-200 hover:bg-white/10'
                                               }`}
                                           whileHover={{ scale: 1.02, x: 5 }}
                                           whileTap={{ scale: 0.98 }}
                                       >
-                                          <span className="text-xl">{React.createElement(section.icon, { size: 20 })}</span>
-                                          <span className="font-medium">{section.title}</span>
+                                          <span className="text-lg sm:text-xl">{React.createElement(section.icon, { size: window.innerWidth < 640 ? 18 : 20 })}</span>
+                                          <span className="font-medium text-sm sm:text-base">{section.title}</span>
                                       </motion.button>
                                   ))}
                               </div>
@@ -446,8 +476,8 @@ const ExploreMode = ({ isRecruiterMode }) => {
                   )}
               </AnimatePresence>
 
-              {/* Main Content */}
-              <div className={`flex-1 p-8 transition-all duration-300 ${showSidebar ? 'ml-80' : 'ml-0'}`}>
+                {/* Responsive Main Content */}
+                <div className={`flex-1 p-4 sm:p-6 lg:p-8 transition-all duration-300 ${showSidebar && window.innerWidth >= 640 ? 'sm:ml-80' : 'ml-0'}`}>
                   <AnimatePresence mode="wait">
                       <motion.div
                           key={activeSection}
@@ -466,7 +496,7 @@ const ExploreMode = ({ isRecruiterMode }) => {
             <AnimatePresence>
                 {selectedProject && (
                     <motion.div
-                        className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[60] p-4"
+                        className="modal-overlay"
                         variants={modalVariants}
                         initial="hidden"
                         animate="visible"
@@ -474,13 +504,13 @@ const ExploreMode = ({ isRecruiterMode }) => {
                         onClick={() => setSelectedProject(null)}
                     >
                         <motion.div
-                            className="bg-gray-900/95 backdrop-blur-md rounded-xl p-8 border border-white/20 max-w-4xl max-h-[90vh] overflow-y-auto w-full"
+                            className="modal-content"
                             onClick={(e) => e.stopPropagation()}
                         >
-                            <div className="flex flex-col lg:flex-row gap-8">
-                                {/* Project Image */}
-                                <div className="lg:w-1/2">
-                                    <div className="w-full h-64 bg-gradient-to-br from-purple-500/20 to-blue-500/20 rounded-lg flex items-center justify-center">
+                            <div className="flex flex-col gap-6 sm:gap-8 lg:flex-row">
+                                {/* Project Image - Responsive */}
+                                <div className="w-full lg:w-1/2">
+                                    <div className="w-full h-48 sm:h-56 lg:h-64 bg-gradient-to-br from-purple-500/20 to-blue-500/20 rounded-lg flex items-center justify-center">
                                         {selectedProject.image ? (
                                             <img
                                                 src={selectedProject.image}
@@ -488,27 +518,27 @@ const ExploreMode = ({ isRecruiterMode }) => {
                                                 className="w-full h-full object-cover rounded-lg"
                                             />
                                         ) : (
-                                            <div className="text-8xl opacity-50">{selectedProject.icon ? React.createElement(selectedProject.icon, { size: 64 }) : <Rocket size={64} />}</div>
+                                                <div className="text-6xl sm:text-7xl lg:text-8xl opacity-50">{selectedProject.icon ? React.createElement(selectedProject.icon, { size: windowWidth < 640 ? 48 : windowWidth < 1024 ? 56 : 64 }) : <Rocket size={windowWidth < 640 ? 48 : windowWidth < 1024 ? 56 : 64} />}</div>
                                         )}
                                     </div>
                                 </div>
 
-                                {/* Project Details */}
-                                <div className="lg:w-1/2">
-                                    <h2 className="text-3xl font-playfair text-white mb-4">{selectedProject.title}</h2>
-                                    <p className="text-white/90 leading-relaxed mb-6">{selectedProject.description}</p>
+                                {/* Project Details - Responsive */}
+                                <div className="w-full lg:w-1/2">
+                                    <h2 className="text-2xl sm:text-3xl font-playfair text-white mb-3 sm:mb-4">{selectedProject.title}</h2>
+                                    <p className="text-white/90 leading-relaxed text-sm sm:text-base mb-4 sm:mb-6">{selectedProject.description}</p>
 
-                                    {/* Technologies */}
-                                    <div className="mb-6">
-                                        <h3 className="text-lg font-semibold text-blue-200 mb-3">Technologies Used</h3>
-                                        <div className="flex flex-wrap gap-2">
+                                    {/* Technologies - Responsive */}
+                                    <div className="mb-4 sm:mb-6">
+                                        <h3 className="text-base sm:text-lg font-semibold text-blue-200 mb-2 sm:mb-3">Technologies Used</h3>
+                                        <div className="flex flex-wrap gap-1 sm:gap-2">
                                             {selectedProject.technologies.map((tech, index) => (
                                                 <span
                                                     key={index}
-                                                    className="bg-blue-500/20 text-blue-200 px-3 py-1 rounded-md flex items-center gap-2 border border-blue-500/30"
+                                                    className="bg-blue-500/20 text-blue-200 px-2 sm:px-3 py-1 rounded-md flex items-center gap-1 sm:gap-2 border border-blue-500/30 text-xs sm:text-sm"
                                                 >
                                                     <span>
-                                                        {tech.icon ? React.createElement(tech.icon, { size: 16 }) : <Wrench size={16} />}
+                                                        {tech.icon ? React.createElement(tech.icon, { size: 14 }) : <Wrench size={14} />}
                                                     </span>
                                                     <span>{tech.name || tech}</span>
                                                 </span>
@@ -516,14 +546,14 @@ const ExploreMode = ({ isRecruiterMode }) => {
                                         </div>
                                     </div>
 
-                                    {/* Project Links */}
-                                    <div className="flex gap-4 mb-6">
+                                    {/* Project Links - Responsive */}
+                                    <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-4 sm:mb-6">
                                         {selectedProject.githubUrl && (
                                             <a
                                                 href={selectedProject.githubUrl}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="flex items-center gap-2 px-4 py-2 bg-gray-700/50 text-white rounded-lg border border-gray-600 hover:bg-gray-600/50 transition-colors"
+                                                className="btn-secondary touch-target flex items-center justify-center gap-2"
                                             >
                                                 <Github className="w-4 h-4" />
                                                 View Code
@@ -534,7 +564,7 @@ const ExploreMode = ({ isRecruiterMode }) => {
                                                 href={selectedProject.liveUrl}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                                                className="btn-primary touch-target flex items-center justify-center gap-2"
                                             >
                                                 <ExternalLink className="w-4 h-4" />
                                                 Live Demo
@@ -542,10 +572,10 @@ const ExploreMode = ({ isRecruiterMode }) => {
                                         )}
                                     </div>
 
-                                    {/* Project Status and Year */}
-                                    <div className="flex items-center gap-4 text-sm">
+                                    {/* Project Status and Year - Responsive */}
+                                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-xs sm:text-sm">
                                         {selectedProject.status && (
-                                            <span className={`px-3 py-1 rounded-full ${selectedProject.status === 'Completed' ? 'bg-green-500/20 text-green-300' :
+                                            <span className={`px-2 sm:px-3 py-1 rounded-full w-fit ${selectedProject.status === 'Completed' ? 'bg-green-500/20 text-green-300' :
                                                 selectedProject.status === 'In Progress' ? 'bg-yellow-500/20 text-yellow-300' :
                                                     'bg-blue-500/20 text-blue-300'
                                                 }`}>
@@ -559,7 +589,7 @@ const ExploreMode = ({ isRecruiterMode }) => {
 
                             <button
                                 onClick={() => setSelectedProject(null)}
-                                className="mt-8 mx-auto block px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                                className="btn-primary touch-target mt-6 sm:mt-8 mx-auto block"
                             >
                                 Close
                             </button>
@@ -572,7 +602,7 @@ const ExploreMode = ({ isRecruiterMode }) => {
             <AnimatePresence>
                 {selectedExperience && (
                     <motion.div
-                        className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[60] p-4"
+                        className="modal-overlay"
                         variants={modalVariants}
                         initial="hidden"
                         animate="visible"
@@ -580,31 +610,32 @@ const ExploreMode = ({ isRecruiterMode }) => {
                         onClick={() => setSelectedExperience(null)}
                     >
                         <motion.div
-                            className="bg-gray-900/95 backdrop-blur-md rounded-xl p-8 border border-white/20 max-w-4xl max-h-[90vh] overflow-y-auto w-full"
+                            className="modal-content"
                             onClick={(e) => e.stopPropagation()}
                         >
-                            <div className="flex items-start gap-4 mb-6">
-                                <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex items-center justify-center flex-shrink-0">
-                                    <span className="text-white font-bold text-xl">
+                            {/* Experience Header - Responsive */}
+                            <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-4 mb-4 sm:mb-6">
+                                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex items-center justify-center flex-shrink-0 mx-auto sm:mx-0">
+                                    <span className="text-white font-bold text-lg sm:text-xl">
                                         {selectedExperience.company.charAt(0)}
                                     </span>
                                 </div>
-                                <div className="flex-1">
-                                    <h2 className="text-3xl font-playfair text-white mb-2">{selectedExperience.position}</h2>
-                                    <p className="text-blue-200 font-medium text-lg">{selectedExperience.company}</p>
-                                    <div className="flex items-center gap-4 text-white/70 mt-2">
-                                        <span className="flex items-center gap-1">
+                                <div className="flex-1 text-center sm:text-left">
+                                    <h2 className="text-2xl sm:text-3xl font-playfair text-white mb-1 sm:mb-2">{selectedExperience.position}</h2>
+                                    <p className="text-blue-200 font-medium text-base sm:text-lg">{selectedExperience.company}</p>
+                                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-white/70 mt-2 text-sm">
+                                        <span className="flex items-center justify-center sm:justify-start gap-1">
                                             <Calendar className="w-4 h-4" />
                                             {selectedExperience.duration}
                                         </span>
                                         {selectedExperience.location && (
-                                            <span className="flex items-center gap-1">
+                                            <span className="flex items-center justify-center sm:justify-start gap-1">
                                                 <MapPin className="w-4 h-4" />
                                                 {selectedExperience.location}
                                             </span>
                                         )}
                                         {selectedExperience.type && (
-                                            <span className={`px-3 py-1 rounded-full text-sm ${selectedExperience.type === 'Full-time' ? 'bg-green-500/20 text-green-300' :
+                                            <span className={`px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm mx-auto sm:mx-0 w-fit ${selectedExperience.type === 'Full-time' ? 'bg-green-500/20 text-green-300' :
                                                 selectedExperience.type === 'Internship' ? 'bg-blue-500/20 text-blue-300' :
                                                     'bg-purple-500/20 text-purple-300'
                                                 }`}>
@@ -615,15 +646,15 @@ const ExploreMode = ({ isRecruiterMode }) => {
                                 </div>
                             </div>
 
-                            <p className="text-white/90 leading-relaxed mb-6">{selectedExperience.description}</p>
+                            <p className="text-white/90 leading-relaxed text-sm sm:text-base mb-4 sm:mb-6">{selectedExperience.description}</p>
 
-                            {/* Responsibilities */}
+                            {/* Responsibilities - Responsive */}
                             {selectedExperience.responsibilities && (
-                                <div className="mb-6">
-                                    <h3 className="text-lg font-semibold text-blue-200 mb-3">Key Responsibilities</h3>
-                                    <ul className="space-y-2">
+                                <div className="mb-4 sm:mb-6">
+                                    <h3 className="text-base sm:text-lg font-semibold text-blue-200 mb-2 sm:mb-3">Key Responsibilities</h3>
+                                    <ul className="space-y-1 sm:space-y-2">
                                         {selectedExperience.responsibilities.map((responsibility, index) => (
-                                            <li key={index} className="flex items-start gap-3 text-white/80">
+                                            <li key={index} className="flex items-start gap-2 sm:gap-3 text-white/80 text-sm sm:text-base">
                                                 <span className="text-blue-300 mt-1 flex-shrink-0">•</span>
                                                 <span>{responsibility}</span>
                                             </li>
@@ -632,18 +663,18 @@ const ExploreMode = ({ isRecruiterMode }) => {
                                 </div>
                             )}
 
-                            {/* Technologies */}
+                            {/* Technologies - Responsive */}
                             {selectedExperience.technologies && (
-                                <div className="mb-6">
-                                    <h3 className="text-lg font-semibold text-blue-200 mb-3">Technologies Used</h3>
-                                    <div className="flex flex-wrap gap-2">
+                                <div className="mb-4 sm:mb-6">
+                                    <h3 className="text-base sm:text-lg font-semibold text-blue-200 mb-2 sm:mb-3">Technologies Used</h3>
+                                    <div className="flex flex-wrap gap-1 sm:gap-2">
                                         {selectedExperience.technologies.map((tech, index) => (
                                             <span
                                                 key={index}
-                                                className="bg-blue-500/20 text-blue-200 px-3 py-1 rounded-md flex items-center gap-2 border border-blue-500/30"
+                                                className="bg-blue-500/20 text-blue-200 px-2 sm:px-3 py-1 rounded-md flex items-center gap-1 sm:gap-2 border border-blue-500/30 text-xs sm:text-sm"
                                             >
                                                 <span>
-                                                    {tech.icon ? React.createElement(tech.icon, { size: 16 }) : <Wrench size={16} />}
+                                                    {tech.icon ? React.createElement(tech.icon, { size: 14 }) : <Wrench size={14} />}
                                                 </span>
                                                 <span>{tech.name || tech}</span>
                                             </span>
@@ -652,16 +683,16 @@ const ExploreMode = ({ isRecruiterMode }) => {
                                 </div>
                             )}
 
-                            {/* Achievements */}
+                            {/* Achievements - Responsive */}
                             {selectedExperience.achievements && selectedExperience.achievements.length > 0 && (
-                                <div className="mb-6">
-                                    <h3 className="text-lg font-semibold text-blue-200 mb-3 flex items-center gap-2">
-                                        <Award className="w-5 h-5 text-yellow-400" />
+                                <div className="mb-4 sm:mb-6">
+                                    <h3 className="text-base sm:text-lg font-semibold text-blue-200 mb-2 sm:mb-3 flex items-center justify-center sm:justify-start gap-2">
+                                        <Award className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400" />
                                         Key Achievements
                                     </h3>
-                                    <ul className="space-y-2">
+                                    <ul className="space-y-1 sm:space-y-2">
                                         {selectedExperience.achievements.map((achievement, index) => (
-                                            <li key={index} className="flex items-start gap-3 text-white/80">
+                                            <li key={index} className="flex items-start gap-2 sm:gap-3 text-white/80 text-sm sm:text-base">
                                                 <span className="text-yellow-400 mt-1 flex-shrink-0">★</span>
                                                 <span>{achievement}</span>
                                             </li>
@@ -670,20 +701,20 @@ const ExploreMode = ({ isRecruiterMode }) => {
                                 </div>
                             )}
 
-                            {/* Impact */}
+                            {/* Impact - Responsive */}
                             {selectedExperience.impact && (
-                                <div className="bg-gradient-to-r from-green-500/10 to-blue-500/10 border border-green-500/20 rounded-lg p-4 mb-6">
-                                    <div className="flex items-center gap-2 mb-2">
-                                        <TrendingUp className="w-5 h-5 text-green-400" />
-                                        <span className="font-medium text-green-300">Impact & Results</span>
+                                <div className="bg-gradient-to-r from-green-500/10 to-blue-500/10 border border-green-500/20 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
+                                    <div className="flex items-center justify-center sm:justify-start gap-2 mb-2">
+                                        <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 text-green-400" />
+                                        <span className="font-medium text-green-300 text-sm sm:text-base">Impact & Results</span>
                                     </div>
-                                    <p className="text-white/80">{selectedExperience.impact}</p>
+                                    <p className="text-white/80 text-sm sm:text-base text-center sm:text-left">{selectedExperience.impact}</p>
                                 </div>
                             )}
 
                             <button
                                 onClick={() => setSelectedExperience(null)}
-                                className="mt-8 mx-auto block px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                                className="btn-primary touch-target mt-6 sm:mt-8 mx-auto block"
                             >
                                 Close
                             </button>
