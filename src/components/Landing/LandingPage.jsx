@@ -95,16 +95,16 @@ const LandingPage = ({ isRecruiterMode, setIsRecruiterMode }) => {
         ))}
       </div>
 
-      {/* Mobile/Desktop Top Navigation */}
+      {/* Mobile/Desktop Top Navigation - Updated for better mobile layout */}
       <motion.div
-        className="absolute top-4 sm:top-6 lg:top-8 right-4 sm:right-6 lg:right-8 flex flex-col sm:flex-row items-end sm:items-center gap-2 sm:gap-4 z-20"
+        className="absolute top-4 sm:top-6 lg:top-8 right-4 sm:right-6 lg:right-8 flex flex-row items-center gap-2 sm:gap-4 z-20"
         initial={{ y: -50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 1, duration: 0.8 }}
       >
         <motion.button
           onClick={handleRecruiterMode}
-          className="px-3 sm:px-4 lg:px-6 py-2 text-sm sm:text-base rounded-full backdrop-blur-md border bg-glassmorphism-bg text-primary-silver border-glassmorphism-border font-medium transition-all duration-300 hover:scale-105 hover:bg-gradient-accent hover:text-white"
+          className="px-2 sm:px-4 lg:px-6 py-2 text-xs sm:text-base rounded-full backdrop-blur-md border bg-glassmorphism-bg text-primary-silver border-glassmorphism-border font-medium transition-all duration-300 hover:scale-105 hover:bg-gradient-accent hover:text-white"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
@@ -114,7 +114,7 @@ const LandingPage = ({ isRecruiterMode, setIsRecruiterMode }) => {
 
         <motion.button
           onClick={handleResumeDownload}
-          className="px-3 sm:px-4 lg:px-6 py-2 text-sm sm:text-base rounded-full bg-glassmorphism-bg backdrop-blur-md border border-glassmorphism-border text-primary-silver font-medium transition-all duration-300 hover:scale-105 hover:bg-gradient-accent"
+          className="px-2 sm:px-4 lg:px-6 py-2 text-xs sm:text-base rounded-full bg-glassmorphism-bg backdrop-blur-md border border-glassmorphism-border text-primary-silver font-medium transition-all duration-300 hover:scale-105 hover:bg-gradient-accent"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
@@ -123,8 +123,8 @@ const LandingPage = ({ isRecruiterMode, setIsRecruiterMode }) => {
         </motion.button>
       </motion.div>
 
-      {/* Main Content - Mobile First */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center z-10 px-4 sm:px-6 lg:px-8">
+      {/* Main Content - Mobile First - Updated to avoid overlap */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center z-10 px-4 sm:px-6 lg:px-8 pt-20 sm:pt-16">
         {/* Hero Section */}
         <motion.div
           className="text-center mb-8 sm:mb-10 lg:mb-12"

@@ -57,7 +57,7 @@ const App = () => {
     <ErrorBoundary>
       <ThemeProvider>
         <PortfolioProvider>
-          <Router>
+          <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
             <div className={`app-container ${isRecruiterMode ? 'recruiter-mode' : ''}`}>
               <AnimatePresence mode="wait">
                 <Routes>
