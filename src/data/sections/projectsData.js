@@ -116,7 +116,7 @@ export const projectsData = [
     title: "Sathi Sahyogi",
     description: "Volunteer coordination platform for disaster relief and community service.",
     longDescription: "Built a web app to connect volunteers with NGOs and communities during crises. Features real-time task allocation, role-based access, and resource tracking, ensuring efficient collaboration.",
-    image: "/images/projects/SathiSahyogi_landing.jpg",
+    image: "/images/projects/SathiSahyogi_landing.png",
     githubUrl: "https://github.com/viditkulsh/SathiSahyogi",
     liveUrl: "#",
     showLiveDemo: false, // Control whether to show live demo link
