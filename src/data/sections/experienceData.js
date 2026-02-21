@@ -1,8 +1,42 @@
 // Experience Data - All work experience and professional background
-import { FileText, Palette, FileCode, Wrench, Search, Link, Shield, BookOpen, Settings, Radio, FileText as Contract } from 'lucide-react';
+import { FileText, Palette, FileCode, Wrench, Search, Link, Shield, BookOpen, Settings, Radio, FileText as Contract, Layers, Database, Lock } from 'lucide-react';
 export const experienceData = [
   {
     id: 1,
+    company: "AGP Webpulse LLC",
+    position: "Assistant Manager - IT Web3",
+    duration: "Dec 2025 – Present",
+    location: "UAE (Remote)",
+    type: "Full-time",
+    companyLogo: "/images/companies/agp.png",
+    description: "Leading blockchain development for a regulated RWA tokenization platform, architecting secure infrastructure for equity tokenization while collaborating with cross-functional teams across multiple domains.",
+    responsibilities: [
+      "Architecting and developing full-stack blockchain solutions for RWA equity tokenization",
+      "Designing and implementing permission management systems for multi-tier admin and issuer workflows",
+      "Collaborating with legal, compliance, and business teams to ensure regulatory alignment",
+      "Conducting comprehensive research on tokenization standards and security best practices",
+      "Managing development lifecycle from requirements analysis to production deployment"
+    ],
+    technologies: [
+      { name: "Blockchain", icon: Link },
+      { name: "Smart Contracts", icon: Contract },
+      { name: "Tokenization", icon: Layers },
+      { name: "Full Stack Development", icon: FileCode },
+      { name: "Database Architecture", icon: Database },
+      { name: "Security Systems", icon: Lock }
+    ],
+    achievements: [
+      "Successfully completed comprehensive research phase for RWA tokenization platform architecture",
+      "Designed scalable permission management framework for multi-role access control",
+      "Established cross-functional collaboration protocols with 5-person core team and extended company departments"
+    ],
+    skills: ["Blockchain Development", "Tokenization Architecture", "Permission Management", "Full Stack Development", "Cross-functional Collaboration", "Security Design"],
+    projectsWorked: [],
+    mentors: [],
+    impact: "Building production-grade tokenization infrastructure bridging traditional finance with blockchain technology, enabling compliant equity tokenization for real-world assets."
+  },
+  {
+    id: 2,
     company: "Adbhut Global",
     position: "Freelance Web Developer",
     duration: "Apr 2025",
@@ -33,10 +67,10 @@ export const experienceData = [
     impact: "Elevated web presence and usability for Adbhut Global with measurable engagement growth."
   },
   {
-    id: 2,
+    id: 3,
     company: "DRDO (Defence Research and Development Organization)",
     position: "Blockchain Research Intern",
-    duration: "Jan 2025 – May 2025",
+    duration: "Jan 2025 – Apr 2025",
     location: "Delhi, India",
     type: "Internship",
     companyLogo: "/images/companies/drdo.png",
@@ -61,7 +95,7 @@ export const experienceData = [
     impact: "Contributed to foundational research advancing blockchain interoperability in defense tech."
   },
   {
-    id: 3,
+    id: 4,
     company: "Astraeus Next Gen",
     position: "Blockchain Developer Intern",
     duration: "Dec 2024 – Apr 2025",

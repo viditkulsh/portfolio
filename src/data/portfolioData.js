@@ -33,12 +33,23 @@ export const portfolioData = {
 
   // About Section
   about: {
-    bio: `I recently wrapped up my BCA (Hons) at Bennett University in 2025 with a GPA of 8.78/10. Over the last few years, I’ve gone deep into algorithm design, operating systems, cryptography, distributed systems, and blockchain technologies. Along the way, I had the chance to work with DRDO and Astraeus Next Gen on blockchain interoperability protocols—turning theory into something that actually works in the real world.
-    I like building tech that matters, mixing creativity with solid problem-solving skills. Right now, I’m on the lookout for opportunities that aren’t just “a job,” but the right fit—where I can make an impact and keep learning at the same time.`,
+    introduction: "Born in Jaipur, raised in Delhi NCR. I'm someone who prefers understanding a problem deeply before jumping into solutions. My father worked as a Tech Project Manager, and growing up around conversations about how systems work at scale made technology feel familiar, not intimidating.",
+    bio: `I completed my BCA (Hons) at Bennett University in 2025 with a GPA of 8.78/10. To be honest, school wasn't my strongest phase—I was decent but not outstanding. But when I got to university, something clicked. I started actually enjoying the learning process, and my passion for computers grew naturally from there. I became more focused, my grades improved, and I found myself exploring topics outside the classroom simply because I wanted to.
+
+One area that caught my attention early was blockchain. It wasn't the hype that interested me—it was the practical side: verification, transparency, and privacy. In fintech or supply chain, these aren't just nice features; they determine whether a system gets trusted or ignored. I wanted to understand blockchain beyond surface concepts, so I pursued a research internship at DRDO, working on cross-chain interoperability. That experience taught me patience—research doesn't give you clean answers quickly. You test assumptions, revise your approach, and keep going.
+
+After that, I moved into industry roles where I learned how products are built in real teams. At Astraeus Next Gen, I worked on a Universal Registry Protocol Dashboard and wallet integrations, coordinating across teams. That's where I realized building something useful isn't just about writing code. You have to communicate clearly, align with others, and keep things moving even when requirements shift.
+
+Currently, I work as Assistant Manager IT Web3 at AGP Webpulse LLC, focusing on blockchain development for tokenization platforms. This role has shown me the gap between theory and production—real users behave differently than test environments, and performance, security, and reliability matter every single day.
+
+I'd describe myself as calm and analytical. I don't rush decisions. I prefer to understand the problem fully, think through risks, and then commit. This approach has helped me in both research and product work, especially in security-sensitive areas where small mistakes create big consequences.
+
+Right now, I'm focused on building impactful systems in fintech and management domains. I'm always open to new ideas and genuinely enthusiastic about turning those ideas into reality. Whether it's tokenization, distributed systems, or trusted infrastructure—if it solves real problems, I'm in.`,
     funFacts: [
-      "Can switch from debugging Java to debating blockchain consensus algorithms without caffeine.",
-      "Proud owner of consecutive Outstanding Academic Achievement awards.",
-      "Known to join hackathons just for the adrenaline."
+      "Can debug production blockchain bugs at 3 AM while simultaneously explaining consensus algorithms to confused teammates.",
+      "Went from average school student to 8.78 CGPA holder—proof that passion beats talent when you find what clicks.",
+      "Known to join hackathons not for prizes, but for the pure adrenaline rush of building something from scratch under pressure.",
+      "Believes the best tech conversations happen over chai, not conference rooms."
     ],
 
     timeline: [
@@ -82,6 +93,13 @@ export const portfolioData = {
         description: "Completed two internships in the blockchain domain and wrapped up my BCA (Hons) degree.",
         isHumorous: false,
         lessonLearned: "Real-world experience is the best teacher - theory builds foundation, but practice builds confidence."
+      },
+      {
+        year: "2025-Present",
+        title: "Building Tokenization Infrastructure 🪙",
+        description: "Leading blockchain development at AGP Webpulse LLC, architecting RWA tokenization platforms and managing cross-functional collaboration.",
+        isHumorous: false,
+        lessonLearned: "Production teaches what textbooks can't—user behavior, system reliability, and the importance of security at scale."
       }
     ]
   },

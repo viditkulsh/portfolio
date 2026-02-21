@@ -265,6 +265,7 @@ const StoryMode = ({ isRecruiterMode }) => {
           className="flex items-center justify-center w-12 h-12 bg-white/10 backdrop-blur-md rounded-full border border-white/20 text-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 hover:bg-white/20"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
+          aria-label="Previous story section"
         >
           <span className="text-xl">⬅️</span>
         </motion.button>
@@ -294,6 +295,7 @@ const StoryMode = ({ isRecruiterMode }) => {
           className="flex items-center justify-center w-12 h-12 bg-white/10 backdrop-blur-md rounded-full border border-white/20 text-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 hover:bg-white/20"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
+          aria-label="Next story section"
         >
           <span className="text-xl">➡️</span>
         </motion.button>
