@@ -133,36 +133,49 @@ const AIAssistant = ({ isRecruiterMode = false }) => {
       const response = await fetch('/api/ai', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          message: userInput,
-          history: history
-        })
+        body: JSON.stringify({ message: userInput, history })
       });
 
-      const data = await response.json();
+      // Read as text first — a local-dev 404 returns HTML, not JSON
+      const rawText = await response.text();
+      let data;
+      try {
+        data = JSON.parse(rawText);
+      } catch {
+        // Not JSON → API endpoint doesn't exist locally (expected without `vercel dev`)
+        // Fall through to keyword fallbacks silently
+        return getFallback(userInput, fallbackResponses);
+      }
 
       if (response.ok && data.response) {
         return data.response;
       }
 
       if (response.status === 429) {
-        throw new Error(data.error || 'Rate limited');
+        setError(data.error || 'Too many messages — give me a moment.');
+        return getFallback(userInput, fallbackResponses);
       }
 
-      throw new Error(data.error || 'Server error');
-    } catch (err) {
-      console.error('Gemini API error:', err);
+      // Any other server error — show banner, use fallback
       setError('Brain hiccuped — using backup memory instead.');
+      return getFallback(userInput, fallbackResponses);
 
-      const input = userInput.toLowerCase();
-      if (input.includes('project') || input.includes('built') || input.includes('portfolio')) return fallbackResponses.projects;
-      if (input.includes('skill') || input.includes('tech') || input.includes('stack')) return fallbackResponses.skills;
-      if (input.includes('experience') || input.includes('work') || input.includes('job') || input.includes('role')) return fallbackResponses.experience;
-      if (input.includes('about') || input.includes('who') || input.includes('background') || input.includes('journey')) return fallbackResponses.about;
-      if (input.includes('blockchain') || input.includes('web3') || input.includes('solidity') || input.includes('crypto')) return fallbackResponses.blockchain;
-      if (input.includes('ambition') || input.includes('future') || input.includes('goal') || input.includes('direction') || input.includes('founder')) return fallbackResponses.ambition;
-      return fallbackResponses.default;
+    } catch (err) {
+      // Network-level failure (offline, CORS, etc.)
+      setError('No connection — using backup memory instead.');
+      return getFallback(userInput, fallbackResponses);
     }
+  };
+
+  const getFallback = (userInput, fallbackResponses) => {
+    const input = userInput.toLowerCase();
+    if (input.includes('project') || input.includes('built') || input.includes('portfolio')) return fallbackResponses.projects;
+    if (input.includes('skill') || input.includes('tech') || input.includes('stack')) return fallbackResponses.skills;
+    if (input.includes('experience') || input.includes('work') || input.includes('job') || input.includes('role')) return fallbackResponses.experience;
+    if (input.includes('about') || input.includes('who') || input.includes('background') || input.includes('journey')) return fallbackResponses.about;
+    if (input.includes('blockchain') || input.includes('web3') || input.includes('solidity') || input.includes('crypto')) return fallbackResponses.blockchain;
+    if (input.includes('ambition') || input.includes('future') || input.includes('goal') || input.includes('direction') || input.includes('founder')) return fallbackResponses.ambition;
+    return fallbackResponses.default;
   };
 
   const sendMessage = async (text) => {
