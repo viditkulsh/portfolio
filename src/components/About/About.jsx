@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Trophy } from 'lucide-react';
 import { usePortfolio } from '../../context/PortfolioContext';
+import HorizontalWavyTimeline from './HorizontalWavyTimeline';
 
 const About = () => {
   const { portfolioData } = usePortfolio();
@@ -139,6 +140,16 @@ const About = () => {
             </div>
           </motion.div>
         </div>
+
+        {/* ── Wavy Timeline Section ── */}
+        {portfolioData.about.timeline && portfolioData.about.timeline.length > 0 && (
+          <motion.div
+            className="mt-20"
+            variants={itemVariants}
+          >
+            <HorizontalWavyTimeline timelineItems={portfolioData.about.timeline} />
+          </motion.div>
+        )}
 
         {/* Education Section */}
         <motion.div 

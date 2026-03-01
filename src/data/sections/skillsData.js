@@ -1,4 +1,4 @@
-// Skills Data - All skills and technologies information
+// Skills Data - Redesigned: tier-based + domain-based, no percentages
 import {
   Code,
   Database,
@@ -10,283 +10,188 @@ import {
   Terminal,
   Server,
   GitBranch,
-  Key,
   Lock,
-  Brain,
-  Users,
-  Target,
-  Repeat,
-  Palette,
   Cpu,
   Cloud,
   Container,
   FileCode,
-  Puzzle
+  Network,
+  BarChart2,
+  Settings
 } from 'lucide-react';
 
 export const skillsData = {
-  categories: [
+  // Engineering identity statement
+  identity: "Systems-focused Web3 infrastructure engineer.",
+  identityNote: "I design reliable systems with Web3 foundations — not just a collection of tools.",
+
+  // Tier-based expertise: shows maturity, not self-scored percentages
+  tiers: [
     {
-      name: "Technical Skills",
+      name: "Core Expertise",
+      description: "Production-grade, deeply applied",
       color: "#0F766E",
-      position: { x: 0, y: 2, z: 0 },
+      accent: "teal",
       skills: [
-        { 
-          name: "JavaScript (ES6+)",
-          level: 90,
-          icon: Code,
-          projects: ["BurgerHut", "AdbhutGlobal", "Note-e-Movie", "ImageCarousel"],
-          category: "Programming Languages"
-        },
-        {
-          name: "TypeScript",
-          level: 88,
-          icon: FileCode,
-          projects: ["HemoChain", "idittrack", "Mood_Dapp_myFirstDapp"],
-          category: "Programming Languages"
-        },
-        {
-          name: "Java",
-          level: 90,
-          icon: Coffee,
-          projects: ["GraphCrafters", "Aventura-De-Texto"],
-          category: "Programming Languages"
-        },
-        {
-          name: "C++",
-          level: 80,
-          icon: Terminal,
-          projects: ["GraphCrafters"],
-          category: "Programming Languages"
-        },
-        {
-          name: "Python",
-          level: 82,
-          icon: Code,
-          projects: ["SpellChecker", "GraphCrafters"],
-          category: "Programming Languages"
-        },
-        {
-          name: "Solidity",
-          level: 85,
-          icon: Shield,
-          projects: ["HemoChain", "Mood_Dapp_myFirstDapp"],
-          category: "Programming Languages"
-        },
-        { 
-          name: "React.js", 
-          level: 88,
-          icon: Zap,
-          projects: ["BurgerHut", "AdbhutGlobal", "Note-e-Movie"],
-          category: "Frontend Frameworks"
-        },
-        {
-          name: "Tailwind CSS",
-          level: 85,
-          icon: Palette,
-          projects: ["BurgerHut", "AdbhutGlobal", "Note-e-Movie"],
-          category: "Frontend Frameworks"
-        },
-        { 
-          name: "Node.js", 
-          level: 85,
-          icon: Server,
-          projects: ["BurgerHut", "AdbhutGlobal", "idittrack"],
-          category: "Backend Technologies"
-        },
-        {
-          name: "NestJS",
-          level: 78,
-          icon: Shield,
-          projects: ["idittrack"],
-          category: "Backend Technologies"
-        },
-        { 
-          name: "Express.js", 
-          level: 82,
-          icon: Layers,
-          projects: ["BurgerHut", "AdbhutGlobal", "idittrack"],
-          category: "Backend Frameworks"
-        },
-        {
-          name: "PostgreSQL",
-          level: 80,
-          icon: Database,
-          projects: ["idittrack"],
-          category: "Databases"
-        },
-        {
-          name: "MySQL",
-          level: 82,
-          icon: Database,
-          projects: ["GraphCrafters"],
-          category: "Databases"
-        },
-        { 
-          name: "MongoDB", 
-          level: 80,
-          icon: Database,
-          projects: ["BurgerHut", "AdbhutGlobal", "idittrack"],
-          category: "Databases"
-        },
-        {
-          name: "Firebase",
-          level: 78,
-          icon: Zap,
-          projects: ["ImageCarousel", "idittrack"],
-          category: "Databases"
-        },
-        {
-          name: "Supabase",
-          level: 75,
-          icon: Cloud,
-          projects: ["idittrack"],
-          category: "Databases"
-        },
-        { 
-          name: "Docker",
-          level: 78,
-          icon: Container,
-          projects: ["HemoChain", "idittrack"],
-          category: "DevOps & Cloud"
-        },
-        { 
-          name: "Git/GitHub", 
-          level: 92,
-          icon: GitBranch,
-          projects: ["All Projects"],
-          category: "Development Tools"
-        },
-        { 
-          name: "REST APIs", 
-          level: 88,
-          icon: Globe,
-          projects: ["BurgerHut", "AdbhutGlobal", "idittrack"],
-          category: "API Development"
-        },
-        {
-          name: "JWT Auth",
-          level: 80,
-          icon: Key,
-          projects: ["idittrack", "HemoChain"],
-          category: "Security"
-        }
+        "Java",
+        "TypeScript",
+        "Solidity",
+        "System Design",
+        "Blockchain Architecture",
+        "Cryptography",
+        "Distributed Systems"
       ]
     },
     {
-      name: "Specialized Skills",
-      color: "#5B2C6F",
-      position: { x: -3, y: 0, z: 1 },
+      name: "Strong Working Knowledge",
+      description: "Built real systems with these",
+      color: "#7C3AED",
+      accent: "purple",
       skills: [
-        { 
-          name: "Blockchain Development", 
-          level: 88, 
-          icon: Layers,
-          projects: ["HemoChain", "Mood_Dapp_myFirstDapp"],
-          category: "Blockchain"
-        },
-        { 
-          name: "Smart Contracts", 
-          level: 85, 
-          icon: FileCode,
-          projects: ["HemoChain", "Mood_Dapp_myFirstDapp"],
-          category: "Blockchain"
-        },
-        { 
-          name: "Cryptography", 
-          level: 80, 
-          icon: Lock,
-          projects: ["HemoChain"],
-          category: "Security"
-        },
-        { 
-          name: "Distributed Systems", 
-          level: 82, 
-          icon: Globe,
-          projects: ["idittrack"],
-          category: "System Architecture"
-        },
-        {
-          name: "Machine Learning",
-          level: 78,
-          icon: Cpu,
-          projects: ["GraphCrafters", "SpellChecker"],
-          category: "AI/ML"
-        }
+        "React.js",
+        "Node.js",
+        "PostgreSQL",
+        "Docker",
+        "NestJS",
+        "Express.js",
+        "Git",
+        "Authentication & Authorization"
       ]
     },
     {
-      name: "Soft Skills",
-      color: "#312E81",
-      position: { x: 3, y: -1, z: -1 },
+      name: "Familiar / Applied",
+      description: "Applied in projects, actively growing",
+      color: "#1D4ED8",
+      accent: "blue",
       skills: [
-        { 
-          name: "Problem-solving", 
-          level: 92, 
-          icon: Puzzle,
-          projects: ["All Projects"],
-          category: "Analytical Skills"
-        },
-        { 
-          name: "Collaboration", 
-          level: 88, 
-          icon: Users,
-          projects: ["Team Projects", "Research Collaborations"],
-          category: "Interpersonal Skills"
-        },
-        { 
-          name: "Leadership", 
-          level: 85, 
-          icon: Target,
-          projects: ["Hackathons", "Capstone Research"],
-          category: "Interpersonal Skills"
-        },
-        {
-          name: "Technical Communication",
-          level: 85,
-          icon: FileCode,
-          projects: ["Documentation", "Research Papers"],
-          category: "Communication Skills"
-        },
-        { 
-          name: "Adaptability", 
-          level: 87, 
-          icon: Repeat,
-          projects: ["Learning New Tech", "Multi-Stack Projects"],
-          category: "Personal Skills"
-        },
-        { 
-          name: "Critical Thinking",
-          level: 88,
-          icon: Brain,
-          projects: ["Blockchain Interoperability Research"],
-          category: "Analytical Skills"
-        }
+        "Machine Learning",
+        "AWS Fundamentals",
+        "CI/CD Pipelines",
+        "Python ML Ecosystem",
+        "C++",
+        "MongoDB",
+        "Firebase"
       ]
     }
-  ]
+  ],
+
+  // Domain-based view: tells a story about what you build
+  domains: [
+    {
+      name: "Smart Contract Engineering",
+      icon: Shield,
+      color: "#7C3AED",
+      description: "Production Solidity on EVM chains",
+      skills: [
+        { name: "Solidity", note: "Smart contract architecture" },
+        { name: "ERC Standards", note: "ERC-20, ERC-721, ERC-1155" },
+        { name: "Gas Optimization", note: "Reduce transaction costs" },
+        { name: "Security Patterns", note: "Reentrancy, overflow, access control" },
+        { name: "Wallet Integration", note: "MetaMask, WalletConnect" },
+        { name: "On-chain / Off-chain Design", note: "" },
+        { name: "DeFi Protocol Fundamentals", note: "" }
+      ]
+    },
+    {
+      name: "Backend Systems",
+      icon: Server,
+      color: "#0F766E",
+      description: "APIs, services, and data layers",
+      skills: [
+        { name: "Node.js + NestJS", note: "" },
+        { name: "Java", note: "GraphCrafters, Aventura-De-Texto" },
+        { name: "Express.js", note: "" },
+        { name: "Auth Systems", note: "JWT, OAuth, Role-based access" },
+        { name: "Databases", note: "PostgreSQL · MySQL · MongoDB · Firebase · Supabase" }
+      ]
+    },
+    {
+      name: "Systems & Architecture",
+      icon: Network,
+      color: "#0369A1",
+      description: "Design for scale and reliability",
+      skills: [
+        { name: "Distributed System Design", note: "" },
+        { name: "Microservices Architecture", note: "" },
+        { name: "Event-driven Systems", note: "" },
+        { name: "API Gateway Patterns", note: "" },
+        { name: "CAP Theorem", note: "Consistency, availability tradeoffs" },
+        { name: "Consensus Mechanisms", note: "PoS, PoW fundamentals" },
+        { name: "Load Balancing Fundamentals", note: "" }
+      ]
+    },
+    {
+      name: "DevOps & Infrastructure",
+      icon: Container,
+      color: "#065F46",
+      description: "Ship and operate with confidence",
+      skills: [
+        { name: "Docker & Containerization", note: "" },
+        { name: "CI/CD Pipelines", note: "" },
+        { name: "AWS Fundamentals", note: "EC2, S3, IAM" },
+        { name: "Environment Config Management", note: "" },
+        { name: "Logging & Monitoring", note: "" }
+      ]
+    },
+    {
+      name: "Languages & Frontend",
+      icon: Code,
+      color: "#B45309",
+      description: "From type-safe backends to reactive UIs",
+      skills: [
+        { name: "TypeScript", note: "" },
+        { name: "JavaScript (ES6+)", note: "" },
+        { name: "Java", note: "" },
+        { name: "Python", note: "" },
+        { name: "C++", note: "" },
+        { name: "React.js", note: "" },
+        { name: "Tailwind CSS", note: "" }
+      ]
+    },
+    {
+      name: "AI / Data Foundations",
+      icon: Cpu,
+      color: "#9D174D",
+      description: "Theory and tooling for ML-adjacent work",
+      skills: [
+        { name: "Supervised Learning Basics", note: "" },
+        { name: "Model Evaluation Metrics", note: "" },
+        { name: "Feature Engineering", note: "" },
+        { name: "Data Preprocessing", note: "" },
+        { name: "Python ML Ecosystem", note: "NumPy, Pandas, scikit-learn" }
+      ]
+    }
+  ],
+
+  // Legacy categories field kept for backward compatibility with other components
+  // (maps to domains for any code that reads skillsData.categories)
+  get categories() {
+    return this.domains.map(domain => ({
+      name: domain.name,
+      color: domain.color,
+      skills: domain.skills.map(s => ({
+        name: typeof s === 'string' ? s : s.name,
+        icon: domain.icon,
+        projects: []
+      }))
+    }));
+  }
 };
 
-// Utility functions for skills data
-export const getSkillsByCategory = (categoryName) => {
-  const category = skillsData.categories.find(cat => cat.name === categoryName);
-  return category ? category.skills : [];
-};
-
+// Utility functions
 export const getAllSkills = () => {
-  return skillsData.categories.flatMap(category => category.skills);
+  return skillsData.domains.flatMap(domain =>
+    domain.skills.map(s => (typeof s === 'string' ? s : s.name))
+  );
 };
 
-export const getSkillByName = (skillName) => {
-  const allSkills = getAllSkills();
-  return allSkills.find(skill => skill.name.toLowerCase() === skillName.toLowerCase());
+export const getSkillsByTier = (tierName) => {
+  const tier = skillsData.tiers.find(t => t.name === tierName);
+  return tier ? tier.skills : [];
 };
 
 export const getTopSkills = (count = 5) => {
-  const allSkills = getAllSkills();
-  return allSkills
-    .sort((a, b) => b.level - a.level)
-    .slice(0, count);
+  return skillsData.tiers[0].skills.slice(0, count);
 };
 
 export default skillsData;

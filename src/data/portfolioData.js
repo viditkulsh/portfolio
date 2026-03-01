@@ -323,27 +323,15 @@ Right now, I'm focused on building impactful systems in fintech and management d
       trophy: { type: "none", position: { x: 0, y: 0, z: 0 } }
     },
     {
-      id: 16,
-      title: "The Science of Well-Being",
-      issuer: "Yale University",
-      date: "December 4, 2024",
-      credentialId: "MPXPMFILITCQ",
-      skills: ["Well-being", "Happiness", "Positive Psychology"],
-      image: "/images/certificates/coursera-science-of-well-being.jpg",
-      verificationUrl: "https://coursera.org/verify/MPXPMFILITCQ",
-      icon: "😊",
-      trophy: { type: "none", position: { x: 0, y: 0, z: 0 } }
-    },
-    {
       id: 17,
-      title: "Introduction to Classical Music",
-      issuer: "Yale University",
+      title: "Project Management: The Basics for Success",
+      issuer: "University of California, Irvine",
       date: "December 8, 2024",
       credentialId: "0DT3VCWKTZ59",
-      skills: ["Classical Music"],
-      image: "/images/certificates/coursera-classical-music.jpg",
-      verificationUrl: "https://coursera.org/verify/0DT3VCWKTZ59",
-      icon: "🎼",
+      skills: ["Project Management", "Leadership", "Team Management"],
+      image: "/images/certificates/coursera-project-management.jpg",
+      verificationUrl: "https://www.coursera.org/account/accomplishments/verify/0DT3VCWKTZ59",
+      icon: "📊",
       trophy: { type: "none", position: { x: 0, y: 0, z: 0 } }
     },
     {
@@ -354,7 +342,7 @@ Right now, I'm focused on building impactful systems in fintech and management d
       credentialId: "DJ2EA5O0DKSX",
       skills: ["Branding", "Personal Development", "Social Media Strategy"],
       image: "/images/certificates/coursera-personal-branding-uva.jpg",
-      verificationUrl: "https://coursera.org/verify/DJ2EA5O0DKSX",
+      verificationUrl: "https://www.coursera.org/account/accomplishments/verify/DJ2EA5O0DKSX",
       icon: "🧑‍💼",
       trophy: { type: "none", position: { x: 0, y: 0, z: 0 } }
     },
@@ -445,12 +433,6 @@ Right now, I'm focused on building impactful systems in fintech and management d
       relevantProjects: [1, 2],
       relevantExperience: [1]
     }
-  },
-
-  // AI Assistant Personality
-  aiAssistant: {
-    name: "VidiAI",
-    personality: "professional, knowledgeable, slightly enthusiastic about blockchain"
   },
 
   // Site Configuration

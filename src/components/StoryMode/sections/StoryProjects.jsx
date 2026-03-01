@@ -1,217 +1,102 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePortfolio } from '../../../context/PortfolioContext';
-import { ExternalLink, Github, Eye, Rocket } from 'lucide-react';
+import { ExternalLink, Github, X, Rocket, Star, GitFork, Clock } from 'lucide-react';
+import { getGitHubStats } from '../../../hooks/useGitHubData';
 
 const StoryProjects = () => {
   const { portfolioData } = usePortfolio();
-  const [selectedProject, setSelectedProject] = useState(null);
-  const featuredProjects = portfolioData.projects.filter(project => project.featured);
-
-  const modalVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: { opacity: 1, scale: 1 },
-    exit: { opacity: 0, scale: 0.8 }
-  };
+  const [selected, setSelected] = useState(null);
+  const featured = portfolioData.projects.filter(p => p.featured);
 
   return (
-    <motion.div
-      className="story-projects min-h-screen flex items-center justify-center py-12"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.8 }}
-    >
-      <div className="text-center max-w-7xl mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-        >
-          <h2 className="heading-lg text-gradient mb-4">Featured Projects</h2>
-          <p className="text-xl text-primary-text/80 mb-12">
-            Bringing ideas to life through code and innovation...
-          </p>
-        </motion.div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {featuredProjects.map((project, index) => (
-            <motion.div
-              key={project.id}
-              className="card hover:card-neon cursor-pointer group"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 + index * 0.1 }}
-              onClick={() => setSelectedProject(project)}
-              whileHover={{ scale: 1.02, y: -5 }}
-            >
-              {/* Project Image/Icon */}
-              <div className="w-full h-48 bg-gradient-to-br from-primary-purple/20 to-primary-cyan/20 rounded-lg mb-4 flex items-center justify-center relative overflow-hidden">
-                {project.image ? (
-                  <img 
-                    src={project.image} 
-                    alt={project.title}
-                    className="w-full h-full object-cover"
-                  />
-                ) : (
-                    <div className="text-6xl opacity-50">{project.icon ? React.createElement(project.icon, { size: 48 }) : <Rocket size={48} />}</div>
-                )}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="absolute bottom-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <Eye className="w-5 h-5 text-white" />
-                </div>
-              </div>
-
-              {/* Project Info */}
-              <div className="text-left">
-                <h3 className="text-xl font-semibold text-primary-text mb-2">{project.title}</h3>
-                <p className="text-primary-text/70 text-sm mb-4 line-clamp-2">{project.description}</p>
-                
-                {/* Technologies */}
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.technologies.slice(0, 3).map((tech, techIndex) => (
-                    <span
-                      key={techIndex}
-                      className="text-xs bg-primary-purple/20 text-primary-cyan px-2 py-1 rounded-md flex items-center gap-1"
-                    >
-                      <span>
-                        {React.createElement(tech.icon, {
-                          size: 14,
-                          className: "text-primary-cyan"
-                        })}
-                      </span>
-                      <span>{tech.name}</span>
-                    </span>
-                  ))}
-                  {project.technologies.length > 3 && (
-                    <span className="text-xs text-primary-text/60">+{project.technologies.length - 3} more</span>
-                  )}
-                </div>
-
-                {/* Status */}
-                <div className="flex items-center justify-between">
-                  <span className={`text-xs px-2 py-1 rounded-full ${
-                    project.status === 'Completed' ? 'bg-green-500/20 text-green-300' :
-                    project.status === 'In Progress' ? 'bg-yellow-500/20 text-yellow-300' :
-                    'bg-blue-500/20 text-blue-300'
-                  }`}>
-                    {project.status}
-                  </span>
-                  <span className="text-xs text-primary-text/60">{project.year}</span>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Project Detail Modal */}
-        <AnimatePresence>
-          {selectedProject && (
-            <motion.div
-              className="modal-overlay"
-              variants={modalVariants}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-              onClick={() => setSelectedProject(null)}
-            >
-              <motion.div
-                className="modal-content max-w-4xl max-h-[90vh] overflow-y-auto"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <div className="flex flex-col lg:flex-row gap-8">
-                  {/* Project Image */}
-                  <div className="lg:w-1/2">
-                    <div className="w-full h-64 bg-gradient-to-br from-primary-purple/20 to-primary-cyan/20 rounded-lg flex items-center justify-center">
-                      {selectedProject.image ? (
-                        <img 
-                          src={selectedProject.image} 
-                          alt={selectedProject.title}
-                          className="w-full h-full object-cover rounded-lg"
-                        />
-                      ) : (
-                          <div className="text-8xl opacity-50">{selectedProject.icon ? React.createElement(selectedProject.icon, { size: 64 }) : <Rocket size={64} />}</div>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Project Details */}
-                  <div className="lg:w-1/2">
-                    <h2 className="heading-sm mb-4">{selectedProject.title}</h2>
-                    <p className="text-primary-text leading-relaxed mb-6">{selectedProject.description}</p>
-                    
-                    {/* Technologies */}
-                    <div className="mb-6">
-                      <h3 className="text-lg font-semibold text-primary-text mb-3">Technologies Used</h3>
-                      <div className="flex flex-wrap gap-2">
-                        {selectedProject.technologies.map((tech, index) => (
-                          <span
-                            key={index}
-                            className="bg-primary-purple/20 text-primary-cyan px-3 py-1 rounded-md flex items-center gap-2"
-                          >
-                            <span>
-                              {React.createElement(tech.icon, {
-                                size: 16,
-                                className: "text-primary-cyan"
-                              })}
-                            </span>
-                            <span>{tech.name}</span>
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Project Links */}
-                    <div className="flex gap-4 mb-6">
-                      {selectedProject.githubUrl && (
-                        <a
-                          href={selectedProject.githubUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="btn btn-secondary flex items-center gap-2"
-                        >
-                          <Github className="w-4 h-4" />
-                          View Code
-                        </a>
-                      )}
-                      {selectedProject.showLiveDemo && selectedProject.liveUrl && selectedProject.liveUrl !== "#" && (
-                        <a
-                          href={selectedProject.liveUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="btn btn-primary flex items-center gap-2"
-                        >
-                          <ExternalLink className="w-4 h-4" />
-                          Live Demo
-                        </a>
-                      )}
-                    </div>
-
-                    {/* Project Status and Year */}
-                    <div className="flex items-center gap-4 text-sm">
-                      <span className={`px-3 py-1 rounded-full ${
-                        selectedProject.status === 'Completed' ? 'bg-green-500/20 text-green-300' :
-                        selectedProject.status === 'In Progress' ? 'bg-yellow-500/20 text-yellow-300' :
-                        'bg-blue-500/20 text-blue-300'
-                      }`}>
-                        {selectedProject.status}
-                      </span>
-                      <span className="text-primary-text/60">Year: {selectedProject.year}</span>
-                    </div>
-                  </div>
-                </div>
-                
-                <button
-                  onClick={() => setSelectedProject(null)}
-                  className="btn btn-primary mt-8 mx-auto block"
-                >
-                  Close
-                </button>
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+    <div className="space-y-8">
+      <div className="text-center">
+        <div className="section-label mb-3">Projects</div>
+        <h2 className="heading-xl mb-2">Featured Work</h2>
+        <p className="text-ink-400">Ideas brought to life through code</p>
       </div>
-    </motion.div>
+
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        {featured.map((p, i) => (
+          <motion.div
+            key={p.id}
+            className="card-light cursor-pointer group"
+            onClick={() => setSelected(p)}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: i * 0.08 }}
+            whileHover={{ y: -4 }}
+          >
+            <div className="w-full h-36 rounded-lg mb-4 overflow-hidden bg-sand-100 flex items-center justify-center">
+              {p.image ? (
+                <img src={p.image} alt={p.title} className="w-full h-full object-cover" />
+              ) : (
+                <Rocket size={32} className="text-ink-200" />
+              )}
+            </div>
+            <h3 className="text-base font-semibold text-ink-800 mb-1">{p.title}</h3>
+            <p className="text-sm text-ink-400 line-clamp-2 mb-3">{p.description}</p>
+            <div className="flex flex-wrap gap-1.5 mb-3">
+              {p.technologies.slice(0, 3).map((t, j) => (
+                <span key={j} className="tag text-[0.65rem]">{t.name}</span>
+              ))}
+            </div>
+            {(() => {
+              const gh = getGitHubStats(p.githubUrl); return gh ? (
+                <div className="flex items-center gap-3 text-xs text-ink-400 mb-2 font-mono">
+                  <span className="flex items-center gap-1"><Star size={11} className="text-amber-400" />{gh.stars}</span>
+                  <span className="flex items-center gap-1"><GitFork size={11} />{gh.forks}</span>
+                  {gh.language && <span className="text-ink-300">{gh.language}</span>}
+                </div>
+            ) : null;
+            })()}
+            <div className="flex items-center justify-between text-xs">
+              <span className={`px-2 py-0.5 rounded-full ${p.status === 'Completed' ? 'bg-green-50 text-green-600' :
+                p.status === 'In Progress' ? 'bg-amber-50 text-amber-600' : 'bg-blue-50 text-blue-600'
+                }`}>{p.status}</span>
+              <span className="text-ink-300 font-mono">{p.year}</span>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+
+      <AnimatePresence>
+        {selected && (
+          <motion.div className="modal-overlay" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setSelected(null)}>
+            <motion.div className="modal-content max-w-3xl" initial={{ scale: 0.95 }} animate={{ scale: 1 }} exit={{ scale: 0.95 }} onClick={e => e.stopPropagation()}>
+              <button onClick={() => setSelected(null)} className="absolute top-4 right-4 text-ink-300 hover:text-ink-600"><X size={20} /></button>
+              <div className="grid lg:grid-cols-2 gap-6">
+                <div className="h-48 rounded-xl overflow-hidden bg-sand-100 flex items-center justify-center">
+                  {selected.image ? <img src={selected.image} alt={selected.title} className="w-full h-full object-cover" /> : <Rocket size={48} className="text-ink-200" />}
+                </div>
+                <div>
+                  <h3 className="heading-md mb-2">{selected.title}</h3>
+                  <p className="text-sm text-ink-500 leading-relaxed mb-4">{selected.description}</p>
+                  <div className="flex flex-wrap gap-1.5 mb-4">
+                    {selected.technologies.map((t, j) => <span key={j} className="tag">{React.createElement(t.icon, { size: 12 })} {t.name}</span>)}
+                  </div>
+                  {(() => {
+                    const gh = getGitHubStats(selected.githubUrl); return gh ? (
+                      <div className="flex items-center gap-4 text-xs text-ink-400 font-mono mb-4 border-t border-ink-100 pt-3">
+                        <span className="flex items-center gap-1"><Star size={12} className="text-amber-400" />{gh.stars} stars</span>
+                        <span className="flex items-center gap-1"><GitFork size={12} />{gh.forks} forks</span>
+                        {gh.language && <span>{gh.language}</span>}
+                        <span className="flex items-center gap-1"><Clock size={12} />{new Date(gh.pushedAt).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}</span>
+                    </div>
+                  ) : null;
+                  })()}
+                  <div className="flex gap-3">
+                    {selected.githubUrl && <a href={selected.githubUrl} target="_blank" rel="noopener noreferrer" className="btn-outline text-sm"><Github size={14} /> Code</a>}
+                    {selected.showLiveDemo && selected.liveUrl && selected.liveUrl !== '#' && <a href={selected.liveUrl} target="_blank" rel="noopener noreferrer" className="btn-primary text-sm"><ExternalLink size={14} /> Demo</a>}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   );
 };
 

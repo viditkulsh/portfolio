@@ -2,484 +2,296 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { usePortfolio } from '../../context/PortfolioContext';
-import ResumeSelector from '../../pages/ResumeSelector';
 import GlobalFooter from '../Common/GlobalFooter';
-import { GraduationCap, Microscope, Zap, Rocket, Target, Trophy, Lightbulb, Star } from 'lucide-react';
+import ResumeSelector from '../../pages/ResumeSelector';
+import {
+  ArrowLeft, Download, Mail, Briefcase, Code, GraduationCap, Award,
+  TrendingUp, ExternalLink, Github, Calendar, MapPin, Eye, Layers, Star, GitFork
+} from 'lucide-react';
+import { getGitHubStats } from '../../hooks/useGitHubData';
+
+const tabs = [
+  { id: 'overview', label: 'Overview', icon: Eye },
+  { id: 'technical', label: 'Technical', icon: Code },
+  { id: 'experience', label: 'Experience', icon: Briefcase },
+  { id: 'education', label: 'Education', icon: GraduationCap },
+  { id: 'resume', label: 'Resume', icon: Download },
+];
 
 const RecruiterMode = () => {
   const navigate = useNavigate();
   const { portfolioData } = usePortfolio();
-  const [activeSection, setActiveSection] = useState('overview');
-  // Removed unused showMetrics state variable
-  const [showResumeSelector, setShowResumeSelector] = useState(false);
+  const [activeTab, setActiveTab] = useState('overview');
 
-  // Removed unused useEffect for showMetrics
-
-  const sections = {
-    overview: 'Executive Summary',
-    technical: 'Technical Excellence',
-    research: 'Research & Innovation',
-    impact: 'Impact & Results',
-    culture: 'Cultural Fit'
-  };
-
-  const metrics = [
-    { label: 'Academic CGPA', value: '8.78/10', icon: GraduationCap, description: 'Consistent Excellence' },
-    { label: 'Professional Roles', value: '4', icon: Microscope, description: 'Leadership to Freelance' },
-    { label: 'Technical Skills', value: `${portfolioData.skills?.technical?.skills?.length || 20}+`, icon: Zap, description: 'Full Stack + Blockchain' },
-    { label: 'Projects', value: `${portfolioData.projects?.length || 11}+`, icon: Rocket, description: 'Production Ready' }
+  const stats = [
+    { label: 'CGPA', value: portfolioData.education[0]?.cgpa || 'N/A' },
+    { label: 'Projects', value: `${portfolioData.projects.length}+` },
+    { label: 'Experience', value: `${portfolioData.experience.length} roles` },
+    { label: 'Certifications', value: portfolioData.certificates.length },
   ];
 
-  const strengthsData = {
-    technical: [
-      { skill: 'Blockchain Development', level: 95, rarity: 'High Demand' },
-      { skill: 'Full Stack Development', level: 90, rarity: 'Market Ready' },
-      { skill: 'Research & Innovation', level: 88, rarity: 'Unique Asset' },
-      { skill: 'Problem Solving', level: 92, rarity: 'Core Strength' }
-    ],
-    research: [
-      'Researched on blockchain interoperability under the mentorship of great mentors at DRDO',
-      'Contributed in developing a novel consensus mechanism',
-      'Contributing to next-gen distributed systems',
-      'Exploring cutting-edge blockchain technologies'
-    ],
-    impact: [
-      'Outstanding Academic Achievement (2 consecutive semesters)',
-      'Research collaboration with defense organizations',
-      'Active contributor to blockchain technology advancement',
-      'Demonstrated leadership in technical initiatives'
-    ]
-  };
+  const renderTab = () => {
+    switch (activeTab) {
+      case 'overview':
+        return (
+          <div className="space-y-8">
+            {/* Hero card */}
+            <div className="bg-ink-800 rounded-2xl p-8 text-white">
+              <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
+                <div className="w-20 h-20 rounded-2xl bg-warm flex items-center justify-center text-white font-bold text-2xl font-display flex-shrink-0">
+                  VK
+                </div>
+                <div className="flex-1">
+                  <h2 className="text-2xl font-display font-bold mb-1">{portfolioData.personal.name}</h2>
+                  <p className="text-warm-300 font-medium mb-2">{portfolioData.personal.title}</p>
+                  <p className="text-ink-300 text-sm leading-relaxed">{portfolioData.personal.tagline}</p>
+                </div>
+                <div className="flex gap-2">
+                  <a href={`mailto:${portfolioData.personal.email}?subject=Interview%20Request`} className="px-4 py-2 rounded-lg bg-warm text-white text-sm font-medium hover:bg-warm-600 transition-colors flex items-center gap-2">
+                    <Mail size={14} /> Contact
+                  </a>
+                </div>
+              </div>
+            </div>
 
-  const handleBackToHome = () => {
-    navigate('/');
-  };
+            {/* Stats */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {stats.map((s, i) => (
+                <motion.div key={s.label} className="card-light text-center" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }}>
+                  <p className="text-2xl font-display font-bold text-ink-800">{s.value}</p>
+                  <p className="text-xs text-ink-400 font-mono uppercase tracking-wider mt-1">{s.label}</p>
+                </motion.div>
+              ))}
+            </div>
 
-  const handleDownloadResume = () => {
-    setShowResumeSelector(true);
-  };
+            {/* Key strengths */}
+            <div>
+              <h3 className="heading-sm mb-4">Key Strengths</h3>
+              <div className="grid md:grid-cols-3 gap-4">
+                {[
+                  { icon: Layers, title: 'Blockchain & Web3', desc: 'Cross-chain interoperability, smart contracts, tokenization architecture' },
+                  { icon: Code, title: 'Full Stack Development', desc: 'React, Node.js, MongoDB, modern frameworks for scalable applications' },
+                  { icon: TrendingUp, title: 'Research & Innovation', desc: 'DRDO research experience, academic publications, continuous learning' },
+                ].map((s, i) => (
+                  <motion.div key={s.title} className="card-light" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 + i * 0.1 }}>
+                    <s.icon size={20} className="text-warm-500 mb-3" />
+                    <h4 className="text-sm font-semibold text-ink-800 mb-1">{s.title}</h4>
+                    <p className="text-xs text-ink-400">{s.desc}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
 
-  const handleBackFromResume = () => {
-    setShowResumeSelector(false);
-  };
+            {/* Short intro */}
+            <div className="card-light">
+              <h3 className="heading-sm mb-3">About</h3>
+              <p className="text-sm text-ink-500 leading-relaxed">{portfolioData.about.introduction}</p>
+            </div>
+          </div>
+        );
 
-  const handleViewPortfolio = () => {
-    navigate('/');
-  };
+      case 'technical':
+        return (
+          <div className="space-y-8">
+            <h3 className="heading-md">Technical Skills</h3>
+            {portfolioData.skills.categories.map((cat) => (
+              <div key={cat.name} className="space-y-3">
+                <div className="flex items-center gap-2">
+                  <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: cat.color }} />
+                  <h4 className="text-sm font-semibold text-ink-700">{cat.name}</h4>
+                </div>
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                  {cat.skills.map((s) => (
+                    <div key={s.name} className="card-light flex items-center gap-2 !p-3">
+                      {s.icon && React.createElement(s.icon, { size: 14, className: 'text-ink-400' })}
+                      <span className="text-sm text-ink-700">{s.name}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
 
-  // Show Resume Selector if requested
-  if (showResumeSelector) {
-    return (
-      <ResumeSelector 
-        onBack={handleBackFromResume}
-        onViewPortfolio={handleViewPortfolio}
-      />
-    );
-  }
+            <div>
+              <h3 className="heading-md mb-4">Featured Projects</h3>
+              <div className="grid md:grid-cols-2 gap-4">
+                {portfolioData.projects.filter(p => p.featured).map((p) => (
+                  <div key={p.id} className="card-light">
+                    <h4 className="text-sm font-semibold text-ink-800 mb-1">{p.title}</h4>
+                    <p className="text-xs text-ink-400 mb-2">{p.description}</p>
+                    <div className="flex flex-wrap gap-1 mb-2">
+                      {p.technologies.slice(0, 4).map((t, j) => <span key={j} className="tag text-[0.6rem]">{t.name}</span>)}
+                    </div>
+                    {(() => {
+                      const gh = getGitHubStats(p.githubUrl); return gh ? (
+                        <div className="flex items-center gap-3 text-[0.6rem] text-ink-400 font-mono mb-2">
+                          <span className="flex items-center gap-0.5"><Star size={10} className="text-amber-400" />{gh.stars}</span>
+                          <span className="flex items-center gap-0.5"><GitFork size={10} />{gh.forks}</span>
+                          {gh.language && <span>{gh.language}</span>}
+                        </div>
+                      ) : null;
+                    })()}
+                    <div className="flex gap-2">
+                      {p.githubUrl && <a href={p.githubUrl} target="_blank" rel="noopener noreferrer" className="text-xs text-ink-400 hover:text-warm-500 flex items-center gap-1"><Github size={12} /> Code</a>}
+                      {p.showLiveDemo && p.liveUrl && p.liveUrl !== '#' && <a href={p.liveUrl} target="_blank" rel="noopener noreferrer" className="text-xs text-ink-400 hover:text-warm-500 flex items-center gap-1"><ExternalLink size={12} /> Demo</a>}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        );
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { duration: 0.6, staggerChildren: 0.1 }
+      case 'experience':
+        return (
+          <div className="space-y-6">
+            <h3 className="heading-md">Professional Experience</h3>
+            {portfolioData.experience.map((exp, i) => (
+              <motion.div key={exp.id} className="card-light" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }}>
+                <div className="flex items-start gap-4 mb-4">
+                  <div className="w-12 h-12 rounded-xl bg-ink-800 flex items-center justify-center text-white font-bold flex-shrink-0">{exp.company.charAt(0)}</div>
+                  <div className="flex-1">
+                    <div className="flex items-start justify-between">
+                      <div>
+                        <h4 className="font-semibold text-ink-800">{exp.position}</h4>
+                        <p className="text-sm text-warm-600">{exp.company}</p>
+                      </div>
+                      <span className={`text-xs px-2 py-0.5 rounded-full ${exp.type === 'Full-time' ? 'bg-green-50 text-green-600' : exp.type === 'Internship' ? 'bg-blue-50 text-blue-600' : 'bg-purple-50 text-purple-600'}`}>{exp.type}</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-xs text-ink-400 mt-1">
+                      <span className="flex items-center gap-1"><Calendar size={12} />{exp.duration}</span>
+                      <span className="flex items-center gap-1"><MapPin size={12} />{exp.location}</span>
+                    </div>
+                  </div>
+                </div>
+                <p className="text-sm text-ink-500 mb-3">{exp.description}</p>
+                {exp.responsibilities && (
+                  <ul className="space-y-1 mb-3">
+                    {exp.responsibilities.map((r, j) => <li key={j} className="text-xs text-ink-400 flex items-start gap-2"><span className="text-warm-500">→</span>{r}</li>)}
+                  </ul>
+                )}
+                <div className="flex flex-wrap gap-1 mb-3">
+                  {exp.technologies.map((t, j) => <span key={j} className="tag text-[0.6rem]">{t.name}</span>)}
+                </div>
+                {exp.impact && (
+                  <div className="bg-green-50 border border-green-100 rounded-lg p-3">
+                    <p className="text-xs text-green-700"><TrendingUp size={12} className="inline mr-1" /><strong>Impact:</strong> {exp.impact}</p>
+                  </div>
+                )}
+              </motion.div>
+            ))}
+          </div>
+        );
+
+      case 'education':
+        return (
+          <div className="space-y-6">
+            <h3 className="heading-md">Education</h3>
+            {portfolioData.education.map((edu) => (
+              <div key={edu.id} className="card-light">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-12 h-12 rounded-xl bg-warm-50 flex items-center justify-center text-2xl">🎓</div>
+                  <div>
+                    <h4 className="font-semibold text-ink-800">{edu.degree}</h4>
+                    <p className="text-sm text-ink-400">{edu.institution} · {edu.duration}</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 mb-4">
+                  <Award size={16} className="text-warm-500" />
+                  <span className="text-sm text-ink-600">CGPA: <strong>{edu.cgpa}</strong></span>
+                </div>
+                {edu.keyCourses && (
+                  <div className="mb-4">
+                    <p className="text-xs font-mono text-ink-300 mb-2">KEY COURSES</p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {edu.keyCourses.map((c, j) => <span key={j} className="tag text-xs">{c}</span>)}
+                    </div>
+                  </div>
+                )}
+                {edu.achievements && (
+                  <div>
+                    <p className="text-xs font-mono text-ink-300 mb-2">ACHIEVEMENTS</p>
+                    <ul className="space-y-1">
+                      {edu.achievements.map((a, j) => <li key={j} className="text-xs text-ink-500 flex items-start gap-2"><Award size={12} className="text-warm-500 mt-0.5" />{a}</li>)}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            ))}
+
+            <div>
+              <h3 className="heading-md mb-4">Certifications</h3>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
+                {portfolioData.certificates.map((cert) => (
+                  <div key={cert.id} className="card-light !p-4">
+                    <div className="flex items-start gap-2">
+                      <span className="text-lg">{cert.icon}</span>
+                      <div>
+                        <h5 className="text-xs font-semibold text-ink-800">{cert.title}</h5>
+                        <p className="text-[0.65rem] text-ink-400">{cert.issuer}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        );
+
+      case 'resume':
+        return <ResumeSelector onBack={() => setActiveTab('overview')} onViewPortfolio={() => navigate('/')} />;
+
+      default:
+        return null;
     }
   };
 
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: { y: 0, opacity: 1, transition: { duration: 0.5 } }
-  };
-
   return (
-    <motion.div
-      className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 py-12 px-4"
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-    >
-      <div className="max-w-7xl mx-auto">
-        {/* Back Button */}
-        <motion.div 
-          className="mb-8"
-          variants={itemVariants}
-        >
-          <motion.button
-            onClick={handleBackToHome}
-            className="flex items-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-md rounded-full border border-white/20 text-blue-200 hover:text-white hover:bg-white/20 transition-all duration-300"
-            whileHover={{ scale: 1.05, x: -5 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <span className="text-lg">←</span>
-            <span className="font-medium">Back to Portfolio</span>
-          </motion.button>
-        </motion.div>
-
-        {/* Header */}
-        <motion.div 
-          className="text-center mb-12"
-          variants={itemVariants}
-        >
-          <div className="inline-flex items-center gap-3 mb-4">
-            <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
-            <span className="text-green-400 font-medium">RECRUITER MODE ACTIVE</span>
-          </div>
-          <h1 className="text-5xl md:text-6xl font-dm-serif text-white mb-4">
-            {portfolioData.personal.name}
-          </h1>
-          <div className="mb-6">
-            <p className="text-lg text-blue-300 font-playfair italic">
-              "{portfolioData.personal.quote}"
-            </p>
-          </div>
-          <p className="text-xl text-blue-200 font-playfair">
-            Your Next Top-Tier Developer
-          </p>
-        </motion.div>
-
-        {/* Key Metrics Dashboard */}
-        <motion.div 
-          className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12"
-          variants={itemVariants}
-        >
-          {metrics.map((metric, index) => (
-            <motion.div
-              key={index}
-              className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 text-center"
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ delay: index * 0.1 + 0.5 }}
-              whileHover={{
-                scale: 1.05,
-                y: -5,
-                transition: { duration: 0.2, ease: "easeOut" }
-              }}
-            >
-              <div className="text-3xl mb-2">{React.createElement(metric.icon, { size: 24 })}</div>
-              <div className="text-2xl font-bold text-white mb-1">{metric.value}</div>
-              <div className="text-sm text-blue-200 font-medium mb-1">{metric.label}</div>
-              <div className="text-xs text-blue-300">{metric.description}</div>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Navigation Tabs */}
-        <motion.div 
-          className="flex flex-wrap justify-center gap-2 mb-8"
-          variants={itemVariants}
-        >
-          {Object.entries(sections).map(([key, title]) => (
-            <motion.button
-              key={key}
-              onClick={() => setActiveSection(key)}
-              className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
-                activeSection === key
-                  ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg'
-                  : 'bg-white/10 text-blue-200 hover:bg-white/20'
-              }`}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {title}
-            </motion.button>
-          ))}
-        </motion.div>
-
-        {/* Content Sections */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeSection}
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
-            transition={{ duration: 0.3 }}
-            className="bg-white/5 backdrop-blur-md rounded-2xl p-8 border border-white/10"
-          >
-            {activeSection === 'overview' && (
-              <div className="space-y-6">
-                <h2 className="text-3xl font-playfair text-white mb-6">Why Vidit is Your Ideal Candidate</h2>
-
-                {/* Current Role Highlight */}
-                <div className="bg-gradient-to-r from-purple-600/20 to-blue-600/20 border border-purple-500/30 rounded-xl p-6 mb-8">
-                  <div className="flex items-start gap-4">
-                    <div className="bg-green-500 rounded-full p-3">
-                      <Rocket className="text-white" size={24} />
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-2">
-                        <h3 className="text-2xl font-semibold text-white">Currently Leading Blockchain Innovation</h3>
-                        <span className="bg-green-500 text-white text-xs px-2 py-1 rounded-full">ACTIVE</span>
-                      </div>
-                      <p className="text-blue-200 text-lg mb-3">
-                        <strong>Assistant Manager - IT Web3</strong> at AGP Webpulse LLC (UAE, Remote) • Dec 2025 - Present
-                      </p>
-                      <ul className="space-y-2 text-white/90">
-                        <li className="flex items-start gap-2">
-                          <span className="text-green-400 mt-1">→</span>
-                          <span>Architecting production-grade <strong>RWA equity tokenization platform</strong> for regulated financial infrastructure</span>
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <span className="text-green-400 mt-1">→</span>
-                          <span>Designing <strong>complex permission management systems</strong> with multi-tier admin and issuer workflows</span>
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <span className="text-green-400 mt-1">→</span>
-                          <span>Collaborating across legal, compliance, and business teams in <strong>cross-functional environment</strong></span>
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <span className="text-green-400 mt-1">→</span>
-                          <span>Bridging traditional finance with blockchain technology in <strong>production systems</strong></span>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-8">
-                  <div>
-                    <h3 className="text-xl font-semibold text-blue-200 mb-4 flex items-center gap-2"><Target size={20} /> Perfect Fit Profile</h3>
-                    <ul className="space-y-3 text-white/90">
-                      <li className="flex items-start gap-3">
-                        <span className="text-green-400 mt-1">✓</span>
-                        <span><strong>Blockchain Leadership:</strong> Currently managing Web3 development at AGP Webpulse LLC</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <span className="text-green-400 mt-1">✓</span>
-                        <span><strong>Tokenization Expertise:</strong> Production experience in RWA equity tokenization architecture</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <span className="text-green-400 mt-1">✓</span>
-                        <span><strong>Research Foundation:</strong> DRDO collaboration in cross-chain interoperability</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <span className="text-green-400 mt-1">✓</span>
-                        <span><strong>Academic Excellence:</strong> 8.78/10 CGPA with analytical problem-solving approach</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <span className="text-green-400 mt-1">✓</span>
-                        <span><strong>Technical Breadth:</strong> Full-stack + Blockchain + Security architecture</span>
-                      </li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold text-blue-200 mb-4 flex items-center gap-2"><Rocket size={20} /> Immediate Value Add</h3>
-                    <ul className="space-y-3 text-white/90">
-                      <li className="flex items-start gap-3">
-                        <span className="text-yellow-400 mt-1"><Star size={16} /></span>
-                        <span><strong>Production-Ready:</strong> Currently building real-world tokenization systems</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <span className="text-yellow-400 mt-1"><Star size={16} /></span>
-                        <span><strong>Analytical Mindset:</strong> Calm under pressure, thinks through risks before committing</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <span className="text-yellow-400 mt-1"><Star size={16} /></span>
-                        <span><strong>Cross-Functional Leader:</strong> Proven collaboration with diverse teams</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <span className="text-yellow-400 mt-1"><Star size={16} /></span>
-                        <span><strong>Security-First:</strong> Understands that small mistakes create big consequences</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <span className="text-yellow-400 mt-1"><Star size={16} /></span>
-                        <span><strong>Fintech Focus:</strong> Passionate about building trusted, impactful systems</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {activeSection === 'technical' && (
-              <div className="space-y-6">
-                <h2 className="text-3xl font-playfair text-white mb-6">Technical Excellence</h2>
-                <div className="grid md:grid-cols-2 gap-8">
-                  <div>
-                    <h3 className="text-xl font-semibold text-blue-200 mb-4">Core Strengths</h3>
-                    {strengthsData.technical.map((item, index) => (
-                      <div key={index} className="mb-4">
-                        <div className="flex justify-between items-center mb-2">
-                          <span className="text-white font-medium">{item.skill}</span>
-                          <span className="text-sm text-blue-300">{item.rarity}</span>
-                        </div>
-                        <div className="w-full bg-gray-700 rounded-full h-2">
-                          <motion.div
-                            className="bg-gradient-to-r from-blue-500 to-purple-600 h-2 rounded-full"
-                            initial={{ width: 0 }}
-                            animate={{ width: `${item.level}%` }}
-                            transition={{ duration: 1, delay: index * 0.2 }}
-                          />
-                        </div>
-                        <div className="text-right text-sm text-blue-300 mt-1">{item.level}%</div>
-                      </div>
-                    ))}
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold text-blue-200 mb-4">Technology Stack</h3>
-                    <div className="grid grid-cols-2 gap-3">
-                      {portfolioData.skills.categories[0].skills.slice(0, 8).map((skill, index) => (
-                        <motion.div
-                          key={index}
-                          className="bg-gradient-to-r from-blue-500/20 to-purple-600/20 p-3 rounded-lg border border-blue-500/30"
-                          whileHover={{ scale: 1.05 }}
-                        >
-                          <div className="text-white font-medium text-sm">{skill.name}</div>
-                          <div className="text-blue-300 text-xs">{skill.level}% proficiency</div>
-                        </motion.div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {activeSection === 'research' && (
-              <div className="space-y-6">
-                <h2 className="text-3xl font-playfair text-white mb-6">Research & Innovation</h2>
-                <div className="space-y-6">
-                  <div className="bg-gradient-to-r from-purple-600/20 to-blue-600/20 p-6 rounded-xl border border-purple-500/30">
-                    <h3 className="text-xl font-semibold text-white mb-4">🔬 Current Research</h3>
-                    <p className="text-blue-200 mb-4">
-                      Researched on blockchain interoperability under the mentorship of great mentors at DRDO and Astraeus Next Gen
-                    </p>
-                    <ul className="space-y-2">
-                      {strengthsData.research.map((item, index) => (
-                        <li key={index} className="flex items-start gap-3 text-white/90">
-                          <span className="text-purple-400 mt-1"><Target size={16} /></span>
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div className="bg-blue-600/20 p-6 rounded-xl border border-blue-500/30">
-                      <h4 className="text-lg font-semibold text-white mb-3">Innovation Focus</h4>
-                      <p className="text-blue-200">
-                        I'm trying to push my boundaries into making something that will change the world and become a helpful tool to provide for humanity.
-                      </p>
-                    </div>
-                    <div className="bg-green-600/20 p-6 rounded-xl border border-green-500/30">
-                      <h4 className="text-lg font-semibold text-white mb-3">Real-World Impact</h4>
-                      <p className="text-green-200">
-                        Building innovative solutions focused on creating meaningful change and developing tools that serve humanity's greatest challenges.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {activeSection === 'impact' && (
-              <div className="space-y-6">
-                <h2 className="text-3xl font-playfair text-white mb-6">Impact & Results</h2>
-                <div className="grid md:grid-cols-3 gap-6">
-                  <div className="bg-gradient-to-b from-yellow-500/20 to-orange-500/20 p-6 rounded-xl border border-yellow-500/30">
-                    <h3 className="text-lg font-semibold text-white mb-3 flex items-center gap-2"><Trophy size={18} /> Academic Excellence</h3>
-                    <ul className="space-y-2 text-yellow-100">
-                      <li>• 8.78/10 CGPA</li>
-                      <li>• Consecutive Outstanding Achievement Awards</li>
-                      <li>• Top performer in advanced subjects</li>
-                    </ul>
-                  </div>
-                  <div className="bg-gradient-to-b from-blue-500/20 to-cyan-500/20 p-6 rounded-xl border border-blue-500/30">
-                    <h3 className="text-lg font-semibold text-white mb-3 flex items-center gap-2"><Rocket size={18} /> Professional Growth</h3>
-                    <ul className="space-y-2 text-blue-100">
-                      <li>• DRDO research collaboration</li>
-                      <li>• Industry-academic bridge building</li>
-                      <li>• Leadership in tech initiatives</li>
-                    </ul>
-                  </div>
-                  <div className="bg-gradient-to-b from-purple-500/20 to-pink-500/20 p-6 rounded-xl border border-purple-500/30">
-                    <h3 className="text-lg font-semibold text-white mb-3 flex items-center gap-2"><Lightbulb size={18} /> Innovation Impact</h3>
-                    <ul className="space-y-2 text-purple-100">
-                      <li>• Blockchain protocol development</li>
-                      <li>• Technical documentation</li>
-                      <li>• Knowledge sharing & mentoring</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {activeSection === 'culture' && (
-              <div className="space-y-6">
-                <h2 className="text-3xl font-playfair text-white mb-6">Cultural Fit & Personality</h2>
-                <div className="grid md:grid-cols-2 gap-8">
-                  <div>
-                    <h3 className="text-xl font-semibold text-blue-200 mb-4">🤝 Work Style</h3>
-                    <div className="space-y-4">
-                      <div className="bg-green-600/20 p-4 rounded-lg border border-green-500/30">
-                        <h4 className="text-green-200 font-medium mb-2">Collaborative</h4>
-                        <p className="text-green-100 text-sm">Proven track record in research partnerships and team projects</p>
-                      </div>
-                      <div className="bg-blue-600/20 p-4 rounded-lg border border-blue-500/30">
-                        <h4 className="text-blue-200 font-medium mb-2">Growth-Oriented</h4>
-                        <p className="text-blue-100 text-sm">Continuous learning mindset with adaptability to new technologies</p>
-                      </div>
-                      <div className="bg-purple-600/20 p-4 rounded-lg border border-purple-500/30">
-                        <h4 className="text-purple-200 font-medium mb-2">Problem Solver</h4>
-                        <p className="text-purple-100 text-sm">Research background demonstrates analytical thinking and persistence</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold text-blue-200 mb-4 flex items-center gap-2"><Target size={20} /> Fun Facts</h3>
-                    <div className="space-y-3">
-                      {portfolioData.about.funFacts.map((fact, index) => (
-                        <motion.div
-                          key={index}
-                          className="bg-gradient-to-r from-indigo-600/20 to-purple-600/20 p-4 rounded-lg border border-indigo-500/30"
-                          whileHover={{ scale: 1.02 }}
-                        >
-                          <p className="text-white/90">{fact}</p>
-                        </motion.div>
-                      ))}
-                    </div>
-                    <div className="mt-6 p-4 bg-gradient-to-r from-yellow-600/20 to-orange-600/20 rounded-lg border border-yellow-500/30">
-                      <h4 className="text-yellow-200 font-medium mb-2">Personal Quote</h4>
-                      <blockquote className="text-yellow-100 italic">"{portfolioData.personal.quote}"</blockquote>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-          </motion.div>
-        </AnimatePresence>
-
-        {/* Call to Action */}
-        <motion.div 
-          className="text-center mt-12"
-          variants={itemVariants}
-        >
-          <div className="bg-gradient-to-r from-green-600/20 to-blue-600/20 backdrop-blur-md rounded-xl p-8 border border-green-500/30">
-            <h3 className="text-2xl font-playfair text-white mb-4">Ready to Hire?</h3>
-            <p className="text-blue-200 mb-6 max-w-2xl mx-auto">
-              Vidit is ready to bring his research expertise, technical skills, and collaborative mindset to your team. 
-              Let's discuss how he can contribute to your organization's success.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <motion.button 
-                className="px-8 py-3 bg-gradient-to-r from-green-500 to-blue-600 text-white rounded-full font-medium"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => window.open('mailto:viditkulsh.work@gmail.com?subject=Interview%20Request%20–%20Vidit%20Kulshrestha&body=Hi%20Vidit%2C%0A%0AI%20viewed%20your%20portfolio%20and%20would%20like%20to%20schedule%20an%20interview.%0A%0ADetails%3A%0A', '_blank')}
-              >
-                Schedule Interview
-              </motion.button>
-              <motion.button 
-                onClick={handleDownloadResume}
-                className="px-8 py-3 border border-blue-400 text-blue-200 rounded-full font-medium hover:bg-blue-600/20"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Download Resume
-              </motion.button>
-            </div>
-          </div>
-        </motion.div>
+    <div className="min-h-screen bg-cream">
+      {/* Top bar */}
+      <div className="fixed top-0 left-0 right-0 z-40 bg-white/80 backdrop-blur-md border-b border-ink-100">
+        <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
+          <button onClick={() => navigate('/')} className="flex items-center gap-2 text-ink-400 hover:text-ink-600 transition-colors">
+            <ArrowLeft size={16} /> <span className="text-sm">Home</span>
+          </button>
+          <span className="text-sm font-display font-semibold text-ink-700">Recruiter View</span>
+          <a href={`mailto:${portfolioData.personal.email}?subject=Interview%20Request`}
+            className="text-xs px-3 py-1.5 rounded-lg bg-warm text-white hover:bg-warm-600 transition-colors flex items-center gap-1.5">
+            <Mail size={12} /> Hire
+          </a>
+        </div>
       </div>
 
-      <GlobalFooter />
-    </motion.div>
+      {/* Tab bar */}
+      <div className="fixed top-14 left-0 right-0 z-30 bg-white/80 backdrop-blur-md border-b border-ink-100">
+        <div className="max-w-6xl mx-auto px-4 flex overflow-x-auto no-scrollbar">
+          {tabs.map(t => {
+            const Icon = t.icon;
+            const active = activeTab === t.id;
+            return (
+              <button key={t.id} onClick={() => setActiveTab(t.id)}
+                className={`flex items-center gap-1.5 px-4 py-3 text-sm whitespace-nowrap border-b-2 transition-colors ${active ? 'border-warm text-warm-600 font-medium' : 'border-transparent text-ink-400 hover:text-ink-600'
+                  }`}>
+                <Icon size={14} /> {t.label}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="pt-28 pb-12 px-4">
+        <div className="max-w-6xl mx-auto">
+          <AnimatePresence mode="wait">
+            <motion.div key={activeTab} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }} transition={{ duration: 0.2 }}>
+              {renderTab()}
+            </motion.div>
+          </AnimatePresence>
+        </div>
+        <div className="max-w-6xl mx-auto mt-16">
+          <GlobalFooter />
+        </div>
+      </div>
+    </div>
   );
 };
 

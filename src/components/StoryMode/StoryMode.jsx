@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import { Home, SkipForward, ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react';
 
-// Removed unused usePortfolio import
 import StoryAbout from './sections/StoryAbout';
 import StoryEducation from './sections/StoryEducation';
 import StorySkills from './sections/StorySkills';
@@ -12,320 +12,110 @@ import StoryCertificates from './sections/StoryCertificates';
 import StoryActivities from './sections/StoryActivities';
 import StoryFinale from './sections/StoryFinale';
 
+const STEPS = [
+  { id: 'about', component: StoryAbout, label: 'About' },
+  { id: 'education', component: StoryEducation, label: 'Education' },
+  { id: 'skills', component: StorySkills, label: 'Skills' },
+  { id: 'projects', component: StoryProjects, label: 'Projects' },
+  { id: 'experience', component: StoryExperience, label: 'Experience' },
+  { id: 'certificates', component: StoryCertificates, label: 'Certificates' },
+  { id: 'activities', component: StoryActivities, label: 'Activities' },
+  { id: 'finale', component: StoryFinale, label: 'Finale' },
+];
+
+const DURATION = 25000;
+
 const StoryMode = ({ isRecruiterMode }) => {
   const navigate = useNavigate();
-  const [currentStory, setCurrentStory] = useState(0);
-  const [aiSpeaking, setAiSpeaking] = useState(false);
-  const [countdown, setCountdown] = useState(25); // Live countdown state
-  const [isPaused, setIsPaused] = useState(false);
+  const [step, setStep] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const [countdown, setCountdown] = useState(DURATION / 1000);
+  const timerRef = useRef(null);
+  const countdownRef = useRef(null);
 
-  // Memoize storySteps to prevent re-creation on every render
-  const storySteps = useMemo(() => [
-    { 
-      component: StoryAbout, 
-      title: 'About Me', 
-      description: 'Let me tell you my story...',
-      duration: 30000 // 30 seconds for dense about section
-    },
-    { 
-      component: StoryEducation, 
-      title: 'Education', 
-      description: 'My academic journey through the digital realm',
-      duration: 25000
-    },
-    { 
-      component: StorySkills, 
-      title: 'Skills', 
-      description: 'The tools and technologies in my arsenal',
-      duration: 25000
-    },
-    { 
-      component: StoryProjects, 
-      title: 'Projects', 
-      description: 'Bringing ideas to life through code',
-      duration: 35000 // 35 seconds for many projects
-    },
-    { 
-      component: StoryExperience, 
-      title: 'Experience', 
-      description: 'My professional adventures and lessons learned',
-      duration: 30000 // 30 seconds for experience details
-    },
-    { 
-      component: StoryCertificates, 
-      title: 'Certificates', 
-      description: 'Validating expertise through continuous learning',
-      duration: 25000
-    },
-    { 
-      component: StoryActivities, 
-      title: 'Activities', 
-      description: 'Beyond coding - community, creativity, and growth',
-      duration: 25000
-    },
-    { 
-      component: StoryFinale, 
-      title: 'The Finale', 
-      description: 'Now you know why I\'m the one you need',
-      duration: 30000
-    }
-  ], []); // Empty dependency array since this doesn't depend on props or state
+  const total = STEPS.length;
+  const CurrentSection = STEPS[step].component;
 
-  const CurrentStoryComponent = storySteps[currentStory]?.component;
-  const currentDurationSeconds = Math.round((storySteps[currentStory]?.duration || 25000) / 1000);
+  const next = useCallback(() => { if (step < total - 1) setStep(s => s + 1); }, [step, total]);
+  const prev = useCallback(() => { if (step > 0) setStep(s => s - 1); }, [step]);
 
-  // AI narration effect
   useEffect(() => {
-    setAiSpeaking(true);
-    const timer = setTimeout(() => setAiSpeaking(false), 3000);
-    return () => clearTimeout(timer);
-  }, [currentStory]);
-
-  // Auto-advance with pause support
-  useEffect(() => {
-    if (!isRecruiterMode && !isPaused) {
-      setCountdown(currentDurationSeconds); // Reset countdown
-      
-      const countdownInterval = setInterval(() => {
-        setCountdown(prev => {
-          if (prev <= 1) {
-            clearInterval(countdownInterval);
-            return 0;
-          }
-          return prev - 1;
-        });
-      }, 1000);
-
-      const timer = setTimeout(() => {
-        if (currentStory < storySteps.length - 1) {
-          setCurrentStory(prev => prev + 1);
-        }
-      }, storySteps[currentStory]?.duration || 25000);
-
-      return () => {
-        clearTimeout(timer);
-        clearInterval(countdownInterval);
-      };
-    }
-  }, [currentStory, isRecruiterMode, isPaused, storySteps, currentDurationSeconds]);
-
-  const handleNext = () => {
-    if (currentStory < storySteps.length - 1) {
-      setCurrentStory(prev => prev + 1);
-    } else {
-      // Story completed, navigate to finale or home
-      navigate('/');
-    }
-  };
-
-  const handlePrevious = () => {
-    if (currentStory > 0) {
-      setCurrentStory(prev => prev - 1);
-    }
-  };
-
-  const handleSkip = () => {
-    navigate('/explore');
-  };
-
-  const handleHome = () => {
-    navigate('/');
-  };
-
-  const progressPercentage = ((currentStory + 1) / storySteps.length) * 100;
+    setCountdown(DURATION / 1000);
+    if (paused || step === total - 1) return;
+    timerRef.current = setTimeout(next, DURATION);
+    countdownRef.current = setInterval(() => setCountdown(c => Math.max(0, c - 1)), 1000);
+    return () => { clearTimeout(timerRef.current); clearInterval(countdownRef.current); };
+  }, [step, paused, next, total]);
 
   return (
-    <motion.div
-      className="story-mode min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 relative overflow-hidden"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-    >
-      {/* Progress Bar */}
-      <motion.div
-        className="fixed top-0 left-0 w-full h-2 bg-gray-800/50 backdrop-blur-md z-50"
-        initial={{ scaleX: 0 }}
-        animate={{ scaleX: 1 }}
-      >
-        <motion.div
-          className="h-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"
-          initial={{ width: 0 }}
-          animate={{ width: `${progressPercentage}%` }}
-          transition={{ duration: 0.5 }}
-        />
-      </motion.div>
-
-      {/* Navigation Controls - Improved Layout */}
-      <div className="fixed top-6 left-6 right-6 flex justify-between items-center z-40">
-        {/* Left Controls */}
-        <div className="flex items-center gap-4">
-          <motion.button
-            onClick={handleHome}
-            className="flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-md rounded-full border border-white/20 text-blue-200 hover:text-white hover:bg-white/20 transition-all duration-300"
-            whileHover={{ scale: 1.05, x: -5 }}
-            whileTap={{ scale: 0.95 }}
-            aria-label="Go to home page"
-          >
-            <span className="text-lg">🏠</span>
-            <span className="font-medium hidden md:inline">Home</span>
-          </motion.button>
-          
-          <div className="bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20">
-            <span className="text-blue-200 text-sm font-medium">
-              {currentStory + 1} of {storySteps.length}
-            </span>
+    <div className="min-h-screen bg-cream">
+      {/* Top progress bar */}
+      <div className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-ink-100">
+        <div className="max-w-6xl mx-auto px-4 py-2">
+          {/* Section progress segments */}
+          <div className="flex gap-1 mb-2">
+            {STEPS.map((s, i) => (
+              <div key={s.id} className="flex-1 h-1 rounded-full bg-ink-100 overflow-hidden cursor-pointer" onClick={() => setStep(i)}>
+                <motion.div
+                  className="h-full rounded-full"
+                  style={{ background: i < step ? '#1A1A1A' : i === step ? '#F97316' : 'transparent' }}
+                  initial={{ width: i < step ? '100%' : '0%' }}
+                  animate={{ width: i < step ? '100%' : i === step ? '100%' : '0%' }}
+                  transition={{ duration: i === step ? DURATION / 1000 : 0.3, ease: 'linear' }}
+                  key={`${s.id}-${step}-${paused}`}
+                />
+              </div>
+            ))}
+          </div>
+          {/* Controls */}
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <button onClick={() => navigate('/')} className="p-1.5 rounded-lg hover:bg-ink-50 text-ink-400 transition-colors"><Home size={16} /></button>
+              <span className="text-xs font-mono text-ink-300">{step + 1}/{total}</span>
+            </div>
+            <span className="text-xs font-medium text-ink-600">{STEPS[step].label}</span>
+            <div className="flex items-center gap-2">
+              <button onClick={() => setPaused(!paused)} className="p-1.5 rounded-lg hover:bg-ink-50 text-ink-400 transition-colors">
+                {paused ? <Play size={16} /> : <Pause size={16} />}
+              </button>
+              <button onClick={prev} disabled={step === 0} className="p-1.5 rounded-lg hover:bg-ink-50 text-ink-400 disabled:opacity-30 transition-colors"><ChevronLeft size={16} /></button>
+              <button onClick={next} disabled={step === total - 1} className="p-1.5 rounded-lg hover:bg-ink-50 text-ink-400 disabled:opacity-30 transition-colors"><ChevronRight size={16} /></button>
+              <button onClick={() => navigate('/explore')} className="p-1.5 rounded-lg hover:bg-ink-50 text-ink-400 transition-colors"><SkipForward size={16} /></button>
+            </div>
           </div>
         </div>
-
-        {/* Center Title - Better positioned */}
-        <motion.div
-          className="bg-white/10 backdrop-blur-md px-6 py-3 rounded-xl border border-white/20 text-center max-w-md"
-          key={currentStory}
-          initial={{ y: -20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          <h2 className="text-lg md:text-xl font-semibold text-white mb-1">
-            {storySteps[currentStory]?.title}
-          </h2>
-          <p className="text-sm text-blue-200 hidden md:block">
-            {storySteps[currentStory]?.description}
-          </p>
-        </motion.div>
-
-        {/* Right Controls */}
-        <div className="flex items-center gap-4">
-          <motion.button
-            onClick={handleSkip}
-            className="flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-md rounded-full border border-white/20 text-blue-200 hover:text-white hover:bg-white/20 transition-all duration-300"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            aria-label="Skip story tour"
-          >
-            <span className="text-lg">⏭️</span>
-            <span className="font-medium hidden md:inline">Skip Tour</span>
-          </motion.button>
-        </div>
       </div>
 
-      {/* AI Avatar - Better positioned */}
-      <div className="fixed left-6 bottom-24 w-24 h-24 md:w-32 md:h-32 z-30">
-        <motion.div
-          className="w-full h-full bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center shadow-2xl border-4 border-white/20"
-          animate={{
-            scale: aiSpeaking ? 1.1 : 1,
-            boxShadow: aiSpeaking ? "0 0 30px rgba(59, 130, 246, 0.5)" : "0 0 20px rgba(0, 0, 0, 0.3)"
-          }}
-          transition={{ duration: 0.3 }}
-        >
-          <span className="text-3xl md:text-4xl">🤖</span>
-        </motion.div>
-        {aiSpeaking && (
-          <motion.div
-            className="absolute -top-12 left-1/2 transform -translate-x-1/2"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 10 }}
-          >
-            <div className="bg-blue-500 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-lg">
-              {isRecruiterMode ? 'Professional Mode' : 'Speaking...'}
-            </div>
-          </motion.div>
-        )}
-      </div>
-
-      {/* Main Content Area - Better layout */}
-      <div className="pt-24 pb-32 px-6 md:px-12">
+      {/* Section content */}
+      <div className="pt-24 pb-12 px-4">
         <div className="max-w-6xl mx-auto">
           <AnimatePresence mode="wait">
             <motion.div
-              key={currentStory}
-              initial={{ x: 100, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: -100, opacity: 0 }}
-              transition={{ duration: 0.6, ease: 'easeInOut' }}
-              className="min-h-[calc(100vh-200px)]"
+              key={step}
+              initial={{ opacity: 0, x: 40 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -40 }}
+              transition={{ duration: 0.35 }}
             >
-              {CurrentStoryComponent && (
-                <CurrentStoryComponent 
-                  isRecruiterMode={isRecruiterMode}
-                  onNext={handleNext}
-                  onPrevious={handlePrevious}
-                  stepData={storySteps[currentStory]}
-                  currentStep={currentStory}
-                  totalSteps={storySteps.length}
-                />
-              )}
+              <CurrentSection
+                isRecruiterMode={isRecruiterMode}
+                onNext={next}
+                onPrevious={prev}
+                currentStep={step}
+                totalSteps={total}
+              />
             </motion.div>
           </AnimatePresence>
         </div>
       </div>
 
-      {/* Navigation Arrows - Better positioned and styled */}
-      <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 flex items-center gap-6 z-30">
-        <motion.button
-          onClick={handlePrevious}
-          disabled={currentStory === 0}
-          className="flex items-center justify-center w-12 h-12 bg-white/10 backdrop-blur-md rounded-full border border-white/20 text-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 hover:bg-white/20"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          aria-label="Previous section"
-        >
-          <span className="text-xl">⬅️</span>
-        </motion.button>
-
-        {/* Step Indicators - Improved design */}
-        <div className="flex items-center gap-3 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20">
-          {storySteps.map((step, index) => (
-            <motion.button
-              key={index}
-              onClick={() => setCurrentStory(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                index === currentStory
-                  ? 'bg-blue-400 scale-125 shadow-lg'
-                  : index < currentStory
-                  ? 'bg-purple-400'
-                  : 'bg-gray-500'
-              }`}
-              whileHover={{ scale: 1.2 }}
-              whileTap={{ scale: 0.9 }}
-              aria-label={`Go to section ${index + 1}: ${step.title}`}
-              aria-current={index === currentStory ? 'step' : undefined}
-            />
-          ))}
+      {/* Countdown (not on finale) */}
+      {step < total - 1 && !paused && (
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 text-xs font-mono text-ink-300 bg-white/80 backdrop-blur-sm px-3 py-1 rounded-full border border-ink-100">
+          Next in {countdown}s
         </div>
-
-        <motion.button
-          onClick={handleNext}
-          disabled={currentStory === storySteps.length - 1}
-          className="flex items-center justify-center w-12 h-12 bg-white/10 backdrop-blur-md rounded-full border border-white/20 text-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 hover:bg-white/20"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          aria-label="Next section"
-        >
-          <span className="text-xl">➡️</span>
-        </motion.button>
-      </div>
-
-      {/* Auto-advance indicator with Pause/Resume - Better positioned */}
-      {!isRecruiterMode && currentStory < storySteps.length - 1 && (
-        <motion.div
-          className="fixed bottom-6 right-6 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full text-sm text-blue-200 border border-white/20 flex items-center gap-3 cursor-pointer"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 2 }}
-          onClick={() => setIsPaused(prev => !prev)}
-          role="button"
-          aria-label={isPaused ? 'Resume auto-advance' : 'Pause auto-advance'}
-        >
-          <div className="flex items-center gap-2">
-            <div className={`w-2 h-2 rounded-full ${isPaused ? 'bg-yellow-400' : 'bg-blue-400 animate-pulse'}`}></div>
-            <span>{isPaused ? 'Paused' : `Auto-advancing in ${countdown}s`}</span>
-          </div>
-          <span className="text-lg">{isPaused ? '▶️' : '⏸️'}</span>
-        </motion.div>
       )}
-    </motion.div>
+    </div>
   );
 };
 

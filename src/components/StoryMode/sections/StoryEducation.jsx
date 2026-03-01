@@ -1,77 +1,55 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { usePortfolio } from '../../../context/PortfolioContext';
-import { MapPin, Trophy } from 'lucide-react';
+import { MapPin, Award } from 'lucide-react';
 
-const StoryEducation = ({ isRecruiterMode }) => {
+const StoryEducation = () => {
   const { portfolioData } = usePortfolio();
 
   return (
-    <div className="story-education space-y-8">
-      <motion.div
-        className="text-center mb-12"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        <h2 className="heading-lg text-gradient mb-4">Educational Journey</h2>
-        <p className="text-xl text-primary-text/80">
-          Building the foundation for innovation
-        </p>
-      </motion.div>
+    <div className="space-y-8">
+      <div className="text-center">
+        <div className="section-label mb-3">Education</div>
+        <h2 className="heading-xl mb-2">Academic Foundation</h2>
+        <p className="text-ink-400">The building blocks of innovation</p>
+      </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {portfolioData.education.map((edu, index) => (
+      <div className="grid lg:grid-cols-2 gap-6">
+        {portfolioData.education.map((edu, i) => (
           <motion.div
             key={edu.id}
-            className="card hover:card-neon transition-all duration-500"
-            initial={{ opacity: 0, y: 50 }}
+            className="card-light"
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.2, duration: 0.6 }}
+            transition={{ delay: i * 0.15 }}
           >
-            <div className="flex items-center gap-4 mb-6">
-              <div className="w-12 h-12 bg-gradient-to-r from-primary-cyan to-primary-purple rounded-full flex items-center justify-center">
-                <span className="text-2xl">🎓</span>
-              </div>
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-12 h-12 rounded-xl bg-warm-50 flex items-center justify-center text-2xl">🎓</div>
               <div>
-                <h3 className="text-xl font-semibold text-primary-text">
-                  {edu.degree}
-                </h3>
-                <p className="text-primary-text/70">{edu.field}</p>
+                <h3 className="text-lg font-semibold text-ink-800">{edu.degree}</h3>
+                <p className="text-sm text-ink-400">{edu.field}</p>
               </div>
             </div>
-
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2 text-primary-text/70">
-                  <span><MapPin size={16} /></span>
-                  <span>{edu.institution}</span>
-                </div>
-                <span className="text-primary-cyan font-semibold">
-                  {edu.duration}
-                </span>
-              </div>
-
-              <div className="flex items-center gap-2">
-                <span className="text-primary-purple"><Trophy size={16} /></span>
-                <span className="text-primary-text">
-                  CGPA: <strong className="text-primary-cyan">{edu.cgpa}</strong>
-                </span>
-              </div>
-
-              {edu.achievements && (
-                <div className="mt-4">
-                  <h4 className="text-primary-text font-semibold mb-2">Achievements:</h4>
-                  <ul className="space-y-1">
-                    {edu.achievements.map((achievement, i) => (
-                      <li key={i} className="text-primary-text/70 text-sm">
-                        • {achievement}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
+            <div className="flex items-center justify-between text-sm mb-3">
+              <span className="flex items-center gap-1 text-ink-400"><MapPin size={14} /> {edu.institution}</span>
+              <span className="font-mono text-warm-600">{edu.duration}</span>
             </div>
+            <div className="flex items-center gap-2 mb-4">
+              <Award size={14} className="text-warm-500" />
+              <span className="text-sm text-ink-600">CGPA: <strong className="text-ink-800">{edu.cgpa}</strong></span>
+            </div>
+            {edu.achievements && (
+              <div className="border-t border-ink-100 pt-3 mt-3">
+                <p className="text-xs font-mono text-ink-300 uppercase tracking-wider mb-2">Achievements</p>
+                <ul className="space-y-1">
+                  {edu.achievements.map((a, j) => (
+                    <li key={j} className="text-sm text-ink-500 flex items-start gap-2">
+                      <span className="text-warm-500 mt-0.5">→</span>{a}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </motion.div>
         ))}
       </div>

@@ -10,8 +10,6 @@ const ACTIONS = {
   SET_MODE: 'SET_MODE',
   SET_THEME: 'SET_THEME',
   UPDATE_VIEWED_SECTIONS: 'UPDATE_VIEWED_SECTIONS',
-  SET_AI_CHAT_OPEN: 'SET_AI_CHAT_OPEN',
-  ADD_CHAT_MESSAGE: 'ADD_CHAT_MESSAGE',
   SET_RESUME_VARIANT: 'SET_RESUME_VARIANT',
   TOGGLE_EASTER_EGG: 'TOGGLE_EASTER_EGG',
   SET_ANIMATIONS_ENABLED: 'SET_ANIMATIONS_ENABLED',
@@ -29,11 +27,7 @@ const initialState = {
   // Navigation state
   viewedSections: [],
   sectionHistory: [],
-  
-  // AI Assistant state
-  aiChatOpen: false,
-  chatMessages: [],
-  
+
   // Resume state
   selectedResumeVariant: 'full-stack-developer',
   
@@ -71,16 +65,7 @@ const portfolioReducer = (state, action) => {
         };
       }
       return state;
-      
-    case ACTIONS.SET_AI_CHAT_OPEN:
-      return { ...state, aiChatOpen: action.payload };
-      
-    case ACTIONS.ADD_CHAT_MESSAGE:
-      return { 
-        ...state, 
-        chatMessages: [...state.chatMessages, action.payload] 
-      };
-      
+
     case ACTIONS.SET_RESUME_VARIANT:
       return { ...state, selectedResumeVariant: action.payload };
       
@@ -146,13 +131,7 @@ export const PortfolioProvider = ({ children }) => {
       
     setTheme: (theme) => 
       dispatch({ type: ACTIONS.SET_THEME, payload: theme }),
-      
-    toggleAIChat: () => 
-      dispatch({ type: ACTIONS.SET_AI_CHAT_OPEN, payload: !state.aiChatOpen }),
-      
-    addChatMessage: (message) => 
-      dispatch({ type: ACTIONS.ADD_CHAT_MESSAGE, payload: message }),
-      
+
     setResumeVariant: (variant) => 
       dispatch({ type: ACTIONS.SET_RESUME_VARIANT, payload: variant }),
       

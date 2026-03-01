@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { X } from 'lucide-react';
 
 const EasterEgg = ({ onClose }) => {
   return (
@@ -11,43 +12,56 @@ const EasterEgg = ({ onClose }) => {
       onClick={onClose}
     >
       <motion.div
-        className="modal-content max-w-4xl"
-        initial={{ scale: 0.8, opacity: 0 }}
+        className="modal-content max-w-3xl"
+        initial={{ scale: 0.92, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
-        exit={{ scale: 0.8, opacity: 0 }}
+        exit={{ scale: 0.92, opacity: 0 }}
         onClick={(e) => e.stopPropagation()}
       >
+        <button onClick={onClose} className="absolute top-4 right-4 text-ink-300 hover:text-ink-600 transition-colors">
+          <X size={20} />
+        </button>
+
         <div className="text-center">
-          <motion.h1
-            className="heading-lg text-gradient mb-6"
-            initial={{ y: -20, opacity: 0 }}
+          <motion.div
+            className="inline-block mb-4 px-4 py-1.5 rounded-full text-xs font-mono bg-warm-50 text-warm-600 border border-warm-200"
+            initial={{ y: -15, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.2 }}
+            transition={{ delay: 0.15 }}
           >
-            🎉 Behind the Scenes
-          </motion.h1>
-          
-          <motion.p
-            className="text-xl text-primary-text/80 mb-8"
-            initial={{ y: 20, opacity: 0 }}
+            $ sudo hire vidit
+          </motion.div>
+
+          <motion.h2
+            className="heading-lg mb-3"
+            initial={{ y: -15, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.4 }}
+            transition={{ delay: 0.25 }}
+          >
+            Behind the Scenes
+          </motion.h2>
+
+          <motion.p
+            className="text-ink-400 mb-8 text-sm"
+            initial={{ y: 15, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.35 }}
           >
             You found the secret! Here's what happened behind the curtain...
           </motion.p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
             <motion.div
-              className="card"
-              initial={{ x: -50, opacity: 0 }}
+              className="card-light"
+              initial={{ x: -20, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
-              transition={{ delay: 0.6 }}
+              transition={{ delay: 0.5 }}
             >
-              <div className="flex items-center gap-3 mb-4">
-                <span className="text-2xl">☕</span>
-                <h3 className="text-lg font-semibold">Development Stats</h3>
+              <div className="flex items-center gap-2 mb-3">
+                <span className="text-lg">☕</span>
+                <h3 className="text-sm font-semibold text-ink-800">Dev Stats</h3>
               </div>
-              <ul className="text-left space-y-2 text-primary-text/70">
+              <ul className="space-y-1.5 text-ink-500 text-sm">
                 <li>☕ Coffee consumed: 47 cups</li>
                 <li>🐛 Bugs fixed: 23 (and counting)</li>
                 <li>🎨 Design iterations: 12</li>
@@ -56,18 +70,18 @@ const EasterEgg = ({ onClose }) => {
             </motion.div>
 
             <motion.div
-              className="card"
-              initial={{ x: 50, opacity: 0 }}
+              className="card-light"
+              initial={{ x: 20, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
-              transition={{ delay: 0.8 }}
+              transition={{ delay: 0.6 }}
             >
-              <div className="flex items-center gap-3 mb-4">
-                <span className="text-2xl">💻</span>
-                <h3 className="text-lg font-semibold">Fun Facts</h3>
+              <div className="flex items-center gap-2 mb-3">
+                <span className="text-lg">💻</span>
+                <h3 className="text-sm font-semibold text-ink-800">Fun Facts</h3>
               </div>
-              <ul className="text-left space-y-2 text-primary-text/70">
-                <li>🚀 First 3D element took 4 hours</li>
-                <li>🎭 AI responses: 47 variations</li>
+              <ul className="space-y-1.5 text-ink-500 text-sm">
+                <li>🚀 First animation: 4 hours</li>
+                <li>🎭 Component count: 30+</li>
                 <li>🎨 Color iterations: 15</li>
                 <li>📱 Responsive breakpoints: 8</li>
               </ul>
@@ -75,42 +89,30 @@ const EasterEgg = ({ onClose }) => {
           </div>
 
           <motion.div
-            className="mt-8 p-6 bg-gradient-to-r from-purple-500/10 to-cyan-500/10 rounded-lg border border-primary-cyan/20"
-            initial={{ y: 20, opacity: 0 }}
+            className="mt-5 card-light border-l-2 !border-l-warm"
+            initial={{ y: 15, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 1 }}
+            transition={{ delay: 0.8 }}
           >
-            <h4 className="text-lg font-semibold mb-3">Developer's Note</h4>
-            <p className="text-primary-text/80 italic">
-              "Building this portfolio was like solving a complex puzzle where every piece 
-              had to fit perfectly. The biggest challenge? Making sure the AI assistant 
-              doesn't become too sarcastic (it has opinions about my code style) 😄"
+            <h4 className="text-sm font-semibold text-ink-800 mb-2">Developer's Note</h4>
+            <p className="text-ink-500 text-sm italic leading-relaxed">
+              "Building this portfolio was like solving a complex puzzle where every piece
+              had to fit perfectly. Exploring the boundaries of creative web design! 😄"
             </p>
-            <p className="text-primary-cyan text-sm mt-3">- Vidit</p>
+            <p className="text-warm-500 text-xs mt-2 font-mono">— Vidit</p>
           </motion.div>
 
           <motion.div
-            className="flex justify-center gap-4 mt-8"
+            className="flex justify-center gap-3 mt-6"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 1.2 }}
+            transition={{ delay: 1 }}
           >
-            <button className="btn btn-secondary flex items-center gap-2">
-              <span>🔗</span>
-              View Source Code
-            </button>
-            <button onClick={onClose} className="btn btn-primary">
+            <button onClick={onClose} className="btn-primary text-sm">
               Back to Portfolio
             </button>
           </motion.div>
         </div>
-
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 p-2 hover:bg-white/10 rounded-full transition-colors"
-        >
-          ✕
-        </button>
       </motion.div>
     </motion.div>
   );

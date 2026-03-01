@@ -1,120 +1,53 @@
-// This is tailwind.config.js file present in the root directory of the project.
-
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    './src/**/*.{js,jsx,ts,tsx}',
-  ],
+  content: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
   darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        // New Gradient-based Color Palette
-        gradient: {
-          'deep-blue': '#0D1B2A',
-          'violet': '#5B2C6F',
-          'charcoal': '#1C1C1C',
-          'silver': '#C0C0C0',
-          'teal': '#0F766E',
-          'indigo': '#312E81',
-        },
-        primary: {
-          dark: '#0D1B2A',
-          light: '#5B2C6F',
-          accent: '#0F766E',
-          text: '#EDEDED',
-          silver: '#C0C0C0',
-        },
-        glassmorphism: {
-          bg: 'rgba(255, 255, 255, 0.1)',
-          border: 'rgba(255, 255, 255, 0.2)',
-          dark: 'rgba(13, 27, 42, 0.8)',
-        }
+        // Light palette
+        cream:    { 50: '#FFFDF7', 100: '#FFF9E8', 200: '#FFF3D1', DEFAULT: '#FAF6F0' },
+        sand:     { 100: '#F5F0E8', 200: '#EDE6D8', 300: '#DDD4C2', DEFAULT: '#EDE6D8' },
+        // Dark palette
+        ink:      { 50: '#F8F8F8', 100: '#E8E8E8', 200: '#D1D1D1', 300: '#A3A3A3', 400: '#737373', 500: '#525252', 600: '#404040', 700: '#2D2D2D', 800: '#1A1A1A', 900: '#0F0F0F', DEFAULT: '#1A1A1A' },
+        charcoal: { DEFAULT: '#2D2D2D', light: '#404040' },
+        // Accent
+        warm:     { 50: '#FFF7ED', 100: '#FFEDD5', 200: '#FED7AA', 300: '#FDBA74', 400: '#FB923C', 500: '#F97316', 600: '#EA580C', DEFAULT: '#F97316' },
+        terra:    { DEFAULT: '#C2410C', light: '#EA580C' },
+        sage:     { DEFAULT: '#5F7161', light: '#7C9070' },
+        // Legacy mappings
+        primary:  { cyan: '#F97316', purple: '#C2410C', text: '#1A1A1A' },
+        void:     '#0F0F0F',
+        ice:      '#F97316',
+        violet:   '#C2410C',
       },
       fontFamily: {
-        'dm-serif': ['DM Serif Display', 'serif'],
-        'playfair': ['Playfair Display', 'serif'],
-        'inter': ['Inter', 'sans-serif'],
-        'poppins': ['Poppins', 'sans-serif'],
-        'helvetica': ['Helvetica Neue', 'Arial', 'sans-serif'],
+        display: ['"Playfair Display"', 'Georgia', 'serif'],
+        sans:    ['"Inter"', 'system-ui', 'sans-serif'],
+        mono:    ['"JetBrains Mono"', 'Consolas', 'monospace'],
       },
-      animation: {
-        'gradient': 'gradient 15s ease infinite',
-        'float': 'float 6s ease-in-out infinite',
-        'pulse-glow': 'pulse-glow 2s ease-in-out infinite alternate',
-        'slide-up': 'slide-up 0.6s ease-out',
-        'fade-in': 'fade-in 0.8s ease-out',
-        'bounce-in': 'bounce-in 0.6s ease-out',
+      borderRadius: {
+        '2xl': '1rem',
+        '3xl': '1.5rem',
+      },
+      boxShadow: {
+        'soft':    '0 2px 15px -3px rgba(0,0,0,0.07), 0 10px 20px -2px rgba(0,0,0,0.04)',
+        'lifted':  '0 20px 60px -15px rgba(0,0,0,0.15)',
+        'dark':    '0 2px 15px -3px rgba(0,0,0,0.3), 0 10px 20px -2px rgba(0,0,0,0.2)',
       },
       keyframes: {
-        gradient: {
-          '0%, 100%': {
-            'background-size': '200% 200%',
-            'background-position': 'left center'
-          },
-          '50%': {
-            'background-size': '200% 200%',
-            'background-position': 'right center'
-          },
-        },
-        float: {
-          '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-20px)' },
-        },
-        'pulse-glow': {
-          '0%': {
-            'box-shadow': '0 0 5px rgba(160, 32, 240, 0.4), 0 0 10px rgba(160, 32, 240, 0.3), 0 0 15px rgba(160, 32, 240, 0.2)'
-          },
-          '100%': {
-            'box-shadow': '0 0 10px rgba(160, 32, 240, 0.6), 0 0 20px rgba(160, 32, 240, 0.5), 0 0 30px rgba(160, 32, 240, 0.4)'
-          },
-        },
-        'slide-up': {
-          '0%': { transform: 'translateY(100%)', opacity: '0' },
-          '100%': { transform: 'translateY(0)', opacity: '1' },
-        },
-        'fade-in': {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' },
-        },
-        'bounce-in': {
-          '0%': { transform: 'scale(0.3)', opacity: '0' },
-          '50%': { transform: 'scale(1.05)', opacity: '0.8' },
-          '70%': { transform: 'scale(0.9)', opacity: '0.9' },
-          '100%': { transform: 'scale(1)', opacity: '1' },
-        },
+        'fade-up':   { '0%': { opacity: 0, transform: 'translateY(20px)' }, '100%': { opacity: 1, transform: 'translateY(0)' } },
+        'fade-in':   { '0%': { opacity: 0 }, '100%': { opacity: 1 } },
+        'slide-in':  { '0%': { transform: 'translateX(-100%)' }, '100%': { transform: 'translateX(0)' } },
+        'pulse-dot': { '0%, 100%': { opacity: 1 }, '50%': { opacity: 0.5 } },
       },
-      backdropBlur: {
-        xs: '2px',
+      animation: {
+        'fade-up':   'fade-up 0.6s ease-out',
+        'fade-in':   'fade-in 0.4s ease-out',
+        'slide-in':  'slide-in 0.5s ease-out',
+        'pulse-dot': 'pulse-dot 2s ease-in-out infinite',
       },
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-        'gradient-primary': 'linear-gradient(135deg, #0D1B2A 0%, #5B2C6F 100%)',
-        'gradient-secondary': 'linear-gradient(135deg, #1C1C1C 0%, #C0C0C0 100%)',
-        'gradient-accent': 'linear-gradient(135deg, #0F766E 0%, #312E81 100%)',
-        'gradient-hero': 'linear-gradient(135deg, #0D1B2A 0%, #5B2C6F 50%, #312E81 100%)',
-        'cyber-grid': "url(\"data:image/svg+xml,%3csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3e%3cg fill='none' fill-rule='evenodd'%3e%3cg fill='%23A020F0' fill-opacity='0.1' fill-rule='nonzero'%3e%3cpath d='m36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3e%3c/g%3e%3c/g%3e%3c/svg%3e\")",
-      }
     },
   },
-  plugins: [
-    function ({ addUtilities }) {
-      const newUtilities = {
-        '.glassmorphism': {
-          background: 'rgba(255, 255, 255, 0.1)',
-          'backdrop-filter': 'blur(10px)',
-          '-webkit-backdrop-filter': 'blur(10px)',
-          border: '1px solid rgba(255, 255, 255, 0.2)',
-        },
-        '.neon-border': {
-          border: '2px solid transparent',
-          'background-clip': 'padding-box',
-          'box-shadow': '0 0 10px rgba(0, 255, 224, 0.5), inset 0 0 10px rgba(160, 32, 240, 0.3)',
-        }
-      }
-      addUtilities(newUtilities)
-    }
-  ],
-}
-
+  plugins: [],
+};
