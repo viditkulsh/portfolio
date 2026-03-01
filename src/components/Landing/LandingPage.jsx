@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { usePortfolio } from '../../context/PortfolioContext';
 import ResumeSelector from '../../pages/ResumeSelector';
 
-const LandingPage = ({ isRecruiterMode, setIsRecruiterMode }) => {
+const LandingPage = ({ isRecruiterMode }) => {
   const navigate = useNavigate();
   const { portfolioData, setCurrentSection, setMode } = usePortfolio();
   const [showControls, setShowControls] = useState(false);
@@ -204,14 +204,7 @@ const LandingPage = ({ isRecruiterMode, setIsRecruiterMode }) => {
         <AnimatePresence>
           {showControls && (
             <motion.div
-              className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-center w-full max-w-md sm:max-w-none"
-              initial={{ y: 50, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.8, delay: 1.5 }}
-            >
-              {/* CTA Buttons - Responsive Container */}
-              <motion.div
-                className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-center justify-center w-full"
+              className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-center justify-center w-full max-w-md sm:max-w-none"
                 initial={{ y: 50, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.8, delay: 1.5 }}
@@ -271,8 +264,7 @@ const LandingPage = ({ isRecruiterMode, setIsRecruiterMode }) => {
                     </motion.span>
                   </span>
                   <div className="absolute inset-0 bg-gradient-to-r from-gradient-teal to-gradient-indigo opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </motion.button>
-              </motion.div>
+              </motion.button>
 
             </motion.div>
           )}

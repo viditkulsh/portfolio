@@ -122,6 +122,7 @@ const StoryFinale = () => {
               className="px-8 py-3 bg-gradient-to-r from-green-500 to-blue-600 text-white rounded-full font-medium hover:from-green-600 hover:to-blue-700 transition-all duration-300"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={() => window.open('mailto:viditkulsh.work@gmail.com?subject=Interview%20Request%20–%20Vidit%20Kulshrestha&body=Hi%20Vidit%2C%0A%0AI%20viewed%20your%20portfolio%20and%20would%20like%20to%20schedule%20an%20interview.%0A%0ADetails%3A%0A', '_blank')}
             >
               Schedule Interview
             </motion.button>

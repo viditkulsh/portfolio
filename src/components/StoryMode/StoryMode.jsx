@@ -17,6 +17,7 @@ const StoryMode = ({ isRecruiterMode }) => {
   const [currentStory, setCurrentStory] = useState(0);
   const [aiSpeaking, setAiSpeaking] = useState(false);
   const [countdown, setCountdown] = useState(25); // Live countdown state
+  const [isPaused, setIsPaused] = useState(false);
 
   // Memoize storySteps to prevent re-creation on every render
   const storySteps = useMemo(() => [
@@ -24,7 +25,7 @@ const StoryMode = ({ isRecruiterMode }) => {
       component: StoryAbout, 
       title: 'About Me', 
       description: 'Let me tell you my story...',
-      duration: 25000 // 25 seconds
+      duration: 30000 // 30 seconds for dense about section
     },
     { 
       component: StoryEducation, 
@@ -42,13 +43,13 @@ const StoryMode = ({ isRecruiterMode }) => {
       component: StoryProjects, 
       title: 'Projects', 
       description: 'Bringing ideas to life through code',
-      duration: 25000
+      duration: 35000 // 35 seconds for many projects
     },
     { 
       component: StoryExperience, 
       title: 'Experience', 
       description: 'My professional adventures and lessons learned',
-      duration: 25000
+      duration: 30000 // 30 seconds for experience details
     },
     { 
       component: StoryCertificates, 
@@ -66,11 +67,12 @@ const StoryMode = ({ isRecruiterMode }) => {
       component: StoryFinale, 
       title: 'The Finale', 
       description: 'Now you know why I\'m the one you need',
-      duration: 25000
+      duration: 30000
     }
   ], []); // Empty dependency array since this doesn't depend on props or state
 
   const CurrentStoryComponent = storySteps[currentStory]?.component;
+  const currentDurationSeconds = Math.round((storySteps[currentStory]?.duration || 25000) / 1000);
 
   // AI narration effect
   useEffect(() => {
@@ -79,10 +81,10 @@ const StoryMode = ({ isRecruiterMode }) => {
     return () => clearTimeout(timer);
   }, [currentStory]);
 
-  // Auto-advance (optional)
+  // Auto-advance with pause support
   useEffect(() => {
-    if (!isRecruiterMode) {
-      setCountdown(25); // Reset countdown
+    if (!isRecruiterMode && !isPaused) {
+      setCountdown(currentDurationSeconds); // Reset countdown
       
       const countdownInterval = setInterval(() => {
         setCountdown(prev => {
@@ -105,7 +107,7 @@ const StoryMode = ({ isRecruiterMode }) => {
         clearInterval(countdownInterval);
       };
     }
-  }, [currentStory, isRecruiterMode, storySteps]);
+  }, [currentStory, isRecruiterMode, isPaused, storySteps, currentDurationSeconds]);
 
   const handleNext = () => {
     if (currentStory < storySteps.length - 1) {
@@ -162,6 +164,7 @@ const StoryMode = ({ isRecruiterMode }) => {
             className="flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-md rounded-full border border-white/20 text-blue-200 hover:text-white hover:bg-white/20 transition-all duration-300"
             whileHover={{ scale: 1.05, x: -5 }}
             whileTap={{ scale: 0.95 }}
+            aria-label="Go to home page"
           >
             <span className="text-lg">🏠</span>
             <span className="font-medium hidden md:inline">Home</span>
@@ -197,6 +200,7 @@ const StoryMode = ({ isRecruiterMode }) => {
             className="flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-md rounded-full border border-white/20 text-blue-200 hover:text-white hover:bg-white/20 transition-all duration-300"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            aria-label="Skip story tour"
           >
             <span className="text-lg">⏭️</span>
             <span className="font-medium hidden md:inline">Skip Tour</span>
@@ -265,13 +269,14 @@ const StoryMode = ({ isRecruiterMode }) => {
           className="flex items-center justify-center w-12 h-12 bg-white/10 backdrop-blur-md rounded-full border border-white/20 text-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 hover:bg-white/20"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
+          aria-label="Previous section"
         >
           <span className="text-xl">⬅️</span>
         </motion.button>
 
         {/* Step Indicators - Improved design */}
         <div className="flex items-center gap-3 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20">
-          {storySteps.map((_, index) => (
+          {storySteps.map((step, index) => (
             <motion.button
               key={index}
               onClick={() => setCurrentStory(index)}
@@ -284,6 +289,8 @@ const StoryMode = ({ isRecruiterMode }) => {
               }`}
               whileHover={{ scale: 1.2 }}
               whileTap={{ scale: 0.9 }}
+              aria-label={`Go to section ${index + 1}: ${step.title}`}
+              aria-current={index === currentStory ? 'step' : undefined}
             />
           ))}
         </div>
@@ -294,23 +301,28 @@ const StoryMode = ({ isRecruiterMode }) => {
           className="flex items-center justify-center w-12 h-12 bg-white/10 backdrop-blur-md rounded-full border border-white/20 text-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 hover:bg-white/20"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
+          aria-label="Next section"
         >
           <span className="text-xl">➡️</span>
         </motion.button>
       </div>
 
-      {/* Auto-advance indicator - Better positioned */}
+      {/* Auto-advance indicator with Pause/Resume - Better positioned */}
       {!isRecruiterMode && currentStory < storySteps.length - 1 && (
         <motion.div
-          className="fixed bottom-6 right-6 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full text-sm text-blue-200 border border-white/20"
+          className="fixed bottom-6 right-6 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full text-sm text-blue-200 border border-white/20 flex items-center gap-3 cursor-pointer"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 2 }}
+          onClick={() => setIsPaused(prev => !prev)}
+          role="button"
+          aria-label={isPaused ? 'Resume auto-advance' : 'Pause auto-advance'}
         >
           <div className="flex items-center gap-2">
-            <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
-            <span>Auto-advancing in {countdown}s</span>
+            <div className={`w-2 h-2 rounded-full ${isPaused ? 'bg-yellow-400' : 'bg-blue-400 animate-pulse'}`}></div>
+            <span>{isPaused ? 'Paused' : `Auto-advancing in ${countdown}s`}</span>
           </div>
+          <span className="text-lg">{isPaused ? '▶️' : '⏸️'}</span>
         </motion.div>
       )}
     </motion.div>

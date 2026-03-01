@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { usePortfolio } from '../../context/PortfolioContext';
 import ResumeSelector from '../../pages/ResumeSelector';
+import GlobalFooter from '../Common/GlobalFooter';
 import { GraduationCap, Microscope, Zap, Rocket, Target, Trophy, Lightbulb, Star } from 'lucide-react';
 
 const RecruiterMode = () => {
@@ -24,7 +25,7 @@ const RecruiterMode = () => {
 
   const metrics = [
     { label: 'Academic CGPA', value: '8.78/10', icon: GraduationCap, description: 'Consistent Excellence' },
-    { label: 'Research Collaborations', value: '2+', icon: Microscope, description: 'Work Experience' },
+    { label: 'Professional Roles', value: '4', icon: Microscope, description: 'Leadership to Freelance' },
     { label: 'Technical Skills', value: `${portfolioData.skills?.technical?.skills?.length || 20}+`, icon: Zap, description: 'Full Stack + Blockchain' },
     { label: 'Projects', value: `${portfolioData.projects?.length || 11}+`, icon: Rocket, description: 'Production Ready' }
   ];
@@ -196,25 +197,66 @@ const RecruiterMode = () => {
             {activeSection === 'overview' && (
               <div className="space-y-6">
                 <h2 className="text-3xl font-playfair text-white mb-6">Why Vidit is Your Ideal Candidate</h2>
+
+                {/* Current Role Highlight */}
+                <div className="bg-gradient-to-r from-purple-600/20 to-blue-600/20 border border-purple-500/30 rounded-xl p-6 mb-8">
+                  <div className="flex items-start gap-4">
+                    <div className="bg-green-500 rounded-full p-3">
+                      <Rocket className="text-white" size={24} />
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-2">
+                        <h3 className="text-2xl font-semibold text-white">Currently Leading Blockchain Innovation</h3>
+                        <span className="bg-green-500 text-white text-xs px-2 py-1 rounded-full">ACTIVE</span>
+                      </div>
+                      <p className="text-blue-200 text-lg mb-3">
+                        <strong>Assistant Manager - IT Web3</strong> at AGP Webpulse LLC (UAE, Remote) • Dec 2025 - Present
+                      </p>
+                      <ul className="space-y-2 text-white/90">
+                        <li className="flex items-start gap-2">
+                          <span className="text-green-400 mt-1">→</span>
+                          <span>Architecting production-grade <strong>RWA equity tokenization platform</strong> for regulated financial infrastructure</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-green-400 mt-1">→</span>
+                          <span>Designing <strong>complex permission management systems</strong> with multi-tier admin and issuer workflows</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-green-400 mt-1">→</span>
+                          <span>Collaborating across legal, compliance, and business teams in <strong>cross-functional environment</strong></span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-green-400 mt-1">→</span>
+                          <span>Bridging traditional finance with blockchain technology in <strong>production systems</strong></span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
                 <div className="grid md:grid-cols-2 gap-8">
                   <div>
                     <h3 className="text-xl font-semibold text-blue-200 mb-4 flex items-center gap-2"><Target size={20} /> Perfect Fit Profile</h3>
                     <ul className="space-y-3 text-white/90">
                       <li className="flex items-start gap-3">
                         <span className="text-green-400 mt-1">✓</span>
-                        <span>Academic Excellence: 8.88/10 CGPA with consecutive awards</span>
+                        <span><strong>Blockchain Leadership:</strong> Currently managing Web3 development at AGP Webpulse LLC</span>
                       </li>
                       <li className="flex items-start gap-3">
                         <span className="text-green-400 mt-1">✓</span>
-                        <span>Research Experience: DRDO collaboration in cutting-edge blockchain</span>
+                        <span><strong>Tokenization Expertise:</strong> Production experience in RWA equity tokenization architecture</span>
                       </li>
                       <li className="flex items-start gap-3">
                         <span className="text-green-400 mt-1">✓</span>
-                        <span>Technical Breadth: Full-stack + Blockchain expertise</span>
+                        <span><strong>Research Foundation:</strong> DRDO collaboration in cross-chain interoperability</span>
                       </li>
                       <li className="flex items-start gap-3">
                         <span className="text-green-400 mt-1">✓</span>
-                        <span>Growth Mindset: Continuous learning and adaptation</span>
+                        <span><strong>Academic Excellence:</strong> 8.78/10 CGPA with analytical problem-solving approach</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <span className="text-green-400 mt-1">✓</span>
+                        <span><strong>Technical Breadth:</strong> Full-stack + Blockchain + Security architecture</span>
                       </li>
                     </ul>
                   </div>
@@ -223,19 +265,23 @@ const RecruiterMode = () => {
                     <ul className="space-y-3 text-white/90">
                       <li className="flex items-start gap-3">
                         <span className="text-yellow-400 mt-1"><Star size={16} /></span>
-                        <span>Ready to contribute from day one</span>
+                        <span><strong>Production-Ready:</strong> Currently building real-world tokenization systems</span>
                       </li>
                       <li className="flex items-start gap-3">
                         <span className="text-yellow-400 mt-1"><Star size={16} /></span>
-                        <span>Strong foundation in modern tech stack</span>
+                        <span><strong>Analytical Mindset:</strong> Calm under pressure, thinks through risks before committing</span>
                       </li>
                       <li className="flex items-start gap-3">
                         <span className="text-yellow-400 mt-1"><Star size={16} /></span>
-                        <span>Research mindset brings innovation</span>
+                        <span><strong>Cross-Functional Leader:</strong> Proven collaboration with diverse teams</span>
                       </li>
                       <li className="flex items-start gap-3">
                         <span className="text-yellow-400 mt-1"><Star size={16} /></span>
-                        <span>Collaborative approach with proven results</span>
+                        <span><strong>Security-First:</strong> Understands that small mistakes create big consequences</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <span className="text-yellow-400 mt-1"><Star size={16} /></span>
+                        <span><strong>Fintech Focus:</strong> Passionate about building trusted, impactful systems</span>
                       </li>
                     </ul>
                   </div>
@@ -415,6 +461,7 @@ const RecruiterMode = () => {
                 className="px-8 py-3 bg-gradient-to-r from-green-500 to-blue-600 text-white rounded-full font-medium"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                onClick={() => window.open('mailto:viditkulsh.work@gmail.com?subject=Interview%20Request%20–%20Vidit%20Kulshrestha&body=Hi%20Vidit%2C%0A%0AI%20viewed%20your%20portfolio%20and%20would%20like%20to%20schedule%20an%20interview.%0A%0ADetails%3A%0A', '_blank')}
               >
                 Schedule Interview
               </motion.button>
@@ -430,6 +477,8 @@ const RecruiterMode = () => {
           </div>
         </motion.div>
       </div>
+
+      <GlobalFooter />
     </motion.div>
   );
 };

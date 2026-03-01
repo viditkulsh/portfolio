@@ -9,11 +9,11 @@ const StoryAbout = ({ isRecruiterMode, onNext, onPrevious }) => {
   const [showFunFacts, setShowFunFacts] = useState(false);
 
   const timelineVariants = {
-    hidden: { opacity: 0, x: -50 },
+    hidden: { opacity: 0, y: 50 },
     visible: (i) => ({
       opacity: 1,
-      x: 0,
-      transition: { delay: i * 0.2, duration: 0.6 }
+      y: 0,
+      transition: { delay: i * 0.15, duration: 0.5 }
     })
   };
 
@@ -94,25 +94,25 @@ const StoryAbout = ({ isRecruiterMode, onNext, onPrevious }) => {
       >
         <h2 className="heading-md text-center mb-8">My Journey Timeline</h2>
         
-        <div className="relative">
+        <div className="relative w-full max-w-full">
           {/* Timeline Line */}
-          <div className="absolute left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-primary-cyan to-primary-purple rounded-full" />
+          <div className="absolute top-8 left-8 right-8 h-1 bg-gradient-to-r from-primary-cyan to-primary-purple rounded-full hidden md:block z-0" />
           
           {/* Timeline Items */}
-          <div className="space-y-8">
+          <div className="flex flex-row gap-6 lg:gap-8 overflow-x-auto pb-8 pt-4 px-4 snap-x snap-mandatory scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent">
             {portfolioData.about.timeline.map((item, index) => (
               <motion.div
                 key={index}
-                className="relative flex items-start gap-6 cursor-pointer"
+                className="relative flex flex-col items-center gap-4 cursor-pointer min-w-[260px] max-w-[280px] snap-center z-10"
                 custom={index}
                 variants={timelineVariants}
                 initial="hidden"
                 animate="visible"
                 onClick={() => setSelectedTimelineItem(item)}
-                whileHover={{ scale: 1.02 }}
+                whileHover={{ scale: 1.05, y: -5 }}
               >
                 {/* Timeline Dot */}
-                <div className={`relative z-10 w-16 h-16 rounded-full flex items-center justify-center text-white font-bold text-lg
+                <div className={`relative flex-shrink-0 w-16 h-16 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-xl border-4 border-gray-900
                   ${item.isHumorous 
                     ? 'bg-gradient-to-r from-yellow-400 to-orange-500' 
                   : index % 2 === 0
@@ -123,18 +123,18 @@ const StoryAbout = ({ isRecruiterMode, onNext, onPrevious }) => {
                 </div>
                 
                 {/* Content */}
-                <div className="flex-1 card hover:card-neon transition-all duration-300">
-                  <h3 className="font-semibold text-lg text-primary-text mb-2">
-                    {item.title}
-                    {item.isHumorous && <span className="ml-2">😄</span>}
-                  </h3>
-                  <p className="text-primary-text/70 line-clamp-2">
-                    {item.description}
-                  </p>
-                  <div className="flex items-center gap-2 mt-3 text-primary-cyan text-sm">
+                <div className="w-full card hover:card-neon transition-all duration-300 flex flex-col text-center">
+                  <div className="flex items-center justify-center gap-2 mb-2 text-primary-cyan text-xs font-semibold">
                     <span>📅</span>
                     <span>{item.year}</span>
                   </div>
+                  <h3 className="font-semibold text-base sm:text-lg text-primary-text mb-2">
+                    {item.title}
+                    {item.isHumorous && <span className="ml-2">😄</span>}
+                  </h3>
+                  <p className="text-primary-text/70 line-clamp-3 text-sm">
+                    {item.description}
+                  </p>
                 </div>
               </motion.div>
             ))}

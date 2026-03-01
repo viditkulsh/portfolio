@@ -3,7 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { usePortfolio } from '../../context/PortfolioContext';
 import { socialMediaData } from '../../data/sections/socialMediaData';
-import { User, GraduationCap, Zap, Rocket, Briefcase, Trophy, Mail, Wrench, Smartphone, MapPin, ExternalLink, Github, Eye, Calendar, Award, TrendingUp } from 'lucide-react';
+import GlobalFooter from '../Common/GlobalFooter';
+import { User, GraduationCap, Zap, Rocket, Briefcase, Trophy, Mail, Wrench, MapPin, ExternalLink, Github, Eye, Calendar, Award, TrendingUp, Activity } from 'lucide-react';
 
 const ExploreMode = ({ isRecruiterMode }) => {
     const navigate = useNavigate();
@@ -13,6 +14,7 @@ const ExploreMode = ({ isRecruiterMode }) => {
     const [selectedProject, setSelectedProject] = useState(null);
     const [selectedExperience, setSelectedExperience] = useState(null);
     const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1024);
+    const [bioExpanded, setBioExpanded] = useState(false);
 
     // Handle window resize
     useEffect(() => {
@@ -42,6 +44,7 @@ const ExploreMode = ({ isRecruiterMode }) => {
         projects: { title: 'Projects', icon: Rocket, color: 'from-orange-500 to-red-500' },
         experience: { title: 'Experience', icon: Briefcase, color: 'from-indigo-500 to-purple-500' },
         certificates: { title: 'Certificates', icon: Trophy, color: 'from-yellow-500 to-orange-500' },
+        activities: { title: 'Activities', icon: Activity, color: 'from-teal-500 to-green-500' },
         contact: { title: 'Contact', icon: Mail, color: 'from-pink-500 to-rose-500' }
     };
 
@@ -84,7 +87,19 @@ const ExploreMode = ({ isRecruiterMode }) => {
                                     </div>
                                 </div>
                                 
-                                <p className="text-white/90 leading-relaxed">{portfolioData.about.bio}</p>
+                                <div className="text-white/90 leading-relaxed">
+                                    {bioExpanded ? (
+                                        <p className="whitespace-pre-line">{portfolioData.about.bio}</p>
+                                    ) : (
+                                        <p>{portfolioData.about.bio.substring(0, 400)}...</p>
+                                    )}
+                                    <button
+                                        onClick={() => setBioExpanded(!bioExpanded)}
+                                        className="text-blue-400 hover:text-blue-300 text-sm mt-2 font-medium transition-colors"
+                                    >
+                                        {bioExpanded ? 'Read Less' : 'Read More'}
+                                    </button>
+                                </div>
                                 
                                 {/* Personal Quote */}
                                 <div className="mt-4 p-4 bg-gradient-to-r from-purple-500/10 to-blue-500/10 rounded-lg border-l-4 border-primary-cyan">
@@ -213,10 +228,13 @@ const ExploreMode = ({ isRecruiterMode }) => {
                                                 src={project.image}
                                                 alt={project.title}
                                                 className="w-full h-full object-cover"
+                                                onError={(e) => {
+                                                    e.target.style.display = 'none';
+                                                    e.target.nextSibling.style.display = 'flex';
+                                                }}
                                             />
-                                        ) : (
-                                                <div className="text-4xl sm:text-5xl lg:text-6xl opacity-50">{project.icon ? React.createElement(project.icon, { size: windowWidth < 640 ? 32 : windowWidth < 1024 ? 40 : 48 }) : <Rocket size={windowWidth < 640 ? 32 : windowWidth < 1024 ? 40 : 48} />}</div>
-                                        )}
+                                        ) : null}
+                                        <div className={`text-4xl sm:text-5xl lg:text-6xl opacity-50 items-center justify-center absolute inset-0 ${project.image ? 'hidden' : 'flex'}`}>{project.icon ? React.createElement(project.icon, { size: windowWidth < 640 ? 32 : windowWidth < 1024 ? 40 : 48 }) : <Rocket size={windowWidth < 640 ? 32 : windowWidth < 1024 ? 40 : 48} />}</div>
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                                         <div className="absolute bottom-2 sm:bottom-4 right-2 sm:right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                             <Eye className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
@@ -346,51 +364,122 @@ const ExploreMode = ({ isRecruiterMode }) => {
                     <div className="space-y-6 sm:space-y-8">
                         <h2 className="text-2xl sm:text-3xl lg:text-4xl font-playfair text-white mb-4 sm:mb-6">Get In Touch</h2>
                         <div className="grid gap-6 sm:gap-8 lg:grid-cols-2">
-                            <div className="card">
-                                <h3 className="text-lg sm:text-xl font-semibold text-blue-200 mb-3 sm:mb-4">Contact Information</h3>
-                                <div className="space-y-3 sm:space-y-4">
-                                    <div className="flex items-center gap-3">
-                                        <span className="text-blue-400"><Mail size={16} /></span>
-                                        <span className="text-white text-sm sm:text-base break-all">{portfolioData.personal.email}</span>
+                            <div className="space-y-6">
+                                <div className="card">
+                                    <h3 className="text-lg sm:text-xl font-semibold text-blue-200 mb-3 sm:mb-4">Contact Information</h3>
+                                    <div className="space-y-3 sm:space-y-4">
+                                        <a href={`mailto:${portfolioData.personal.email}`} className="flex items-center gap-3 hover:text-blue-300 transition-colors">
+                                            <span className="text-blue-400"><Mail size={16} /></span>
+                                            <span className="text-white text-sm sm:text-base break-all">{portfolioData.personal.email}</span>
+                                        </a>
+                                        <div className="flex items-center gap-3">
+                                            <span className="text-blue-400"><MapPin size={16} /></span>
+                                            <span className="text-white text-sm sm:text-base">{portfolioData.personal.location}</span>
+                                        </div>
                                     </div>
-                                    <div className="flex items-center gap-3">
-                                        <span className="text-blue-400"><Smartphone size={16} /></span>
-                                        <span className="text-white text-sm sm:text-base">{portfolioData.personal.phone}</span>
-                                    </div>
-                                    <div className="flex items-center gap-3">
-                                        <span className="text-blue-400"><MapPin size={16} /></span>
-                                        <span className="text-white text-sm sm:text-base">{portfolioData.personal.location}</span>
+                                </div>
+                                <div className="card">
+                                    <h3 className="text-lg sm:text-xl font-semibold text-blue-200 mb-3 sm:mb-4">Social Links</h3>
+                                    <div className="space-y-2 sm:space-y-3">
+                                        {Object.entries(portfolioData.personal.social).map(([platform, url]) => {
+                                            const platformData = socialMediaData.platforms[platform];
+                                            const IconComponent = platformData?.icon;
+                                            return (
+                                                <a
+                                                    key={platform}
+                                                    href={url}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="flex items-center gap-3 text-white hover:text-blue-300 transition-colors p-2 rounded-lg hover:bg-white/5 min-h-[44px] touch-target"
+                                                >
+                                                    <span className="text-lg sm:text-xl">
+                                                        {IconComponent ? <IconComponent size={windowWidth < 640 ? 18 : 20} /> : '🔗'}
+                                                    </span>
+                                                    <div className="flex-1 min-w-0">
+                                                        <span className="capitalize font-medium text-sm sm:text-base">{platformData?.name || platform}</span>
+                                                        {platformData?.description && (
+                                                            <p className="text-xs text-blue-300">{platformData.description}</p>
+                                                        )}
+                                                    </div>
+                                                </a>
+                                            );
+                                        })}
                                     </div>
                                 </div>
                             </div>
+                            {/* Quick Contact Form */}
                             <div className="card">
-                                <h3 className="text-lg sm:text-xl font-semibold text-blue-200 mb-3 sm:mb-4">Social Links</h3>
-                                <div className="space-y-2 sm:space-y-3">
-                                    {Object.entries(portfolioData.personal.social).map(([platform, url]) => {
-                                        const platformData = socialMediaData.platforms[platform];
-                                        const IconComponent = platformData?.icon;
-                                        return (
-                                            <a
-                                                key={platform}
-                                                href={url}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="flex items-center gap-3 text-white hover:text-blue-300 transition-colors p-2 rounded-lg hover:bg-white/5 min-h-[44px] touch-target"
-                                            >
-                                                <span className="text-lg sm:text-xl">
-                                                    {IconComponent ? <IconComponent size={windowWidth < 640 ? 18 : 20} /> : '🔗'}
-                                                </span>
-                                                <div className="flex-1 min-w-0">
-                                                    <span className="capitalize font-medium text-sm sm:text-base">{platformData?.name || platform}</span>
-                                                    {platformData?.description && (
-                                                        <p className="text-xs text-blue-300">{platformData.description}</p>
-                                                    )}
-                                                </div>
-                                            </a>
-                                        );
-                                    })}
-                                </div>
+                                <h3 className="text-lg sm:text-xl font-semibold text-blue-200 mb-3 sm:mb-4">Send a Quick Message</h3>
+                                <form
+                                    onSubmit={(e) => {
+                                        e.preventDefault();
+                                        const formData = new FormData(e.target);
+                                        const name = formData.get('name');
+                                        const subject = formData.get('subject');
+                                        const message = formData.get('message');
+                                        window.open(`mailto:${portfolioData.personal.email}?subject=${encodeURIComponent(subject || 'Portfolio Inquiry')}&body=${encodeURIComponent(`Hi Vidit,\n\nMy name is ${name}.\n\n${message}\n`)}`, '_blank');
+                                    }}
+                                    className="space-y-4"
+                                >
+                                    <div>
+                                        <label htmlFor="contact-name" className="block text-sm text-blue-200 mb-1">Your Name</label>
+                                        <input id="contact-name" name="name" type="text" required className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-2 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" placeholder="Jane Doe" />
+                                    </div>
+                                    <div>
+                                        <label htmlFor="contact-subject" className="block text-sm text-blue-200 mb-1">Subject</label>
+                                        <input id="contact-subject" name="subject" type="text" className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-2 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" placeholder="Opportunity / Collaboration" />
+                                    </div>
+                                    <div>
+                                        <label htmlFor="contact-message" className="block text-sm text-blue-200 mb-1">Message</label>
+                                        <textarea id="contact-message" name="message" required rows={4} className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-2 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm resize-none" placeholder="I'd love to discuss..." />
+                                    </div>
+                                    <motion.button
+                                        type="submit"
+                                        className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3 rounded-lg font-medium hover:shadow-lg transition-all"
+                                        whileHover={{ scale: 1.02 }}
+                                        whileTap={{ scale: 0.98 }}
+                                    >
+                                        Send via Email
+                                    </motion.button>
+                                </form>
                             </div>
+                        </div>
+                    </div>
+                );
+
+            case 'activities':
+                return (
+                    <div className="space-y-6 sm:space-y-8">
+                        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-playfair text-white mb-4 sm:mb-6">Activities & Community</h2>
+                        <div className="grid-responsive">
+                            {portfolioData.activities.map((activity, index) => (
+                                <motion.div
+                                    key={index}
+                                    className="card"
+                                    whileHover={{ y: -5 }}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: index * 0.1 }}
+                                >
+                                    <div className="flex items-start gap-3 mb-3">
+                                        <span className="text-2xl">{typeof activity.icon === 'string' ? activity.icon : React.createElement(activity.icon, { size: 24, className: 'text-blue-400' })}</span>
+                                        <div>
+                                            <h3 className="text-lg sm:text-xl font-semibold text-white">{activity.title}</h3>
+                                            <p className="text-blue-200 text-sm">{activity.event}</p>
+                                        </div>
+                                    </div>
+                                    <p className="text-white/80 text-sm sm:text-base mb-3">{activity.description}</p>
+                                    <div className="flex items-center justify-between">
+                                        <span className="text-xs text-blue-300">{activity.date}</span>
+                                        <span className="text-xs bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full capitalize">{activity.type}</span>
+                                    </div>
+                                    {activity.stickyNote && (
+                                        <div className="mt-3 p-2 bg-yellow-500/10 rounded-lg border border-yellow-500/20">
+                                            <p className="text-yellow-200 text-xs italic">{activity.stickyNote}</p>
+                                        </div>
+                                    )}
+                                </motion.div>
+                            ))}
                         </div>
                     </div>
                 );
@@ -415,6 +504,7 @@ const ExploreMode = ({ isRecruiterMode }) => {
                         className="flex items-center gap-2 px-3 sm:px-4 py-2 bg-white/10 backdrop-blur-md rounded-full border border-white/20 text-blue-200 hover:text-white hover:bg-white/20 transition-all duration-300"
                       whileHover={{ scale: 1.05, x: -5 }}
                       whileTap={{ scale: 0.95 }}
+                        aria-label="Back to home page"
                   >
                       <span className="text-lg">←</span>
                         <span className="font-medium hidden sm:inline">Back to Home</span>
@@ -428,6 +518,8 @@ const ExploreMode = ({ isRecruiterMode }) => {
                         className="px-3 sm:px-4 py-2 bg-white/10 backdrop-blur-md rounded-full border border-white/20 text-blue-200 hover:text-white hover:bg-white/20 transition-all duration-300"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
+                        aria-label={showSidebar ? 'Hide navigation menu' : 'Show navigation menu'}
+                        aria-expanded={showSidebar}
                   >
                         <span className="hidden sm:inline">{showSidebar ? 'Hide Menu' : 'Show Menu'}</span>
                         <span className="sm:hidden">☰</span>
@@ -465,6 +557,8 @@ const ExploreMode = ({ isRecruiterMode }) => {
                                               }`}
                                           whileHover={{ scale: 1.02, x: 5 }}
                                           whileTap={{ scale: 0.98 }}
+                                          aria-label={`Navigate to ${section.title}`}
+                                          aria-current={activeSection === key ? 'page' : undefined}
                                       >
                                           <span className="text-lg sm:text-xl">{React.createElement(section.icon, { size: window.innerWidth < 640 ? 18 : 20 })}</span>
                                           <span className="font-medium text-sm sm:text-base">{section.title}</span>
@@ -489,6 +583,10 @@ const ExploreMode = ({ isRecruiterMode }) => {
                           {renderSectionContent()}
                       </motion.div>
                   </AnimatePresence>
+
+                    <div className="mt-20">
+                        <GlobalFooter />
+                    </div>
               </div>
       </div>
 
@@ -516,10 +614,13 @@ const ExploreMode = ({ isRecruiterMode }) => {
                                                 src={selectedProject.image}
                                                 alt={selectedProject.title}
                                                 className="w-full h-full object-cover rounded-lg"
+                                                onError={(e) => {
+                                                    e.target.style.display = 'none';
+                                                    e.target.nextSibling.style.display = 'flex';
+                                                }}
                                             />
-                                        ) : (
-                                                <div className="text-6xl sm:text-7xl lg:text-8xl opacity-50">{selectedProject.icon ? React.createElement(selectedProject.icon, { size: windowWidth < 640 ? 48 : windowWidth < 1024 ? 56 : 64 }) : <Rocket size={windowWidth < 640 ? 48 : windowWidth < 1024 ? 56 : 64} />}</div>
-                                        )}
+                                        ) : null}
+                                        <div className={`text-6xl sm:text-7xl lg:text-8xl opacity-50 items-center justify-center ${selectedProject.image ? 'hidden' : 'flex'}`}>{selectedProject.icon ? React.createElement(selectedProject.icon, { size: windowWidth < 640 ? 48 : windowWidth < 1024 ? 56 : 64 }) : <Rocket size={windowWidth < 640 ? 48 : windowWidth < 1024 ? 56 : 64} />}</div>
                                     </div>
                                 </div>
 
@@ -590,6 +691,7 @@ const ExploreMode = ({ isRecruiterMode }) => {
                             <button
                                 onClick={() => setSelectedProject(null)}
                                 className="btn-primary touch-target mt-6 sm:mt-8 mx-auto block"
+                                aria-label="Close project details"
                             >
                                 Close
                             </button>
@@ -715,6 +817,7 @@ const ExploreMode = ({ isRecruiterMode }) => {
                             <button
                                 onClick={() => setSelectedExperience(null)}
                                 className="btn-primary touch-target mt-6 sm:mt-8 mx-auto block"
+                                aria-label="Close experience details"
                             >
                                 Close
                             </button>

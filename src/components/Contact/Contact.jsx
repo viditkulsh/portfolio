@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mail, Instagram, Github, Twitter, Linkedin, Phone, MapPin } from 'lucide-react';
+import { Mail, Instagram, Github, Twitter, Linkedin, MapPin } from 'lucide-react';
 import { portfolioData } from '../../data/portfolioData';
 import './Contact.css';
 
@@ -59,10 +59,10 @@ const Contact = () => {
                 <MapPin className="w-4 h-4" />
                 <span>{portfolioData.personal.location}</span>
               </div>
-              <div className="flex items-center gap-2">
-                <Phone className="w-4 h-4" />
-                <span>{portfolioData.personal.phone}</span>
-              </div>
+              <a href={`mailto:${portfolioData.personal.email}`} className="flex items-center gap-2 hover:text-blue-200 transition-colors">
+                <Mail className="w-4 h-4" />
+                <span>{portfolioData.personal.email}</span>
+              </a>
             </div>
           </div>
         </div>

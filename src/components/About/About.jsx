@@ -51,11 +51,20 @@ const About = () => {
             className="space-y-8"
             variants={itemVariants}
           >
+            {/* Introduction */}
+            {portfolioData.about.introduction && (
+              <div className="backdrop-blur-md bg-gradient-accent/10 p-6 rounded-2xl border border-gradient-teal/20">
+                <p className="text-primary-silver/90 font-inter leading-relaxed text-lg italic">
+                  {portfolioData.about.introduction}
+                </p>
+              </div>
+            )}
+
             <div className="backdrop-blur-md bg-glassmorphism-dark p-8 rounded-2xl border border-glassmorphism-border">
               <h3 className="text-2xl font-playfair text-primary-silver mb-6">
                 My Journey
               </h3>
-              <p className="text-primary-silver/90 font-inter leading-relaxed text-lg">
+              <p className="text-primary-silver/90 font-inter leading-relaxed text-lg whitespace-pre-line">
                 {portfolioData.about.bio}
               </p>
             </div>
