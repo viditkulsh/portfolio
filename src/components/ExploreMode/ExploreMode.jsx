@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { usePortfolio } from '../../context/PortfolioContext';
 import { socialMediaData } from '../../data/sections/socialMediaData';
 import GlobalFooter from '../Common/GlobalFooter';
+import JourneyTimeline from '../Common/JourneyTimeline';
 import {
   User, GraduationCap, Zap, Rocket, Briefcase, Trophy, Mail, Activity,
   MapPin, ExternalLink, Github, Calendar, Award, TrendingUp,
@@ -92,20 +93,8 @@ const ExploreMode = ({ isRecruiterMode }) => {
             </div>
             {/* Timeline */}
             <div>
-              <h3 className="heading-sm mb-4">Timeline</h3>
-              <div className="space-y-3">
-                {portfolioData.about.timeline.map((t, i) => (
-                  <motion.div key={i} className="card-light flex items-start gap-4" initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.05 }}>
-                    <div className={`w-10 h-10 rounded-lg flex items-center justify-center text-xs font-bold text-white flex-shrink-0 ${t.isHumorous ? 'bg-warm' : 'bg-ink-800'}`}>
-                      {t.year.slice(-2)}
-                    </div>
-                    <div>
-                      <h4 className="text-sm font-semibold text-ink-800">{t.title}</h4>
-                      <p className="text-xs text-ink-400">{t.description}</p>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
+              <h3 className="heading-sm mb-5">My Journey</h3>
+              <JourneyTimeline timelineItems={portfolioData.about.timeline} />
             </div>
           </div>
         );
