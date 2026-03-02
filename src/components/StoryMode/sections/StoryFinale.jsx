@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import ResumeSelector from '../../../pages/ResumeSelector';
-import { Download, Mail, ArrowLeft, Briefcase, CalendarCheck } from 'lucide-react';
+import { Download, ArrowLeft, Briefcase, CalendarCheck } from 'lucide-react';
 import socialMediaData from '../../../data/sections/socialMediaData';
 
 const StoryFinale = () => {
