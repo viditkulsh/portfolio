@@ -1,23 +1,11 @@
 // Skills Data - Redesigned: tier-based + domain-based, no percentages
 import {
   Code,
-  Database,
-  Globe,
-  Zap,
   Shield,
-  Layers,
-  Coffee,
-  Terminal,
   Server,
-  GitBranch,
-  Lock,
   Cpu,
-  Cloud,
   Container,
-  FileCode,
-  Network,
-  BarChart2,
-  Settings
+  Network
 } from 'lucide-react';
 
 export const skillsData = {

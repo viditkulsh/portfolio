@@ -185,7 +185,7 @@ export const projectsData = [
     description: "Blockchain-based blood donation tracking system.",
     longDescription: "Blood donation systems face a critical trust problem: How do you verify that blood units are safe, properly stored, and reach the right recipients? HemoChain uses blockchain to create an immutable, transparent chain of custody for every blood donation. From the moment a donor gives blood to when it reaches a patient, every step is recorded on-chain. This isn't just about tracking—it's about building trust in life-saving systems where mistakes or fraud can literally cost lives.",
     image: "/images/projects/hemomain.jpg",
-    githubUrl: "https://github.com/viditkulsh/HemoChain",
+    githubUrl: null,
     liveUrl: "https://hemochain.com",
     showLiveDemo: true,
     technologies: [
