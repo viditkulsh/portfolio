@@ -367,7 +367,6 @@ Right now, I'm focused on building impactful systems in fintech and management d
       title: "ICB Student Chapter Member",
       event: "Bennett University",
       description: "Active member contributing to blockchain and technology initiatives",
-      date: "2022-Present",
       type: "organization",
       icon: Building,
       stickyNote: "Building the future of blockchain technology! 🚀"
@@ -377,27 +376,15 @@ Right now, I'm focused on building impactful systems in fintech and management d
       title: "Hackathon Participant",
       event: "Various Technical Symposiums",
       description: "Regular participant in hackathons and technical competitions",
-      date: "2022-Present",
       type: "competition",
       icon: Trophy,
       stickyNote: "Turning caffeine into code since 2022! ☕"
     },
     {
       id: 3,
-      title: "Research: Cross-Chain Interoperability",
-      event: "DRDO & Bennett University",
-      description: "Co-authored research on cross-chain communication and trustless blockchain interoperability protocols under DRDO mentorship. Contributed to architectural documentation and technical proposals for academic publication.",
-      date: "2025",
-      type: "academic",
-      icon: "📄",
-      stickyNote: "Making blockchain dreams into reality!"
-    },
-    {
-      id: 4,
       title: "Technical Writing",
       event: "Various Platforms",
       description: "Writing technical articles and documentation for blockchain projects",
-      date: "2022-Present",
       type: "writing",
       icon: "✍️",
       stickyNote: "Explaining complex tech in simple words!"
