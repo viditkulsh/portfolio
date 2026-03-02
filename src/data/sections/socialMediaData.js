@@ -9,7 +9,8 @@ import {
   MessageCircle,
   PenTool,
   Trophy,
-  BarChart3
+  BarChart3,
+  CalendarCheck
 } from 'lucide-react';
 
 export const socialMediaData = {
@@ -90,6 +91,13 @@ export const socialMediaData = {
       icon: Trophy,
       color: "#5B4638",
       description: "Competitive programming and algorithm challenges"
+    },
+    calendar: {
+      name: "Schedule Interview",
+      url: "https://calendar.app.google/LUxqdA51weZGWov59",
+      icon: CalendarCheck,
+      color: "#4285F4",
+      description: "Book a meeting or interview slot via Google Calendar"
     }
   },
   
@@ -97,7 +105,7 @@ export const socialMediaData = {
   featured: ['github', 'linkedin', 'leetcode', 'twitter'],
   
   // Professional platforms (for recruiter mode)
-  professional: ['linkedin', 'github', 'codolio', 'medium', 'email'],
+  professional: ['linkedin', 'github', 'codolio', 'medium', 'email', 'calendar'],
   
   // Social platforms (for personal connections)
   social: ['twitter', 'instagram', 'telegram', 'discord'],

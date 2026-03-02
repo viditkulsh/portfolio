@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import ResumeSelector from '../../../pages/ResumeSelector';
-import { Download, Mail, ArrowLeft, Briefcase } from 'lucide-react';
+import { Download, Mail, ArrowLeft, Briefcase, CalendarCheck } from 'lucide-react';
+import socialMediaData from '../../../data/sections/socialMediaData';
 
 const StoryFinale = () => {
   const navigate = useNavigate();
@@ -25,9 +26,9 @@ const StoryFinale = () => {
       <motion.div className="flex flex-col sm:flex-row gap-3" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
         <button onClick={() => setShowResume(true)} className="btn-primary"><Download size={16} /> Download Resume</button>
         <button
-          onClick={() => window.open('mailto:viditkulsh.work@gmail.com?subject=Interview%20Request', '_blank')}
+          onClick={() => window.open(socialMediaData.platforms.calendar.url, '_blank', 'noopener,noreferrer')}
           className="btn-outline"
-        ><Mail size={16} /> Schedule Interview</button>
+        ><CalendarCheck size={16} /> Schedule Interview</button>
         <button onClick={() => navigate('/recruiter')} className="btn-outline"><Briefcase size={16} /> Recruiter Mode</button>
       </motion.div>
 

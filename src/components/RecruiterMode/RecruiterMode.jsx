@@ -6,8 +6,9 @@ import GlobalFooter from '../Common/GlobalFooter';
 import ResumeSelector from '../../pages/ResumeSelector';
 import {
   ArrowLeft, Download, Mail, Briefcase, Code, GraduationCap, Award,
-  TrendingUp, ExternalLink, Github, Calendar, MapPin, Eye, Layers, Star, GitFork
+  TrendingUp, ExternalLink, Github, Calendar, MapPin, Eye, Layers, Star, GitFork, CalendarCheck
 } from 'lucide-react';
+import socialMediaData from '../../data/sections/socialMediaData';
 import { getGitHubStats } from '../../hooks/useGitHubData';
 
 const tabs = [
@@ -46,9 +47,20 @@ const RecruiterMode = () => {
                   <p className="text-warm-300 font-medium mb-2">{portfolioData.personal.title}</p>
                   <p className="text-ink-300 text-sm leading-relaxed">{portfolioData.personal.tagline}</p>
                 </div>
-                <div className="flex gap-2">
-                  <a href={`mailto:${portfolioData.personal.email}?subject=Interview%20Request`} className="px-4 py-2 rounded-lg bg-warm text-white text-sm font-medium hover:bg-warm-600 transition-colors flex items-center gap-2">
-                    <Mail size={14} /> Contact
+                <div className="flex flex-col sm:flex-row gap-2">
+                  <a
+                    href={socialMediaData.platforms.calendar.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-4 py-2 rounded-lg bg-warm text-white text-sm font-medium hover:bg-warm-600 transition-colors flex items-center gap-2"
+                  >
+                    <CalendarCheck size={14} /> Schedule Interview
+                  </a>
+                  <a
+                    href={`mailto:${portfolioData.personal.email}?subject=Interview%20Request`}
+                    className="px-4 py-2 rounded-lg border border-ink-200 text-ink-600 text-sm font-medium hover:bg-ink-50 transition-colors flex items-center gap-2"
+                  >
+                    <Mail size={14} /> Email
                   </a>
                 </div>
               </div>
@@ -254,9 +266,13 @@ const RecruiterMode = () => {
             <ArrowLeft size={16} /> <span className="text-sm">Home</span>
           </button>
           <span className="text-sm font-display font-semibold text-ink-700">Recruiter View</span>
-          <a href={`mailto:${portfolioData.personal.email}?subject=Interview%20Request`}
-            className="text-xs px-3 py-1.5 rounded-lg bg-warm text-white hover:bg-warm-600 transition-colors flex items-center gap-1.5">
-            <Mail size={12} /> Hire
+          <a
+            href={socialMediaData.platforms.calendar.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs px-3 py-1.5 rounded-lg bg-warm text-white hover:bg-warm-600 transition-colors flex items-center gap-1.5"
+          >
+            <CalendarCheck size={12} /> Schedule Interview
           </a>
         </div>
       </div>
