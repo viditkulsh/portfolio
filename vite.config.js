@@ -31,7 +31,6 @@ export default defineConfig({
         manualChunks(id) {
           if (!id.includes('node_modules')) return;
           if (/three|@react-three/.test(id)) return 'three';
-          if (/gsap/.test(id)) return 'gsap';
           if (/framer-motion|motion-dom|motion-utils/.test(id)) return 'motion';
           if (/react-dom|react-router|scheduler/.test(id)) return 'react-vendor';
         },
