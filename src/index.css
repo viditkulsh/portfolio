@@ -1,42 +1,11 @@
+/* CSS requires @import to precede all other rules, so the token, base and
+   component layers load first. Tailwind's preflight then follows; the two
+   resets agree by design, and no rule here depends on beating preflight.
+   Tailwind utilities load last and win over components, as intended. */
+@import './styles/tokens.css';
+@import './styles/base.css';
+@import './styles/components.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@layer base {
-  :root {
-    --color-bg: #FAF6F0;
-    --color-bg-alt: #FFFFFF;
-    --color-surface: #FFFFFF;
-    --color-text: #1A1A1A;
-    --color-text-muted: #737373;
-    --color-border: #E8E8E8;
-    --color-accent: #F97316;
-    --color-accent-dark: #C2410C;
-  }
-
-  html {
-    scroll-behavior: smooth;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  body {
-    font-family: 'Inter', system-ui, sans-serif;
-    background-color: var(--color-bg);
-    color: var(--color-text);
-    line-height: 1.6;
-  }
-
-  ::selection {
-    background-color: #F97316;
-    color: white;
-  }
-
-  * {
-    scrollbar-width: thin;
-    scrollbar-color: #D1D1D1 transparent;
-  }
-  *::-webkit-scrollbar { width: 6px; }
-  *::-webkit-scrollbar-track { background: transparent; }
-  *::-webkit-scrollbar-thumb { background: #D1D1D1; border-radius: 3px; }
-}

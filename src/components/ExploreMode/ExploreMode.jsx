@@ -5,6 +5,7 @@ import { usePortfolio } from '../../context/PortfolioContext';
 import { socialMediaData } from '../../data/sections/socialMediaData';
 import GlobalFooter from '../Common/GlobalFooter';
 import JourneyTimeline from '../Common/JourneyTimeline';
+import DarkModeToggle from '../Common/DarkModeToggle';
 import {
   User, GraduationCap, Zap, Rocket, Briefcase, Trophy, Mail, Activity,
   MapPin, ExternalLink, Github, Calendar, Award, TrendingUp,
@@ -302,22 +303,25 @@ const ExploreMode = ({ isRecruiterMode }) => {
   };
 
   return (
-    <div className="min-h-screen bg-cream">
+    <div className="min-h-screen bg-cream dark:bg-[#0F0F0F] transition-colors duration-300">
       {/* Top bar */}
-      <div className="fixed top-0 left-0 right-0 z-40 bg-white/80 backdrop-blur-md border-b border-ink-100">
+      <div className="fixed top-0 left-0 right-0 z-40 bg-white/80 dark:bg-[rgba(15,15,15,0.9)] backdrop-blur-md border-b border-ink-100 dark:border-[#2D2D2D] transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 h-14 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <button onClick={() => setShowSidebar(!showSidebar)} className="md:hidden p-2 rounded-lg hover:bg-ink-50 text-ink-400">
+            <button onClick={() => setShowSidebar(!showSidebar)} className="md:hidden p-2 rounded-lg hover:bg-ink-50 dark:hover:bg-[rgba(255,255,255,0.05)] text-ink-400">
               {showSidebar ? <X size={18} /> : <Menu size={18} />}
             </button>
-            <button onClick={() => navigate('/')} className="flex items-center gap-2 text-ink-400 hover:text-ink-600 transition-colors">
+            <button onClick={() => navigate('/')} className="flex items-center gap-2 text-ink-400 hover:text-ink-600 dark:hover:text-[#FAF6F0] transition-colors">
               <ArrowLeft size={16} /> <span className="text-sm font-medium">Home</span>
             </button>
           </div>
-          <span className="text-sm font-medium text-ink-600">Explore</span>
-          <button onClick={() => navigate('/recruiter')} className="text-xs px-3 py-1.5 rounded-lg bg-ink-800 text-white hover:bg-ink-700 transition-colors">
-            Recruiter
-          </button>
+          <span className="text-sm font-medium text-ink-600 dark:text-[#D1D1D1]">Explore</span>
+          <div className="flex items-center gap-3">
+            <DarkModeToggle />
+            <button onClick={() => navigate('/recruiter')} className="text-xs px-3 py-1.5 rounded-lg bg-ink-800 dark:bg-[#2D2D2D] text-white hover:bg-ink-700 dark:hover:bg-[#404040] transition-colors">
+              Recruiter
+            </button>
+          </div>
         </div>
       </div>
 
@@ -326,7 +330,7 @@ const ExploreMode = ({ isRecruiterMode }) => {
         <AnimatePresence>
           {showSidebar && (
             <motion.aside
-              className="fixed md:sticky top-14 left-0 h-[calc(100vh-3.5rem)] w-56 bg-white border-r border-ink-100 z-30 overflow-y-auto"
+              className="fixed md:sticky top-14 left-0 h-[calc(100vh-3.5rem)] w-56 bg-white dark:bg-[#1A1A1A] border-r border-ink-100 dark:border-[#2D2D2D] z-30 overflow-y-auto transition-colors duration-300"
               initial={{ x: -224 }} animate={{ x: 0 }} exit={{ x: -224 }} transition={{ type: 'spring', damping: 25, stiffness: 200 }}
             >
               <nav className="p-3 space-y-0.5">
@@ -335,7 +339,7 @@ const ExploreMode = ({ isRecruiterMode }) => {
                   const active = activeSection === key;
                   return (
                     <button key={key} onClick={() => { setActiveSection(key); if (windowWidth < 768) setShowSidebar(false); }}
-                      className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm transition-all ${active ? 'bg-warm-50 text-warm-600 font-medium' : 'text-ink-400 hover:bg-ink-50 hover:text-ink-600'
+                      className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm transition-all ${active ? 'bg-warm-50 dark:bg-[rgba(249,115,22,0.1)] text-warm-600 font-medium' : 'text-ink-400 hover:bg-ink-50 dark:hover:bg-[rgba(255,255,255,0.05)] hover:text-ink-600 dark:hover:text-[#FAF6F0]'
                         }`}>
                       <Icon size={16} /> {s.title}
                       {active && <ChevronRight size={14} className="ml-auto" />}

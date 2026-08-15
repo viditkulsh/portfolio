@@ -262,3 +262,164 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ============================================
+   DARK MODE OVERRIDES  (html.dark)
+   ============================================ */
+
+html.dark {
+  color-scheme: dark;
+}
+
+/* --- Body background --- */
+html.dark body {
+  background-color: #0F0F0F;
+  color: #FAF6F0;
+}
+
+/* --- Typography --- */
+html.dark .heading-hero,
+html.dark .heading-xl,
+html.dark .heading-lg,
+html.dark .heading-md,
+html.dark .heading-sm {
+  color: #FAF6F0;
+}
+
+/* --- Section Variants --- */
+html.dark .section-light {
+  background-color: #1A1A1A;
+  color: #FAF6F0;
+}
+
+html.dark .section-white {
+  background-color: #1A1A1A;
+  color: #FAF6F0;
+}
+
+/* --- Card System --- */
+html.dark .card-light {
+  background: #2D2D2D;
+  border-color: #404040;
+  color: #FAF6F0;
+}
+
+html.dark .card-light:hover {
+  border-color: #F97316;
+  box-shadow: 0 20px 60px -15px rgba(249, 115, 22, 0.15);
+}
+
+/* --- Buttons --- */
+html.dark .btn-primary {
+  background: #FAF6F0;
+  color: #1A1A1A;
+}
+
+html.dark .btn-primary:hover {
+  background: #F97316;
+  color: #FFFFFF;
+}
+
+html.dark .btn-outline {
+  color: #FAF6F0;
+  border-color: #FAF6F0;
+}
+
+html.dark .btn-outline:hover {
+  background: #FAF6F0;
+  color: #1A1A1A;
+}
+
+/* --- Tags/Chips --- */
+html.dark .tag {
+  background: rgba(255, 255, 255, 0.08);
+  color: #D1D1D1;
+}
+
+/* --- Modal --- */
+html.dark .modal-content {
+  background: #1A1A1A;
+  color: #FAF6F0;
+  border: 1px solid #404040;
+}
+
+/* --- Misc utility overrides --- */
+html.dark .bg-cream {
+  background-color: #0F0F0F !important;
+}
+
+html.dark .bg-white {
+  background-color: #1A1A1A !important;
+}
+
+html.dark .text-ink-800 {
+  color: #FAF6F0 !important;
+}
+
+html.dark .text-ink-700 {
+  color: #E8E8E8 !important;
+}
+
+html.dark .text-ink-600 {
+  color: #D1D1D1 !important;
+}
+
+html.dark .text-ink-500 {
+  color: #A3A3A3 !important;
+}
+
+html.dark .text-ink-400 {
+  color: #737373 !important;
+}
+
+html.dark .text-ink-300 {
+  color: #525252 !important;
+}
+
+html.dark .border-ink-100 {
+  border-color: #2D2D2D !important;
+}
+
+html.dark .border-ink-200 {
+  border-color: #404040 !important;
+}
+
+html.dark .bg-sand-100 {
+  background-color: #2D2D2D !important;
+}
+
+html.dark .bg-sand-200 {
+  background-color: #2D2D2D !important;
+}
+
+html.dark .bg-warm-50 {
+  background-color: rgba(249, 115, 22, 0.08) !important;
+}
+
+html.dark .bg-ink-50 {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+html.dark .bg-ink-800 {
+  background-color: #111111 !important;
+}
+
+html.dark .bg-ink-900 {
+  background-color: #0A0A0A !important;
+}
+
+html.dark .border-ink-100\/50 {
+  border-color: rgba(45, 45, 45, 0.7) !important;
+}
+
+html.dark .bg-cream\/80 {
+  background-color: rgba(15, 15, 15, 0.85) !important;
+}
+
+html.dark .bg-white\/80 {
+  background-color: rgba(26, 26, 26, 0.85) !important;
+}
+
+html.dark .bg-ink-100 {
+  background-color: #2D2D2D !important;
+}

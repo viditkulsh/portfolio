@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { usePortfolio } from '../../context/PortfolioContext';
 import { ArrowRight, Download, BookOpen, Compass, Briefcase } from 'lucide-react';
 import ResumeSelector from '../Resume/ResumeSelector';
+import DarkModeToggle from '../Common/DarkModeToggle';
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -12,26 +13,27 @@ const LandingPage = () => {
 
   return (
     <>
-    <div className="min-h-screen bg-cream">
+      <div className="min-h-screen bg-cream dark:bg-[#0F0F0F] transition-colors duration-300">
       {/* Top bar */}
       <motion.nav
-        className="fixed top-0 left-0 right-0 z-50 bg-cream/80 backdrop-blur-md border-b border-ink-100/50"
+          className="fixed top-0 left-0 right-0 z-50 bg-cream/80 dark:bg-[rgba(15,15,15,0.85)] backdrop-blur-md border-b border-ink-100/50 dark:border-[#2D2D2D] transition-colors duration-300"
         initial={{ y: -60 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5 }}
       >
         <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
-          <span className="font-display text-xl font-bold text-ink-800 tracking-tight">VK</span>
+            <span className="font-display text-xl font-bold text-ink-800 dark:text-[#FAF6F0] tracking-tight">VK</span>
           <div className="flex items-center gap-3">
+              <DarkModeToggle />
             <button
               onClick={() => navigate('/recruiter')}
-              className="text-xs font-medium text-ink-400 hover:text-ink-800 transition-colors flex items-center gap-1.5"
+                className="text-xs font-medium text-ink-400 hover:text-ink-800 dark:hover:text-[#FAF6F0] transition-colors flex items-center gap-1.5"
             >
               <Briefcase size={13} /> Recruiter
             </button>
             <button
               onClick={() => setShowResume(true)}
-              className="text-xs font-medium text-ink-400 hover:text-ink-800 transition-colors flex items-center gap-1.5"
+                className="text-xs font-medium text-ink-400 hover:text-ink-800 dark:hover:text-[#FAF6F0] transition-colors flex items-center gap-1.5"
             >
               <Download size={13} /> Resume
             </button>
@@ -55,10 +57,10 @@ const LandingPage = () => {
             </span>
             .
             <br />
-            <span className="text-ink-300">I build things that matter.</span>
+              <span className="text-ink-300 dark:text-[#525252]">I build things that matter.</span>
           </h1>
 
-          <p className="text-lg md:text-xl text-ink-400 max-w-2xl leading-relaxed mb-10 font-sans">
+            <p className="text-lg md:text-xl text-ink-400 max-w-2xl leading-relaxed mb-10 font-sans dark:text-[#737373]">
             {portfolioData.personal.shortIntro}
           </p>
 
@@ -87,7 +89,7 @@ const LandingPage = () => {
 
         {/* Quick stats strip */}
         <motion.div
-          className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 border-t border-ink-100 pt-10"
+            className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 border-t border-ink-100 dark:border-[#2D2D2D] pt-10"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.6 }}
@@ -99,7 +101,7 @@ const LandingPage = () => {
             { label: 'Certifications', value: `${portfolioData.certificates.length}` },
           ].map((s, i) => (
             <div key={i}>
-              <div className="text-2xl md:text-3xl font-display font-bold text-ink-800">{s.value}</div>
+              <div className="text-2xl md:text-3xl font-display font-bold text-ink-800 dark:text-[#FAF6F0]">{s.value}</div>
               <div className="text-xs text-ink-400 font-mono uppercase tracking-wider mt-1">{s.label}</div>
             </div>
           ))}

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { Home, SkipForward, ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react';
+import DarkModeToggle from '../Common/DarkModeToggle';
 
 import StoryAbout from './sections/StoryAbout';
 import StoryEducation from './sections/StoryEducation';
@@ -48,9 +49,9 @@ const StoryMode = ({ isRecruiterMode }) => {
   }, [step, paused, next, total]);
 
   return (
-    <div className="min-h-screen bg-cream">
+    <div className="min-h-screen bg-cream dark:bg-[#0F0F0F] transition-colors duration-300">
       {/* Top progress bar */}
-      <div className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-ink-100">
+      <div className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-[rgba(15,15,15,0.9)] backdrop-blur-md border-b border-ink-100 dark:border-[#2D2D2D] transition-colors duration-300">
         <div className="max-w-6xl mx-auto px-4 py-2">
           {/* Section progress segments */}
           <div className="flex gap-1 mb-2">
@@ -70,12 +71,13 @@ const StoryMode = ({ isRecruiterMode }) => {
           {/* Controls */}
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <button onClick={() => navigate('/')} className="p-1.5 rounded-lg hover:bg-ink-50 text-ink-400 transition-colors"><Home size={16} /></button>
-              <span className="text-xs font-mono text-ink-300">{step + 1}/{total}</span>
+              <button onClick={() => navigate('/')} className="p-1.5 rounded-lg hover:bg-ink-50 dark:hover:bg-[rgba(255,255,255,0.05)] text-ink-400 transition-colors"><Home size={16} /></button>
+              <span className="text-xs font-mono text-ink-300 dark:text-[#525252]">{step + 1}/{total}</span>
             </div>
-            <span className="text-xs font-medium text-ink-600">{STEPS[step].label}</span>
+            <span className="text-xs font-medium text-ink-600 dark:text-[#D1D1D1]">{STEPS[step].label}</span>
             <div className="flex items-center gap-2">
-              <button onClick={() => setPaused(!paused)} className="p-1.5 rounded-lg hover:bg-ink-50 text-ink-400 transition-colors">
+              <DarkModeToggle />
+              <button onClick={() => setPaused(!paused)} className="p-1.5 rounded-lg hover:bg-ink-50 dark:hover:bg-[rgba(255,255,255,0.05)] text-ink-400 transition-colors">
                 {paused ? <Play size={16} /> : <Pause size={16} />}
               </button>
               <button onClick={prev} disabled={step === 0} className="p-1.5 rounded-lg hover:bg-ink-50 text-ink-400 disabled:opacity-30 transition-colors"><ChevronLeft size={16} /></button>
@@ -111,7 +113,7 @@ const StoryMode = ({ isRecruiterMode }) => {
 
       {/* Countdown (not on finale) */}
       {step < total - 1 && !paused && (
-        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 text-xs font-mono text-ink-300 bg-white/80 backdrop-blur-sm px-3 py-1 rounded-full border border-ink-100">
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 text-xs font-mono text-ink-300 dark:text-[#525252] bg-white/80 dark:bg-[rgba(26,26,26,0.85)] backdrop-blur-sm px-3 py-1 rounded-full border border-ink-100 dark:border-[#2D2D2D] transition-colors duration-300">
           Next in {countdown}s
         </div>
       )}

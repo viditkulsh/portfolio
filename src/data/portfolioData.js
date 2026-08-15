@@ -4,16 +4,41 @@ import { skillsData } from './sections/skillsData.js';
 import { projectsData } from './sections/projectsData.js';
 import { socialMediaData } from './sections/socialMediaData.js';
 import { experienceData } from './sections/experienceData.js';
+import { certificatesData } from './sections/certificatesData.js';
+import { researchThreads } from './sections/researchData.js';
+import { architectureData } from './sections/architectureData.js';
 import { Trophy, Building } from 'lucide-react';
 
 export const portfolioData = {
   // Personal Information
   personal: {
     name: "Vidit Kulshrestha",
-    title: "Full Stack & Blockchain Developer",
-    tagline: "Engineering scalable solutions at the crossroads of web and blockchain innovation",
-    shortIntro: "Tech enthusiast and problem solver with a strong foundation in distributed systems, blockchain interoperability, and full-stack development. Passionate about turning ideas into secure, scalable, and elegant digital solutions.",
-    quote: "Read Analyze Execute",
+    title: "Software Engineer — Blockchain & Fintech Systems",
+    // Short enough to read in one breath, specific enough to be falsifiable.
+    tagline: "I build blockchain and fintech systems — researched first, then shipped.",
+    // The three claims the whole site exists to evidence: build, depth, delivery.
+    // Every noun here maps to something on the page.
+    shortIntro:
+      "I build tokenization infrastructure at AGP Webpulse, researched cross-chain interoperability at DRDO, and shipped smart contracts and full-stack platforms in between. I go deep on how a system actually works before I commit to building it.",
+    // Discipline-level summary used under the hero.
+    positioning: {
+      build: {
+        label: "Build",
+        claim: "Production systems, not demos.",
+        evidence: "Tokenization platform at AGP Webpulse · IditTrack SaaS · SathiSahyogi on Ethereum",
+      },
+      depth: {
+        label: "Depth",
+        claim: "I investigate before I implement.",
+        evidence: "Cross-chain interoperability research at DRDO · BCA capstone on interoperability protocols",
+      },
+      delivery: {
+        label: "Delivery",
+        claim: "Concept through to something running.",
+        evidence: "3,300+ contract test cases at AGP Webpulse · 365+ backend APIs · adbhutglobal.com live in production",
+      },
+    },
+    quote: "Read. Analyze. Execute.",
     email: "viditkulsh.work@gmail.com",
     phone: "+91-9205075815",
     location: "Delhi NCR, India",
@@ -140,225 +165,8 @@ Right now, I'm focused on building impactful systems in fintech and management d
   // Import experience from dedicated file
   experience: experienceData,
 
-  // Certificates
-  certificates: [
-    {
-      id: 1,
-      title: "Blockchain Platforms",
-      issuer: "University at Buffalo (SUNY)",
-      date: "April 25, 2024",
-      credentialId: "LLQ33LSJH7UQ",
-      skills: [],
-      image: "/images/certificates/coursera-blockchain-platforms.jpg",
-      verificationUrl: "https://coursera.org/verify/LLQ33LSJH7UQ",
-      icon: "⛓️",
-      trophy: { type: "none", position: { x: 0, y: 0, z: 0 } }
-    },
-    {
-      id: 2,
-      title: "Blockchain Basics",
-      issuer: "University at Buffalo (SUNY)",
-      date: "April 17, 2024",
-      credentialId: "R4JUF8CEGFE5",
-      skills: [],
-      image: "/images/certificates/coursera-blockchain-basics.jpg",
-      verificationUrl: "https://coursera.org/verify/R4JUF8CEGFE5",
-      icon: "⛓️",
-      trophy: { type: "none", position: { x: 0, y: 0, z: 0 } }
-    },
-    {
-      id: 3,
-      title: "The Bits and Bytes of Computer Networking",
-      issuer: "Google",
-      date: "February 25, 2024",
-      credentialId: "ZHFD5ZA8YQ4G",
-      skills: ["OSI Models", "Network Security", "DHCP"],
-      image: "/images/certificates/coursera-bits-bytes-networking.jpg",
-      verificationUrl: "https://coursera.org/verify/ZHFD5ZA8YQ4G",
-      icon: "🌐",
-      trophy: { type: "none", position: { x: 0, y: 0, z: 0 } }
-    },
-    {
-      id: 4,
-      title: "AWS Academy Graduate – AWS Academy Cloud Foundations",
-      issuer: "AWS Academy",
-      date: "",
-      credentialId: "c7fa381f-b831-4a8d-a58c-87b0f94f3619",
-      skills: ["Cloud Foundations"],
-      image: "/images/certificates/credly-aws-academy-cloud-foundations.jpg",
-      verificationUrl: "https://www.credly.com/go/5EiLSUn8",
-      icon: "☁️",
-      trophy: { type: "none", position: { x: 0, y: 0, z: 0 } }
-    },
-    {
-      id: 5,
-      title: "AI, Empathy & Ethics",
-      issuer: "University of California, Santa Cruz",
-      date: "November 13, 2023",
-      credentialId: "RTSATUDW7RSB",
-      skills: ["Artificial Intelligence", "Data Ethics", "Machine Learning"],
-      image: "/images/certificates/coursera-ai-empathy-ethics.jpg",
-      verificationUrl: "https://coursera.org/verify/RTSATUDW7RSB",
-      icon: "🤖",
-      trophy: { type: "none", position: { x: 0, y: 0, z: 0 } }
-    },
-    {
-      id: 6,
-      title: "Blockchain Specialization",
-      issuer: "University at Buffalo (SUNY)",
-      date: "April 17, 2024",
-      credentialId: "NKNTMAC6QJJ9",
-      skills: ["Blockchain"],
-      image: "/images/certificates/coursera-blockchain-specialization.jpg",
-      verificationUrl: "https://coursera.org/verify/specialization/NKNTMAC6QJJ9",
-      icon: "⛓️",
-      trophy: { type: "none", position: { x: 0, y: 0, z: 0 } }
-    },
-    {
-      id: 7,
-      title: "Decentralized Applications (Dapps)",
-      issuer: "University at Buffalo (SUNY)",
-      date: "February 26, 2024",
-      credentialId: "VFABPJNPGS6E",
-      skills: [],
-      image: "/images/certificates/coursera-dapps.jpg",
-      verificationUrl: "https://coursera.org/verify/VFABPJNPGS6E",
-      icon: "🧩",
-      trophy: { type: "none", position: { x: 0, y: 0, z: 0 } }
-    },
-    {
-      id: 8,
-      title: "Cryptography",
-      issuer: "University of Maryland, College Park",
-      date: "November 7, 2024",
-      credentialId: "0WQ67B639L8N",
-      skills: ["Algorithms", "Encryption", "Cybersecurity"],
-      image: "/images/certificates/coursera-cryptography.jpg",
-      verificationUrl: "https://coursera.org/verify/0WQ67B639L8N",
-      icon: "🔐",
-      trophy: { type: "none", position: { x: 0, y: 0, z: 0 } }
-    },
-    {
-      id: 9,
-      title: "CodeChef Certificate",
-      issuer: "CodeChef",
-      date: "",
-      credentialId: "74009f5",
-      skills: [],
-      image: "/images/certificates/codechef-74009f5.jpg",
-      verificationUrl: "https://www.codechef.com/certificates/verify",
-      icon: "👨‍🍳",
-      trophy: { type: "none", position: { x: 0, y: 0, z: 0 } }
-    },
-    {
-      id: 10,
-      title: "CodeChef Certificate",
-      issuer: "CodeChef",
-      date: "",
-      credentialId: "e98fdc0",
-      skills: [],
-      image: "/images/certificates/codechef-e98fdc0.jpg",
-      verificationUrl: "https://www.codechef.com/certificates/verify",
-      icon: "👨‍🍳",
-      trophy: { type: "none", position: { x: 0, y: 0, z: 0 } }
-    },
-    {
-      id: 11,
-      title: "Linux Fundamentals",
-      issuer: "LearnQuest",
-      date: "September 8, 2023",
-      credentialId: "H3XUJMHTZVA8",
-      skills: ["Linux", "Bash", "Command-Line Interface"],
-      image: "/images/certificates/coursera-linux-fundamentals.jpg",
-      verificationUrl: "https://coursera.org/verify/H3XUJMHTZVA8",
-      icon: "🐧",
-      trophy: { type: "none", position: { x: 0, y: 0, z: 0 } }
-    },
-    {
-      id: 12,
-      title: "Introduction to Mobile App Development",
-      issuer: "IBM",
-      date: "November 19, 2024",
-      credentialId: "PHT1O885P355",
-      skills: ["Mobile Development", "Android Development", "iOS Development"],
-      image: "/images/certificates/coursera-intro-mobile-app-dev.jpg",
-      verificationUrl: "https://coursera.org/verify/PHT1O885P355",
-      icon: "📱",
-      trophy: { type: "none", position: { x: 0, y: 0, z: 0 } }
-    },
-    {
-      id: 13,
-      title: "Introduction to Intellectual Property",
-      issuer: "University of Pennsylvania",
-      date: "November 6, 2023",
-      credentialId: "YZX7CZR9W6R2",
-      skills: ["Intellectual Property", "Legal Strategy", "Business Strategy"],
-      image: "/images/certificates/coursera-intro-intellectual-property.jpg",
-      verificationUrl: "https://coursera.org/verify/YZX7CZR9W6R2",
-      icon: "⚖️",
-      trophy: { type: "none", position: { x: 0, y: 0, z: 0 } }
-    },
-    {
-      id: 14,
-      title: "Work Smarter, Not Harder: Time Management for Personal & Professional Productivity",
-      issuer: "University of California, Irvine",
-      date: "December 5, 2024",
-      credentialId: "G5SCH3JYI6TP",
-      skills: ["Time Management", "Goal Setting", "Prioritization"],
-      image: "/images/certificates/coursera-time-management-uci.jpg",
-      verificationUrl: "https://coursera.org/verify/G5SCH3JYI6TP",
-      icon: "⏱️",
-      trophy: { type: "none", position: { x: 0, y: 0, z: 0 } }
-    },
-    {
-      id: 15,
-      title: "Introduction to Psychology",
-      issuer: "Princeton University",
-      date: "December 5, 2024",
-      credentialId: "W4N5JM7YVYNU",
-      skills: ["Psychology"],
-      image: "/images/certificates/coursera-intro-psychology-princeton.jpg",
-      verificationUrl: "https://coursera.org/verify/W4N5JM7YVYNU",
-      icon: "🧠",
-      trophy: { type: "none", position: { x: 0, y: 0, z: 0 } }
-    },
-    {
-      id: 17,
-      title: "Project Management: The Basics for Success",
-      issuer: "University of California, Irvine",
-      date: "December 8, 2024",
-      credentialId: "0DT3VCWKTZ59",
-      skills: ["Project Management", "Leadership", "Team Management"],
-      image: "/images/certificates/coursera-project-management.jpg",
-      verificationUrl: "https://www.coursera.org/account/accomplishments/verify/0DT3VCWKTZ59",
-      icon: "📊",
-      trophy: { type: "none", position: { x: 0, y: 0, z: 0 } }
-    },
-    {
-      id: 18,
-      title: "Introduction to Personal Branding",
-      issuer: "University of Virginia",
-      date: "December 5, 2024",
-      credentialId: "DJ2EA5O0DKSX",
-      skills: ["Branding", "Personal Development", "Social Media Strategy"],
-      image: "/images/certificates/coursera-personal-branding-uva.jpg",
-      verificationUrl: "https://www.coursera.org/account/accomplishments/verify/DJ2EA5O0DKSX",
-      icon: "🧑‍💼",
-      trophy: { type: "none", position: { x: 0, y: 0, z: 0 } }
-    },
-    {
-      id: 19,
-      title: "Moralities of Everyday Life",
-      issuer: "Yale University",
-      date: "November 13, 2023",
-      credentialId: "VVJTVZYQ4V87",
-      skills: ["Psychology", "Ethics", "Social Sciences"],
-      image: "/images/certificates/coursera-moralities-everyday-life.jpg",
-      verificationUrl: "https://coursera.org/verify/VVJTVZYQ4V87",
-      icon: "📚",
-      trophy: { type: "none", position: { x: 0, y: 0, z: 0 } }
-    }
-  ],
+  // Certificates (real PDF-backed entries — see certificatesData.js)
+  certificates: certificatesData,
 
   // Co-curricular Activities
   activities: [
@@ -391,11 +199,27 @@ Right now, I'm focused on building impactful systems in fintech and management d
     }
   ],
 
+  // Research dimension — how questions became shipped systems
+  research: researchThreads,
+
+  // Flagship system architecture (grounded; see architectureData.js)
+  architecture: architectureData,
+
   // Social Media (import from dedicated file)
   socialMedia: socialMediaData,
 
   // Resume Variants for different roles
   resumeVariants: {
+    // The only variant that includes the current AGP Webpulse role.
+    // Last revised 24 Jun 2026 — the three role-specific PDFs below predate it.
+    "current": {
+      title: "General Resume",
+      filename: "Vidit_Kulsh_CV.pdf",
+      path: "/resumes/Vidit_Kulsh_CV.pdf",
+      highlightedSkills: ["Solidity", "Foundry", "TypeScript", "PostgreSQL", "Next.js"],
+      relevantProjects: [11, 8, 6],
+      relevantExperience: [1]
+    },
     "full-stack-developer": {
       title: "Full Stack Developer Resume",
       filename: "Vidit Kulsh CV Full Stack.pdf",

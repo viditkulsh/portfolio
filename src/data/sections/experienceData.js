@@ -9,31 +9,36 @@ export const experienceData = [
     location: "UAE (Remote)",
     type: "Full-time",
     companyLogo: "/images/companies/agp.png",
-    description: "Leading blockchain development for a regulated platform focused on tokenizing financial instruments, architecting secure infrastructure for asset tokenization while collaborating with cross-functional teams across multiple domains.",
+    // Rewritten from Vidit_Kulsh_CV.pdf (updated 24 Jun 2026), which carries
+    // far more concrete detail than the earlier placeholder copy.
+    description: "Building a real-world-asset (RWA) and financial infrastructure platform supporting regulated investment workflows and asset lifecycle management — backend services, access control, and the smart-contract validation suite behind it.",
     responsibilities: [
-      "Architecting and developing full-stack blockchain solutions for tokenizing financial instruments",
-      "Designing and implementing permission management systems for multi-tier admin and issuer workflows",
-      "Collaborating with legal, compliance, and business teams to ensure regulatory alignment",
-      "Conducting comprehensive research on tokenization standards and security best practices",
-      "Managing development lifecycle from requirements analysis to production deployment"
+      "Developing and maintaining 365+ backend APIs across onboarding, governance, compliance, transaction and operational workflows",
+      "Designing backend services, access-control systems, audit mechanisms and business logic for multi-role enterprise applications",
+      "Building the platform data layer — 60+ tables and 140+ migrations — with a focus on security, data integrity and maintainability",
+      "Building workflow-driven tooling used across 5 user roles for business, compliance and administrative processes",
+      "Evaluating third-party identity, compliance, custody, wallet and blockchain providers — technical due diligence and integration planning",
+      "Implementing identity verification, governance, approval, reporting and asset-management workflows in a regulated environment"
     ],
     technologies: [
-      { name: "Blockchain", icon: Link },
-      { name: "Smart Contracts", icon: Contract },
+      { name: "Next.js", icon: FileCode },
+      { name: "TypeScript", icon: FileCode },
+      { name: "PostgreSQL", icon: Database },
+      { name: "Supabase", icon: Database },
+      { name: "Foundry", icon: Settings },
+      { name: "Solidity", icon: Contract },
       { name: "Tokenization", icon: Layers },
-      { name: "Full Stack Development", icon: FileCode },
-      { name: "Database Architecture", icon: Database },
-      { name: "Security Systems", icon: Lock }
+      { name: "Access Control", icon: Lock }
     ],
     achievements: [
-      "Successfully completed comprehensive research phase for financial instrument tokenization platform architecture",
-      "Designed scalable permission management framework for multi-role access control",
-      "Established cross-functional collaboration protocols with 5-person core team and extended company departments"
+      "Built the complete smart-contract validation suite in Foundry: 3,300+ test cases across 130+ suites, covering unit, fuzz, invariant, RBAC, integration, attack-vector and state-machine testing",
+      "Delivered 365+ backend APIs and a 60+ table data layer with 140+ migrations",
+      "Built automated testing frameworks covering authorization, workflow validation, business rules and critical platform operations"
     ],
-    skills: ["Blockchain Development", "Tokenization Architecture", "Permission Management", "Full Stack Development", "Cross-functional Collaboration", "Security Design"],
+    skills: ["Smart Contract Testing", "Backend Architecture", "Access Control", "Tokenization Architecture", "PostgreSQL", "TypeScript", "Regulatory Compliance", "Technical Due Diligence"],
     projectsWorked: [],
     mentors: [],
-    impact: "Building production-grade tokenization infrastructure bridging traditional finance with blockchain technology, enabling compliant equity tokenization for real-world assets."
+    impact: "Building production-grade RWA tokenization infrastructure that bridges traditional finance and blockchain — where the test suite matters as much as the contracts, because the failure mode is someone else's money."
   },
   {
     id: 2,
@@ -70,7 +75,8 @@ export const experienceData = [
     id: 3,
     company: "DRDO (Defence Research and Development Organization)",
     position: "Blockchain Research Intern",
-    duration: "Jan 2025 – Apr 2025",
+    // Corrected to match all three résumé PDFs, which state Jan–May 2025.
+    duration: "Jan 2025 – May 2025",
     location: "Delhi, India",
     type: "Internship",
     companyLogo: "/images/companies/drdo.png",
@@ -90,8 +96,9 @@ export const experienceData = [
       "Advanced knowledge of cross-chain interoperability"
     ],
     skills: ["Blockchain Research", "Technical Writing", "Cross-chain Communication"],
-    projectsWorked: [1], // Assuming project 1 relates to this research
-    mentors: ["Dr. Research Lead"],
+    projectsWorked: [],
+    // Placeholder mentor names removed — they were never real records.
+    mentors: [],
     impact: "Contributed to foundational research advancing blockchain interoperability in defense tech."
   },
   {
@@ -120,8 +127,9 @@ export const experienceData = [
       "Delivered cross-chain bridge prototypes enabling interoperability"
     ],
     skills: ["Smart Contract Development", "Cross-chain Bridges", "Code Review", "Agile Development"],
-    projectsWorked: [1], // Assuming overlap with research project
-    mentors: ["Senior Blockchain Architect"],
+    projectsWorked: [],
+    // Placeholder mentor names removed — they were never real records.
+    mentors: [],
     impact: "Enabled interoperability solutions between Ethereum-compatible networks enhancing project scope."
   }
 ];

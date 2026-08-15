@@ -24,8 +24,10 @@ export const skillsData = {
         "Java",
         "TypeScript",
         "Solidity",
+        "Foundry",
         "System Design",
         "Blockchain Architecture",
+        "Smart Contract Testing",
         "Cryptography",
         "Distributed Systems"
       ]
@@ -37,8 +39,10 @@ export const skillsData = {
       accent: "purple",
       skills: [
         "React.js",
+        "Next.js",
         "Node.js",
         "PostgreSQL",
+        "Supabase",
         "Docker",
         "NestJS",
         "Express.js",

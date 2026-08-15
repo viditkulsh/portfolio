@@ -153,7 +153,7 @@ export const projectsData = [
     title: "Note-e-Movie",
     description: "Movie note-taking app with integrated film database search.",
     longDescription: "Built a platform for movie enthusiasts to take notes, save favorites, and track watchlists. Integrated external movie database APIs for accurate data.",
-    image: "/images/projects/noteemovie.jpg",
+    image: null, // no screenshot on record — renders a generated glyph,
     githubUrl: "https://github.com/viditkulsh/Note-e-Movie",
     liveUrl: "#",
     showLiveDemo: false, // Control whether to show live demo link
@@ -184,7 +184,7 @@ export const projectsData = [
     title: "HemoChain",
     description: "Blockchain-based blood donation tracking system.",
     longDescription: "Blood donation systems face a critical trust problem: How do you verify that blood units are safe, properly stored, and reach the right recipients? HemoChain uses blockchain to create an immutable, transparent chain of custody for every blood donation. From the moment a donor gives blood to when it reaches a patient, every step is recorded on-chain. This isn't just about tracking—it's about building trust in life-saving systems where mistakes or fraud can literally cost lives.",
-    image: "/images/projects/hemomain.jpg",
+    image: null, // no screenshot on record — renders a generated glyph,
     githubUrl: null,
     liveUrl: "https://hemochain.com",
     showLiveDemo: true,
@@ -218,7 +218,7 @@ export const projectsData = [
     title: "Spell Checker",
     description: "Lightweight spell-checking utility for text correction.",
     longDescription: "Built a Python-based spell checker that uses dictionary-based matching and NLP techniques for correction suggestions.",
-    image: "/images/projects/spellchecker.jpg",
+    image: null, // no screenshot on record — renders a generated glyph,
     githubUrl: "https://github.com/viditkulsh/SpellChecker",
     liveUrl: "#",
     showLiveDemo: false, // Control whether to show live demo link
@@ -247,7 +247,7 @@ export const projectsData = [
     title: "Graph Crafters",
     description: "Data visualization tool for graph plotting and customization.",
     longDescription: "Built a Java-based tool to plot and customize various graph types for academic and professional use.",
-    image: "/images/projects/graphcrafters.jpg",
+    image: null, // no screenshot on record — renders a generated glyph,
     githubUrl: "https://github.com/viditkulsh/GraphCrafters",
     liveUrl: "#",
     showLiveDemo: false, // Control whether to show live demo link
@@ -276,7 +276,7 @@ export const projectsData = [
     title: "Image Carousel",
     description: "Customizable image carousel component for websites.",
     longDescription: "Developed a responsive, touch-friendly image carousel with smooth animations, auto-play, and configurable settings.",
-    image: "/images/projects/imagecarousel.jpg",
+    image: null, // no screenshot on record — renders a generated glyph,
     githubUrl: "https://github.com/viditkulsh/ImageCarousel",
     liveUrl: "https://idit-image-carousel.vercel.app/",
     showLiveDemo: true, // Control whether to show live demo link
@@ -306,7 +306,7 @@ export const projectsData = [
     title: "Mood Dapp",
     description: "Ethereum-based decentralized application for storing user mood.",
     longDescription: "Created a blockchain application allowing users to set and retrieve their mood on the Ethereum network using smart contracts.",
-    image: "/images/projects/moodapp.jpg",
+    image: null, // no screenshot on record — renders a generated glyph,
     githubUrl: "https://github.com/viditkulsh/Mood_Dapp_myFirstDapp",
     liveUrl: "#",
     showLiveDemo: false, // Control whether to show live demo link
@@ -336,7 +336,7 @@ export const projectsData = [
     title: "Aventura De Texto",
     description: "Text-based adventure game implemented in Python.",
     longDescription: "Designed an interactive game where players navigate through a story using text commands, featuring multiple endings.",
-    image: "/images/projects/aventura.jpg",
+    image: null, // no screenshot on record — renders a generated glyph,
     githubUrl: "https://github.com/viditkulsh/Aventura-De-Texto",
     liveUrl: "#",
     showLiveDemo: false,

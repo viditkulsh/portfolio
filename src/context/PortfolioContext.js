@@ -86,14 +86,9 @@ export const PortfolioProvider = ({ children }) => {
   
   // Load saved preferences from localStorage
   useEffect(() => {
-    const savedTheme = localStorage.getItem('portfolio-theme');
     const savedAnimations = localStorage.getItem('portfolio-animations');
     const savedResumeVariant = localStorage.getItem('portfolio-resume-variant');
-    
-    if (savedTheme) {
-      dispatch({ type: ACTIONS.SET_THEME, payload: savedTheme });
-    }
-    
+
     if (savedAnimations !== null) {
       dispatch({ 
         type: ACTIONS.SET_ANIMATIONS_ENABLED, 
@@ -109,12 +104,14 @@ export const PortfolioProvider = ({ children }) => {
     }
   }, []);
   
-  // Save preferences to localStorage
+  // Save preferences to localStorage.
+  // NOTE: theme is deliberately NOT persisted here. ThemeContext is its sole
+  // owner; writing it from both places meant whichever effect ran last won,
+  // which could silently revert the user's toggle.
   useEffect(() => {
-    localStorage.setItem('portfolio-theme', state.theme);
     localStorage.setItem('portfolio-animations', JSON.stringify(state.animationsEnabled));
     localStorage.setItem('portfolio-resume-variant', state.selectedResumeVariant);
-  }, [state.theme, state.animationsEnabled, state.selectedResumeVariant]);
+  }, [state.animationsEnabled, state.selectedResumeVariant]);
   
   // Action creators
   const actions = {

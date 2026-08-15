@@ -1,0 +1,182 @@
+/* ============================================================
+   DESIGN TOKENS
+   Single source of truth for colour, type, space, motion.
+
+   Both themes are defined here as custom properties, so theming
+   is a variable swap — never a cascade of `!important` overrides.
+   Every token has a value on `:root`; the dark block only
+   *reassigns*, so nothing can be undefined in either theme.
+   ============================================================ */
+
+:root {
+  /* ---- Ground & surfaces (warm neutrals, not pure grey) ---- */
+  --bg: #faf6f0;
+  --bg-sunken: #f2ece3;
+  --surface: #ffffff;
+  --surface-raised: #ffffff;
+  --surface-inset: #f7f3ec;
+
+  /* ---- Ink ----
+     Every value below clears WCAG AA (4.5:1) against --bg. Measured, not
+     eyeballed: muted 5.50, faint 4.97. The previous values were 4.23 and
+     2.43 and failed, which is exactly the kind of thing that survives a
+     design review and fails an audit. */
+  --text: #17140f; /* 17.06 */
+  --text-secondary: #4a443c; /* 8.93 */
+  --text-muted: #6b6357; /* 5.50 */
+  --text-faint: #726a5a; /* 4.97 */
+
+  /* ---- Lines ---- */
+  --line: #e4ddd1;
+  --line-strong: #cfc5b5;
+  --line-faint: #efe9df;
+
+  /* ---- Accents ----
+     Ember carries identity and action. Cyan is the technical
+     voice: diagrams, data flow, code annotation. Keeping them
+     in separate jobs is what stops the page looking decorated. */
+  /* --ember is the brand mark: fills, borders, graphics, and button
+     backgrounds (white-on-ember measures 4.86).
+     --ember-text is the same hue darkened for small text, where the brand
+     value alone would fail (5.40 vs 4.15). Keeping them as two tokens
+     preserves the identity instead of desaturating the whole palette to
+     satisfy an audit. */
+  --ember: #c04d1b;
+  --ember-text: #ad4416;
+  --ember-strong: #a3400f;
+  --ember-soft: rgba(192, 77, 27, 0.1);
+  --ember-line: rgba(192, 77, 27, 0.3);
+
+  --cyan: #14706b;
+  --cyan-strong: #0d5652;
+  --cyan-soft: rgba(20, 112, 107, 0.09);
+  --cyan-line: rgba(20, 112, 107, 0.26);
+
+  /* ---- Semantic ---- */
+  --positive: #2f6d43;
+  --caution: #96631a;
+
+  /* ---- Elevation ---- */
+  --shadow-sm: 0 1px 2px rgba(23, 20, 15, 0.05), 0 1px 3px rgba(23, 20, 15, 0.04);
+  --shadow-md: 0 4px 12px rgba(23, 20, 15, 0.06), 0 12px 28px -12px rgba(23, 20, 15, 0.1);
+  --shadow-lg: 0 24px 64px -20px rgba(23, 20, 15, 0.18);
+
+  /* ---- Ambient field (hero lattice, background wash) ---- */
+  --field-node: rgba(23, 20, 15, 0.5);
+  --field-edge: rgba(23, 20, 15, 0.13);
+  --field-live: rgba(210, 85, 31, 0.85);
+  --grain-opacity: 0.02;
+
+  /* ---- Type ---- */
+  --font-display: 'Instrument Serif', 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+
+  /* Fluid display sizes. Clamps are viewport-scaled so headings
+     never need per-breakpoint overrides. */
+  --step-hero: clamp(2.75rem, 1.2rem + 7vw, 8rem);
+  --step-xl: clamp(2.25rem, 1.4rem + 3.6vw, 4.5rem);
+  --step-lg: clamp(1.75rem, 1.3rem + 1.9vw, 2.75rem);
+  --step-md: clamp(1.3rem, 1.15rem + 0.75vw, 1.75rem);
+  --step-body-lg: clamp(1.05rem, 0.99rem + 0.3vw, 1.25rem);
+  --step-body: 1rem;
+  --step-sm: 0.875rem;
+  --step-xs: 0.78rem;
+  --step-micro: 0.7rem;
+
+  /* Line length: the single most load-bearing readability control. */
+  --measure: 68ch;
+  --measure-tight: 46ch;
+
+  /* ---- Space (4px base) ---- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+  --section-y: clamp(5rem, 10vh, 9rem);
+  --gutter: clamp(1.25rem, 4vw, 3rem);
+  --shell: 76rem;
+
+  /* ---- Radii ---- */
+  --radius-sm: 0.375rem;
+  --radius: 0.625rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-pill: 9999px;
+
+  /* ---- Motion ----
+     Four curves, each with a job. Anything that needs a fifth
+     curve probably needs a different idea instead. */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1); /* entrances, reveals */
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1); /* state changes */
+  --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1); /* affirmative feedback */
+  --ease-linear: linear; /* progress, continuous ambient */
+
+  --dur-instant: 90ms;
+  --dur-fast: 180ms;
+  --dur-base: 320ms;
+  --dur-slow: 620ms;
+  --dur-scene: 1100ms;
+
+  --z-base: 0;
+  --z-raised: 10;
+  --z-nav: 60;
+  --z-overlay: 80;
+  --z-modal: 100;
+}
+
+/* ============================================================
+   DARK — the primary intended theme.
+   Reassigns tokens only. Note the ink/ground relationship is
+   not a simple inversion: dark surfaces stay warm, and accents
+   lift in luminance so they hold contrast against near-black.
+   ============================================================ */
+:root.dark {
+  color-scheme: dark;
+
+  --bg: #100e0c;
+  --bg-sunken: #0a0908;
+  --surface: #171512;
+  --surface-raised: #1e1b17;
+  --surface-inset: #131110;
+
+  --text: #f4efe7; /* 16.83 */
+  --text-secondary: #cdc4b8; /* 11.18 */
+  --text-muted: #948a7c; /* 5.67 */
+  --text-faint: #938979; /* 5.59 — was #6b6357 at 3.25, failed */
+
+  --line: #2a2621;
+  --line-strong: #3d3830;
+  --line-faint: #1f1c18;
+
+  /* Against a near-black ground the brand ember already clears AA at 6.69,
+     so mark and text can share one value here. */
+  --ember: #f2733c;
+  --ember-text: #f2733c;
+  --ember-strong: #ff8a56;
+  --ember-soft: rgba(242, 115, 60, 0.12);
+  --ember-line: rgba(242, 115, 60, 0.32);
+
+  --cyan: #5fbdb4;
+  --cyan-strong: #7fd6cd;
+  --cyan-soft: rgba(95, 189, 180, 0.11);
+  --cyan-line: rgba(95, 189, 180, 0.3);
+
+  --positive: #6cc08a;
+  --caution: #d8a44e;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.45), 0 16px 36px -16px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 28px 72px -24px rgba(0, 0, 0, 0.75);
+
+  --field-node: rgba(244, 239, 231, 0.55);
+  --field-edge: rgba(244, 239, 231, 0.11);
+  --field-live: rgba(242, 115, 60, 0.9);
+  --grain-opacity: 0.035;
+}

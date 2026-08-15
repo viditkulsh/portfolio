@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { usePortfolio } from '../../context/PortfolioContext';
 import GlobalFooter from '../Common/GlobalFooter';
 import ResumeSelector from '../../pages/ResumeSelector';
+import DarkModeToggle from '../Common/DarkModeToggle';
 import {
   ArrowLeft, Download, Mail, Briefcase, Code, GraduationCap, Award,
   TrendingUp, ExternalLink, Github, Calendar, MapPin, Eye, Layers, Star, GitFork, CalendarCheck
@@ -258,34 +259,37 @@ const RecruiterMode = () => {
   };
 
   return (
-    <div className="min-h-screen bg-cream">
+    <div className="min-h-screen bg-cream dark:bg-[#0F0F0F] transition-colors duration-300">
       {/* Top bar */}
-      <div className="fixed top-0 left-0 right-0 z-40 bg-white/80 backdrop-blur-md border-b border-ink-100">
+      <div className="fixed top-0 left-0 right-0 z-40 bg-white/80 dark:bg-[rgba(15,15,15,0.9)] backdrop-blur-md border-b border-ink-100 dark:border-[#2D2D2D] transition-colors duration-300">
         <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
-          <button onClick={() => navigate('/')} className="flex items-center gap-2 text-ink-400 hover:text-ink-600 transition-colors">
+          <button onClick={() => navigate('/')} className="flex items-center gap-2 text-ink-400 hover:text-ink-600 dark:hover:text-[#FAF6F0] transition-colors">
             <ArrowLeft size={16} /> <span className="text-sm">Home</span>
           </button>
-          <span className="text-sm font-display font-semibold text-ink-700">Recruiter View</span>
-          <a
-            href={socialMediaData.platforms.calendar.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-xs px-3 py-1.5 rounded-lg bg-warm text-white hover:bg-warm-600 transition-colors flex items-center gap-1.5"
-          >
-            <CalendarCheck size={12} /> Schedule Interview
-          </a>
+          <span className="text-sm font-display font-semibold text-ink-700 dark:text-[#E8E8E8]">Recruiter View</span>
+          <div className="flex items-center gap-2">
+            <DarkModeToggle />
+            <a
+              href={socialMediaData.platforms.calendar.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs px-3 py-1.5 rounded-lg bg-warm text-white hover:bg-warm-600 transition-colors flex items-center gap-1.5"
+            >
+              <CalendarCheck size={12} /> Schedule Interview
+            </a>
+          </div>
         </div>
       </div>
 
       {/* Tab bar */}
-      <div className="fixed top-14 left-0 right-0 z-30 bg-white/80 backdrop-blur-md border-b border-ink-100">
+      <div className="fixed top-14 left-0 right-0 z-30 bg-white/80 dark:bg-[rgba(15,15,15,0.85)] backdrop-blur-md border-b border-ink-100 dark:border-[#2D2D2D] transition-colors duration-300">
         <div className="max-w-6xl mx-auto px-4 flex overflow-x-auto no-scrollbar">
           {tabs.map(t => {
             const Icon = t.icon;
             const active = activeTab === t.id;
             return (
               <button key={t.id} onClick={() => setActiveTab(t.id)}
-                className={`flex items-center gap-1.5 px-4 py-3 text-sm whitespace-nowrap border-b-2 transition-colors ${active ? 'border-warm text-warm-600 font-medium' : 'border-transparent text-ink-400 hover:text-ink-600'
+                className={`flex items-center gap-1.5 px-4 py-3 text-sm whitespace-nowrap border-b-2 transition-colors ${active ? 'border-warm text-warm-600 font-medium' : 'border-transparent text-ink-400 hover:text-ink-600 dark:hover:text-[#FAF6F0]'
                   }`}>
                 <Icon size={14} /> {t.label}
               </button>
